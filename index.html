@@ -32,32 +32,19 @@
     <div class="circle"></div>
 
     <div id="header">
+        <img src="assets/formandibujito.jpg" class="background-image">
         <div class="containernav">
             <nav>
                 <img src="assets/cajona.png" class="logo">
                 <ul id="sidemenu">
                     <li><a href="#header"> Home </a></li>
                     <li><a href="#about"> About </a></li>
-                    <li><a href="#services"> Services </a></li>
-                    <li><a href="#portflio"> Portfolio </a></li>
+                    <li><a href="#proyects"> Proyects </a></li>
                     <li><a href="#contact"> Contact </a></li>
                     <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
                 </ul>
                 <i class="fa-solid fa-bars" onclick="openmenu()"></i>
             </nav>
-            <div class="header-text">
-
-                <div>
-                <h1 class="fidel"> Fidel</h1>
-                <h1 class="genre"> Genre </h1>
-                </div>
-
-                <div>
-                <h1 class="software"> Software </h1>
-                <h1 class="developer"> Developer </h1>
-                </div>
-
-            </div>
         </div>
     </div>
 
@@ -72,63 +59,29 @@
                     <img src="assets/aboutfoto6.jpg">
                 </div>
                 <div class="about-col-2">
-                    <h1 class="sub-title-about">About Me</h1>
-                    <p class="about-p">My name is Fidel (Form4nn) Genre i have 19 years old and I am currently studying software development at Instituto Superior icop, taking external courses and working freelance.</p>
+                    <h2 class="sub-title-about">About Me</h2>
+                    <p class="about-p">Hi, my name is Fidel Genre i have 20 years old and I am currently studying software development at Instituto Superior icop and working as a IT technician in Santa Fe Civil Registry</p>
+                    <h2 class="front">Frontend Development</h2>
+                    <p class="about-p">ability to make frontend pages with technologies such as html, css and javascript</p>
+                    <h2 class="back">Backend Development</h2>
+                    <p class="about-p">I can program in back/databases with php, sql and nosql</p>
                     <div class="technologies">
                         <a href="#about"><i class="fa-brands fa-html5"></i></a>
                         <a href="#about"><i class="fa-brands fa-css3-alt"></i></a>
                         <a href="#about"><i class="fa-brands fa-js"></i></a>
-                        <a href="#about"><i class="fa-solid fa-code-branch"></i></a>
                         <a href="#about"><i class="fa-solid fa-database"></i></a>
-                        <a href="#about"><i class="fa-brands fa-python"></i></a>
+                        <a href="#about"><i class="fa-brands fa-php"></i></a>
                     </div>
                     <button class="cv" onclick="descargarArchivo()">Download CV</button>
-                    <div class="linktree">
-                        <a href="https://linktr.ee/form4nn" target="_blank">
-                        <button class="form4nn">Form4nn</button></a>
-                        <a href="https://linktr.ee/fidelgenre" target="_blank">
-                            <button class="form4nn">FidelGenre</button></a>
-                    </div>
                 </div>
             </div>
     </div>
 
-<!----------services---------->
-
-<div id="services">
-    <script src="https://kit.fontawesome.com/03c110005b.js" crossorigin="anonymous"></script>
-    <div class="container">
-        <h1 class="sub-title1">My Services</h1>
-        <div class="services-list">
-            <div>
-                <i class="fa-solid fa-code"></i>
-                <h2>Soon</h2>
-                <p></p>
-                <a href="#">Learn More</a>
-            </div>
-            <div>
-                <i class="fa-solid fa-code"></i>
-                <h2>Frontend Development</h2>
-                <p>Frontend Development With
-                    <br>
-                    Html-Css-JavaScript
-                </p>
-                <a href="#">Learn More</a>
-            </div>
-            <div>
-                <i class="fa-solid fa-code"></i>
-                <h2>Soon</h2>
-                <p></p>
-                <a href="#">Learn More</a>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!--------portfolio---------->
-<div id="portflio">
+<script src="https://kit.fontawesome.com/03c110005b.js" crossorigin="anonymous"></script>
+<div id="proyects">
     <div class="container">
-        <h1 class="sub-title2">Portfolio</h1>
+        <h1 class="sub-title2">Proyects</h1>
         <div class="work-list">
             <div class="work">
                 <img src="assets/aaaac..jpg">
@@ -165,7 +118,7 @@
     <div class="contact-overlay">
     <div class="container-c">
         <div class="contact-right">
-            <form action="https://api.web3forms.com/submit" method="POST" class="submit-to-google-sheets">
+            <form action="form.php" method="POST" class="speaker-form">
                 <input type="hidden" name="access_key" value="09f4b68c-4a39-4326-a907-ee51665d7b97">
                 <h1 class="sub-title-c">Contact Me</h1>
                 <input type="text" name="name" placeholder="Your Name" required>
