@@ -17,8 +17,23 @@
     z-index: 99999999;
 }
 
-::-webkit-scrollbar{ /*scrollbar*/
-    display: none;
+.moving-image {
+    height: auto; /* Ajusta la altura automáticamente */
+    width: 90px; /* O el ancho que prefieras */
+    position: fixed;
+    border-radius: 0px; /* Si quieres bordes redondeados en tus imágenes */
+    animation-name: animate; /* Asegúrate de que use la misma animación */
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+  }
+  
+  @keyframes animate {
+    0% {
+      transform: scale(0) translateY(0) rotate(70deg);
+    }
+    100% {
+      transform: scale(1.3) translateY(-100px) rotate(360deg);
+    }
 }
 
 #BotonArriba{ /*up button*/
@@ -32,9 +47,9 @@ html{
     scroll-behavior: smooth;
 }
 
-body{
-    background:white;
-    color: #fff;
+body {
+    transition: background-color 0.3s ease; /* Para una transición suave */
+    background-color: rgb(224, 217, 217);
 }
 
 #header {
@@ -44,20 +59,6 @@ body{
     overflow: hidden;
 }
 
-.background-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Hace que la imagen cubra todo sin deformarse */
-    z-index: -1; /* Pone la imagen en el fondo */
-}
-
-#sidemenu{
-    font-family: cursive
-}
-
 .container{
     padding: 10px 10%;
     background: black;
@@ -65,35 +66,7 @@ body{
 
 .containernav{
     padding: 10px 10%;
-    background-color: rgba(0,0,0,0.290);
     height: 100%;
-
-}
-
-.sub-title1{
-    text-align: center;
-    margin-top: 3%;
-    font-size: 60px;
-    font-weight: 600;
-    color: white;
-    text-shadow: 2px 2px 4px #333;
-}
-
-.sub-title1:hover{
-    color: #ff004f;
-}
-
-.sub-title2{
-    text-align: center;
-    margin-top: 3%;
-    font-size: 60px;
-    font-weight: 600;
-    color: white;
-    text-shadow: 2px 2px 4px #333;
-}
-
-.sub-title2:hover{
-    color: #ff004f;
 }
 
 nav{
@@ -104,7 +77,7 @@ nav{
 }
 
 .logo{
-    width: 140px;
+    width: 100px;
 }
 
 nav ul li{
@@ -114,7 +87,7 @@ nav ul li{
 }
 
 nav ul li a{
-    color: #f3eeee;
+    color: #292828;
     text-decoration: none;
     font-size: 19px;
     position: relative;
@@ -125,7 +98,7 @@ nav ul li a::after{
     content: '';
     width: 0;
     height: 3px;
-    background: #ff004f;
+    background: #000000;
     position: absolute;
     left: 0;
     bottom: -6px;
@@ -138,19 +111,39 @@ nav ul li a:hover::after{
 
 /*home*/
 
-.header-text{
-    margin-top: 20%;
-    font-size: 30px;
-
+.fidelgenre{
+    color: #000000;
+    font-size: 300%;
+    text-align: center;
+    text-shadow: 10px 10px 10px #333;
+    margin-top: 14%;
 }
 
-.header-text{
-    font-size: 23px;
-    margin-top: 20px;
+
+.programmer{
+    color: #000000;
+    text-shadow: 10px 10px 10px #333;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: -20%;
 }
 
-.header-text{
-    color: #c9b4ba;  
+
+@keyframes rotar {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+}
+
+.miImagen{
+    width: 21%;
+    margin-left: 39%;
+    margin-top: 26%;
+    /*animation: rotarLados 5s linear infinite;*/
+    animation: rotar 5s linear infinite;
 }
 
 /*home*/
@@ -176,11 +169,6 @@ nav ul li a:hover::after{
     max-width: 400px;
     border-radius: 15px;
     margin-right: 40px; /* Espacio entre la imagen y el texto */
-}
-
-
-.about-col-2 {
-    text-align: center;
 }
 
 .sub-title-about {
@@ -214,7 +202,7 @@ nav ul li a:hover::after{
     max-width: 700px; /* Ajusta según el diseño */
     margin-left: auto;
     margin-right: auto;
-    background-color: black;
+    color: white;
 }
 
 .about-p:hover {
@@ -260,7 +248,6 @@ nav ul li a:hover::after{
     transform: scale(1.05); /* Hace que crezca ligeramente al pasar el mouse */
 }
 
-
 /*about*/
 
 /*proyects*/
@@ -276,7 +263,6 @@ nav ul li a:hover::after{
     border-radius: 10px;
     position: relative;
     overflow: hidden;
-
 }
 
 .work img{
@@ -303,11 +289,13 @@ nav ul li a:hover::after{
     text-align: center;
     font-size: 14px;
     transition: height 0.5s;
+    color: white;
 }
 
 .layer h3{
     font-weight: 500;
     margin-bottom: 20px;
+    color: white;
 }
 
 .layer a{
@@ -360,22 +348,9 @@ nav ul li a:hover::after{
 #contact{
     width: 100%;
     height: 100vh;
-    background-image: url(assets/pexels1.jpg);
     background-size: cover;
     background-position: center;
-}
-
-.contact-overlay {
-    position: cover; /* Ensures overlay stays on top */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent black */
-}
-
-.contact{
-    background-color: rgba(0,0,0,0.8);
+    background-color: rgb(224, 217, 217);
 }
 
 .container-c{
@@ -383,11 +358,6 @@ nav ul li a:hover::after{
     text-align: center;
     margin-left: 8.6%;
 }
-
-.contact-right{
-    flex-basis: 60%;
-}
-
 
 .speaker-form{
     width: 20%;
@@ -405,15 +375,8 @@ nav ul li a:hover::after{
     color: #ff004f;
 }
 
-p i{
-    color: #ff004f;
-    margin-right: 15px;
-    font-size: 25px;
-}
-
 .contact-right form{
     width: 100%;
-
 }
 
 form input, form textarea{
@@ -428,7 +391,7 @@ form input, form textarea{
     border-radius: 6px;
 }
 
-.btn.btn2{
+.btn2{
     display: flex;
     margin: 30px auto;
     width: fit-content;
@@ -441,9 +404,10 @@ form input, form textarea{
     transition: background 0.5s;
 }
 
-.btn.btn2:hover{
+.btn2:hover{
     background-color: rgba(0, 0, 0, 0.6);
 }
+
 
 /*---------css for small screens ---------*/
 
