@@ -102,7 +102,7 @@ nav ul li a::after{
     content: '';
     width: 0;
     height: 3px;
-    background: #000000;
+    background: #ff004f;
     position: absolute;
     left: 0;
     bottom: -6px;
@@ -163,9 +163,11 @@ nav ul li a:hover::after{
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: center;  
     flex-wrap: wrap; /* Permite que se acomode en pantallas pequeñas */
     gap: 40px; /* Agrega espacio entre la imagen y el texto */
+    position: relative;
+    overflow: hidden;
 }
 
 .about-col-1 img {
@@ -373,6 +375,8 @@ nav ul li a:hover::after{
     color: black;
     font-size: 380%;
     text-shadow: 10px 10px 10px #333;
+    display: flex;
+    justify-content: center;
 }
 
 .contact-right form{
