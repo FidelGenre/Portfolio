@@ -76,6 +76,10 @@ nav{
     flex: wrap;
 }
 
+nav .fa-solid{
+    display: none;
+}
+
 .logo{
     width: 100px;
 }
@@ -366,13 +370,9 @@ nav ul li a:hover::after{
 }
 
 .sub-title-c{
-    color: #ffffff;
+    color: black;
     font-size: 380%;
-    text-shadow: 2px 2px 4px #333;
-}
-
-.sub-title-c:hover{
-    color: #ff004f;
+    text-shadow: 10px 10px 10px #333;
 }
 
 .contact-right form{
@@ -411,29 +411,7 @@ form input, form textarea{
 
 /*---------css for small screens ---------*/
 
-nav .fa-solid{
-    display: none;
-}
-
 @media only screen and (max-width: 1328px){
-    /*home responsive*/
-
-    .containernav{
-        background-color: rgba(0,0,0,0.2);
-    }
-
-    #header{
-        /*background-image: url(assets/formandibujito\ -\ Copy.jpg);*/
-        background-color: #262626;
-    }
-    .header-text{
-        margin-top: 100%;
-        font-size: 16px;
-
-    }
-    .header-text h1{
-        font-size: 30px;
-    }
 
     nav .fa-solid{
         display: block;
@@ -468,36 +446,4 @@ nav .fa-solid{
     .circle{
         display: none;
     }
-
-    .container-c {
-        width: 70%;
-        padding-top: 370px;
-        margin-left: -20%;
-        }
-        .submit-to-google-sheets {
-        width: 60%;
-        padding-top: 30px;
-        }
-        .sub-title-c,
-        p i {
-        font-size: 2.5rem;
-        }
-    
-    /*home responsive*/
-
-    /*about responsive*/
-
-    .sub-title-about{
-        font-size: 40px;
-    }
-
-    .about-col-1, .about-col-2{
-        flex-basis: 100%;
-    }
-
-    /*about responsive*/
-
 }
-
-/*contact responsive*/
-
