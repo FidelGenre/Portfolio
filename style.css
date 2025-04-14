@@ -17,7 +17,7 @@
     z-index: 99999999;
 }
 
-.moving-image {
+.moving-image{
     height: auto; /* Ajusta la altura automáticamente */
     width: 90px; /* O el ancho que prefieras */
     position: fixed;
@@ -48,8 +48,7 @@ html{
 }
 
 body {
-    transition: background-color 0.3s ease; /* Para una transición suave */
-    background-color: rgb(224, 217, 217);
+
 }
 
 #header {
@@ -57,6 +56,8 @@ body {
     width: 100%;
     height: 100vh;
     overflow: hidden;
+        /* background: linear-gradient(to bottom, #ddd, #aaa); Slightly darker light greys */
+        background: linear-gradient(to bottom, #E0E0E0, #222);
 }
 
 .container{
@@ -142,13 +143,25 @@ nav ul li a:hover::after{
     }
 }
 
-.miImagen{
+@keyframes pulmonar {
+    0% {
+      transform: scale(0.4); /* Starting size */
+    }
+    50% {
+      transform: scale(1.1); /* Slightly larger, like inhaling */
+    }
+    100% {
+      transform: scale(1); /* Back to the original size, like exhaling */
+    }
+  }
+
+.miImagen {
     width: 21%;
     margin-left: 39%;
-    margin-top: 26%;
-    /*animation: rotarLados 5s linear infinite;*/
-    animation: rotar 5s linear infinite;
-}
+    margin-top: 24%;
+    animation: rotar 5s linear infinite, pulmonar 3s ease-in-out infinite alternate;
+};
+
 
 /*home*/
 
@@ -176,6 +189,48 @@ nav ul li a:hover::after{
     border-radius: 15px;
     margin-right: 40px; /* Espacio entre la imagen y el texto */
 }
+
+.about-col-1 .image-container {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 15px;
+    margin-right: 40px;
+    position: relative; /* Para apilar las imágenes */
+    overflow: hidden; /* Oculta cualquier desbordamiento */
+    height: auto; /* Ajusta la altura al contenido */
+  }
+  
+  .about-col-1 .image-container .image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Inicialmente todas ocultas */
+    animation: fade 9s infinite; /* Animación de 9 segundos en bucle */
+  }
+  
+  /* Define un retraso para cada imagen para que aparezcan secuencialmente */
+  .about-col-1 .image-container .image:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .about-col-1 .image-container .image:nth-child(2) {
+    animation-delay: 3s;
+  }
+  
+  .about-col-1 .image-container .image:nth-child(3) {
+    animation-delay: 6s;
+  }
+  
+  /* Define la animación de fundido (fade) */
+  @keyframes fade {
+    0% { opacity: 0; }
+    16.66% { opacity: 1; } /* Empieza a mostrarse */
+    33.33% { opacity: 1; } /* Se mantiene visible */
+    50% { opacity: 0; }   /* Empieza a desvanecerse */
+    100% { opacity: 0; }  /* Completamente oculta */
+  }
 
 .sub-title-about {
     font-size: 60px;
@@ -209,10 +264,6 @@ nav ul li a:hover::after{
     margin-left: auto;
     margin-right: auto;
     color: white;
-}
-
-.about-p:hover {
-    color: gray;
 }
 
 .technologies {
@@ -357,6 +408,8 @@ nav ul li a:hover::after{
     background-size: cover;
     background-position: center;
     background-color: rgb(224, 217, 217);
+            /* background: linear-gradient(to bottom, #ddd, #aaa); Slightly darker light greys */
+            background: linear-gradient(to bottom, #E0E0E0, #222);
 }
 
 .container-c{
@@ -367,7 +420,7 @@ nav ul li a:hover::after{
 
 .speaker-form{
     width: 20%;
-    padding-top: 33%;
+    padding-top: 29%;
     margin-left: 50%;
 }
 
@@ -377,6 +430,10 @@ nav ul li a:hover::after{
     text-shadow: 10px 10px 10px #333;
     display: flex;
     justify-content: center;
+}
+
+.sub-title-c:hover{
+    color: #ff004f;
 }
 
 .contact-right form{
