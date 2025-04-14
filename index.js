@@ -1,16 +1,88 @@
-/*sidemenu*/
+// Navigation active state
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-links li a');
 
-let sidemeu = document.getElementById("sidemenu");
+window.addEventListener('scroll', () => {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').substring(1) === current) {
+            link.classList.add('active');
+        }
+    });
+});
 
-    function openmenu(){
-        sidemeu.style.right = "0";
-    }
+// Mobile navigation
+const hamburger = document.querySelector('.hamburger');
+const navLinksContainer = document.querySelector('.nav-links');
 
-    function closemenu(){
-    sidemeu.style.right = "-200px";
-}
+hamburger.addEventListener('click', () => {
+    navLinksContainer.classList.toggle('active');
+    hamburger.textContent = navLinksContainer.classList.contains('active') ? '✕' : '☰';
+});
 
-/*sidemenu*/
+// Close mobile menu when clicking on a link
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navLinksContainer.classList.remove('active');
+        hamburger.textContent = '☰';
+    });
+});
+
+/* Form submission
+//const contactForm = document.getElementById('contactForm');
+
+contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    // Get form values
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const subject = document.getElementById('subject').value;
+    const message = document.getElementById('message').value;
+    
+    // Here you would typically send the form data to a server
+    // For this example, we'll just log it to the console
+    console.log({
+        name,
+        email,
+        subject,
+        message
+    });
+    
+    // Show success message (in a real application)
+    alert('Thank you for your message! I will get back to you soon.');
+    
+    // Reset form
+    contactForm.reset();
+});*/
+
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop - 70,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
 
 /*mouse*/
 
@@ -80,7 +152,7 @@ function irArriba(){
         if(scroll > 100){
             botonArriba.style.right = 20 + "px";
         }   else{
-            botonArriba.style.right = -100 + "px";
+            botonArriba.style.right = -160 + "px";
         }
     })
 }
@@ -88,55 +160,3 @@ function irArriba(){
 irArriba();
 
 /*up*/
-
-/*cv*/
-
-function descargarArchivo() {
-    if (confirm("¿Deseas descargar el archivo?")) {
-    window.location.href = "https://drive.google.com/file/d/1tqa5oUkb-R4y3A2OlHFU3t4naFoQ8sqv/view?usp=sharing";
-    }
-}
-
-/*cv*/
-
-const form = document.getElementById('form');
-const result = document.getElementById('result');
-
-form.addEventListener('submit', function(e) {
-    const formData = new FormData(form);
-    e.preventDefault();
-
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
-
-    result.innerHTML = "Please wait..."
-
-    fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: json
-        })
-        .then(async (response) => {
-            let json = await response.json();
-            if (response.status == 200) {
-                result.innerHTML = json.message;
-            } else {
-                console.log(response);
-                result.innerHTML = json.message;
-            }
-        })
-        .catch(error => {
-            console.log(error);
-            result.innerHTML = "Something went wrong!";
-        })
-        .then(function() {
-            form.reset();
-            setTimeout(() => {
-                result.style.display = "none";
-            }, 3000);
-        });
-});
-
