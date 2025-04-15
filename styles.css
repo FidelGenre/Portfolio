@@ -291,6 +291,10 @@ section p {
     margin-bottom: 10px;
 }
 
+.project-info p {
+    font-weight: normal;
+}
+
 .project-tags {
     display: flex;
     flex-wrap: wrap;
@@ -439,6 +443,18 @@ footer {
     .hero-text h1 {
         font-size: 40px;
     }
+
+    #BotonArriba{ /*up button*/
+        position: fixed;
+        bottom: 1%;
+        right: -100px;
+        width: 30%;
+        margin-right: -2%;
+    }
+
+    .circle { /*mouse follower*/
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
@@ -471,5 +487,17 @@ footer {
     
     section {
         padding: 80px 0;
+    }
+
+    #BotonArriba{ /*up button*/
+        position: fixed;
+        bottom: 1%;
+        right: -100px;
+        width: 30%;
+        margin-right: -2%;
+    }
+
+    .circle { /*mouse follower*/
+        display: none;
     }
 }
