@@ -160,3 +160,15 @@ function irArriba(){
 irArriba();
 
 /*up*/
+
+function redirect1(){
+    window.location.href = "https://fidelgenre.github.io/Coffee-Shop/";
+}
+
+function redirect2(){
+    window.location.href = "https://fidelgenre.github.io/Fight-Game/";
+}
+
+function redirect3(){
+    window.location.href = "https://fidelgenre.github.io/Slot-Machine/";
+}
