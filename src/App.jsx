@@ -6,11 +6,12 @@ import { MouseTrail } from "./components/MouseTrail/MouseTrail";
 import { Navbar } from "./components/NavBar/Navbar";
 import { Projects } from "./components/Projects/Projects";
 import { ScrollToTopButton } from "./components/ScrollToTopButton/ScrollToTopButton";
+import videoBg from "./assets/background/fondo5.mp4";
 
 function App() {
   return (
     <div className={styles.App}>
-      scr
+      <video src={videoBg} autoPlay loop muted></video>
       <MouseTrail />
       <ScrollToTopButton />
       <Navbar />

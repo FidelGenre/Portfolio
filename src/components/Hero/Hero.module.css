@@ -5,7 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 5%;
+  margin-top: 6%;
+  margin-bottom: 10%;
   z-index: 1;
   margin-left: 10%;
   margin-right: 10%;
@@ -51,7 +52,7 @@
 }
 
 .heroImg {
-  width: 50%;
+  width: 46%;
   z-index: 1;
   animation-name: floating;
   animation-duration: 3s;
@@ -71,48 +72,6 @@
   }
 }
 
-.topBlur {
-  position: absolute;
-  width: 70vw;
-  height: 50vw;
-  min-width: 350px;
-  min-width: 350px;
-  top: -128px;
-  left: -10vw;
-  border-radius: 764px;
-  background: rgba(57, 57, 57, 0.7);
-  filter: blur(400px);
-  z-index: 0;
-}
-
-.bottomBlur {
-  position: absolute;
-  width: 70vw;
-  height: 50vw;
-  min-width: 350px;
-  min-width: 250px;
-  top: 246px;
-  right: -25vw;
-  border-radius: 764px;
-  background: rgba(141, 141, 141, 0.7);
-  filter: blur(400px);
-  z-index: 0;
-}
-
-.moreBlur{
-  position: absolute;
-  width: 50vw;
-  height: 50vw;
-  min-width: 350px;
-  min-width: 350px;
-  top: 1228px;
-  left: -10vw;
-  border-radius: 764px;
-  background: rgba(141, 141, 141, 0.7);
-  filter: blur(400px);
-  z-index: 0;
-}
-
 @media screen and (max-width: 830px) {
   .container {
     flex-direction: column-reverse;
@@ -125,47 +84,4 @@
   .heroImg{
   margin: 6%;
   }
-
-  .topBlur{
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 1000px;
-    height: 1000px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent 70%);
-    filter: blur(200px);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .bottomBlur{
-    content: "";
-    position: absolute;
-    top: 200%;
-    left: 50%;
-    width: 1000px;
-    height: 1000px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent 70%);
-    filter: blur(200px);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .moreBlur{
-    content: "";
-    position: absolute;
-    top: 350%;
-    left: 50%;
-    width: 1000px;
-    height: 1000px;
-    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent 70%);
-    filter: blur(200px);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-
 }
