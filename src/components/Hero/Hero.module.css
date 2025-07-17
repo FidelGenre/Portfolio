@@ -1,0 +1,141 @@
+@import "../../vars.css";
+
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 6%;
+  z-index: 1;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 9%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--color-text);
+  z-index: 1;
+}
+
+.title {
+  font-size: 72px;
+  font-weight: 900;
+  margin-bottom: 33px;
+  font-family: var(--font-roboto);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 70%,
+    rgba(255, 255, 255, 0) 120%
+  );
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.description {
+  font-size: 30px;
+  font-family: var(--font-roboto);
+  margin-bottom: 52px;
+}
+
+.contactBtn {
+  text-decoration: none;
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border-radius: 100px;
+  font-size: 30px;
+  font-weight: 600;
+  padding: 17px 26px;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.heroImg {
+  width: 49%;
+  z-index: 1;
+  animation-name: floating;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0, 0px);
+  }
+  50% {
+    transform: translate(0, 10px);
+  }
+  100% {
+    transform: translate(0, -0px);
+  }
+}
+
+.topBlur,
+.bottomBlur{
+  position: fixed;
+  border-radius: 200px;
+  filter: blur(300px);
+  z-index: 0;
+  pointer-events: none; 
+  background: rgba(156, 156, 156, 0.6); 
+}
+
+.topBlur {
+  width: clamp(300px, 70vw, 800px);
+  height: clamp(300px, 50vw, 600px);
+  top: -10px;
+  left: -10vw;
+}
+
+.bottomBlur {
+  width: clamp(300px, 70vw, 800px);
+  height: clamp(300px, 50vw, 600px);
+  top: 246px;
+  right: 5vw;
+}
+
+
+@media screen and (max-width: 830px) {
+  .container {
+    flex-direction: column-reverse;
+    margin-bottom: 60%;
+  }
+
+  .content {
+    align-items: center;
+  }
+
+  .heroImg{
+  margin: 6%;
+  }
+
+  .topBlur{
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent 70%);
+    filter: blur(200px);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bottomBlur{
+    content: "";
+    position: fixed;
+    top: 200%;
+    left: 50%;
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5), transparent 70%);
+    filter: blur(200px);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
