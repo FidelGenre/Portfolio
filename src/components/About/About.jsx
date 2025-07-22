@@ -3,18 +3,17 @@ import meImage from "../../assets/about/aboutImage.jpg";
 
 export function About() {
   const technologies = [
+    { name: "HTML5", icon: "🌐" },
+    { name: "CSS3", icon: "🎨" },
     { name: "JavaScript", icon: "JS" },
     { name: "React", icon: "⚛️" },
     { name: "Node.js", icon: "📗" },
-    { name: "HTML5", icon: "🌐" },
-    { name: "CSS3", icon: "🎨" },
-    { name: "C#", icon: "#" },
-    { name: "Express.js", icon: "🚀" },
-    { name: "MongoDB", icon: "🍃" },
-    { name: "MySQL", icon: "🐬" },
-    { name: "RESTful APIs", icon: "🔗" },
     { name: "PHP", icon: "H" },
-    { name: "PostgreSQL", icon: "🐘" },
+    { name: "Laravel", icon: "🚀" },
+    { name: "C#", icon: "#" },
+    { name: "MySQL", icon: "🐬" },
+    { name: "MongoDB", icon: "🍃" },
+    { name: "RESTful APIs", icon: "🔗" },
   ]
 
   const tools = [
@@ -28,7 +27,6 @@ export function About() {
     { name: "Chrome DevTools", icon: "🔧" },
     { name: "Npm", icon: "📦" },
     { name: "Photoshop", icon: "🖌️" },
-    { name: "Blender", icon: "🌀" },
   ]
 
   const services = [
