@@ -10,23 +10,23 @@ export function About() {
     { name: "Node.js", icon: "📗" },
     { name: "PHP", icon: "H" },
     { name: "Laravel", icon: "🚀" },
-    { name: "C#", icon: "#" },
+    /*{ name: "C#", icon: "#" },*/
     { name: "MySQL", icon: "🐬" },
     { name: "MongoDB", icon: "🍃" },
     { name: "RESTful APIs", icon: "🔗" },
   ]
 
   const tools = [
-    { name: "Git & GitHub", icon: "🐙" },
+    { name: "Git", icon: "🐙" },
     { name: "VS Code", icon: "💙" },
     { name: "Figma", icon: "🎨" },
     { name: "Docker", icon: "🐳" },
     { name: "Vercel", icon: "▲" },
     { name: "Wordpress", icon: "🌐" },
-    { name: "Unity", icon: "🎮" },
+    { name: "GitHub", icon: "🎮" },
     { name: "Chrome DevTools", icon: "🔧" },
     { name: "Npm", icon: "📦" },
-    { name: "Photoshop", icon: "🖌️" },
+    { name: "XAMPP", icon: "🛠️" },
   ]
 
   const services = [
@@ -52,6 +52,7 @@ export function About() {
       title: "Backend",
       subtitle: "Developer",
     },
+    /*
     {
       icon: (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -61,6 +62,7 @@ export function About() {
       title: "Game",
       subtitle: "Developer",
     },
+    */
   ]
 
   return (
@@ -71,10 +73,10 @@ export function About() {
         <div className={styles.aboutMain}>
           <div className={styles.aboutText}>
             <p>
-            I'm Fidel Genre, a passionate full-stack developer currently in my final year of university. I specialize in frontend development, backend development, and game development—bringing ideas to life through clean code and thoughtful design.
+            I'm Fidel Genre, a passionate full-stack developer currently in my final year of university. I specialize in frontend development and backend development, bringing ideas to life through clean code and thoughtful design.
             </p>
             <p>
-            I love crafting beautiful, functional digital experiences with a strong focus on performance and user experience. Whether it's building web apps or creating interactive games, I enjoy turning complex problems into elegant, scalable solutions.
+            I love crafting beautiful, functional digital experiences with a strong focus on performance and user experience. Whether it's building web apps, I enjoy turning complex problems into elegant, scalable solutions.
             </p>
             <p>
             Outside of coding, I stay curious by exploring new technologies, contributing to open source, and continuously learning to grow as a developer.
@@ -109,7 +111,7 @@ export function About() {
               <span className={styles.overviewLabel}>INTRODUCTION</span>
               <h2 className={styles.overviewTitle}>Overview.</h2>
               <p className={styles.overviewDescription}>
-              I'm a passionate software developer focused on frontend development, backend development, and game development. I enjoy creating intuitive user interfaces, building robust backend systems, and bringing interactive experiences to life. I'm a fast learner who works closely with clients to deliver efficient, scalable, and user-friendly solutions that solve real-world problems.
+              I'm a passionate software developer focused on frontend development and backend development. I enjoy creating intuitive user interfaces, building robust backend systems, and bringing interactive experiences to life. I'm a fast learner who works closely with clients to deliver efficient, scalable, and user-friendly solutions that solve real-world problems.
               </p>
             </div>
 
