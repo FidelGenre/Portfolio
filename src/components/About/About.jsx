@@ -9,7 +9,7 @@ export function About() {
     { name: "React", icon: "⚛️" },
     { name: "Node.js", icon: "📗" },
     { name: "PHP", icon: "H" },
-    { name: "Laravel", icon: "🚀" },
+    { name: "Express.js", icon: "🚀" },
     /*{ name: "C#", icon: "#" },*/
     { name: "MySQL", icon: "🐬" },
     { name: "MongoDB", icon: "🍃" },
