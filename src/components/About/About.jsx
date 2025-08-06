@@ -23,7 +23,7 @@ export function About() {
     { name: "Figma", icon: "🎨" },
     { name: "Docker", icon: "🐳" },
     { name: "Vercel", icon: "▲" },
-    { name: "Wordpress", icon: "🌐" },
+    { name: "Hosting", icon: "🌐" },
     { name: "GitHub", icon: "🎮" },
     { name: "Chrome DevTools", icon: "🔧" },
     { name: "Npm", icon: "📦" },
