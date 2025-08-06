@@ -14,6 +14,7 @@ export function About() {
     { name: "MySQL", icon: "🐬" },
     { name: "MongoDB", icon: "🍃" },
     { name: "RESTful APIs", icon: "🔗" },
+    { name: "JAVA", icon: "☕" },
   ]
 
   const tools = [
