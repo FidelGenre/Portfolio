@@ -8,14 +8,13 @@ export function About() {
     { name: "JavaScript", icon: "JS" },
     { name: "React", icon: "⚛️" },
     { name: "Node.js", icon: "📗" },
-    { name: "PHP", icon: "H" },
     { name: "Express.js", icon: "🚀" },
-    /*{ name: "C#", icon: "#" },*/
-    { name: "MySQL", icon: "🐬" },
-    { name: "MongoDB", icon: "🍃" },
-    { name: "RESTful APIs", icon: "🔗" },
     { name: "JAVA", icon: "☕" },
+    { name: "RESTful APIs", icon: "🔗" },
     { name: "PosgreSQL", icon: "🐘" },
+    { name: "MongoDB", icon: "🍃" },
+    { name: "PHP", icon: "H" },
+    { name: "MySQL", icon: "🐬" },
   ]
 
   const tools = [
