@@ -13,8 +13,6 @@ export function About() {
     { name: "RESTful APIs", icon: "🔗" },
     { name: "PosgreSQL", icon: "🐘" },
     { name: "MongoDB", icon: "🍃" },
-    { name: "PHP", icon: "H" },
-    { name: "MySQL", icon: "🐬" },
   ]
 
   const tools = [
@@ -27,7 +25,7 @@ export function About() {
     { name: "GitHub", icon: "🎮" },
     { name: "Chrome DevTools", icon: "🔧" },
     { name: "Npm", icon: "📦" },
-    { name: "XAMPP", icon: "🛠️" },
+    { name: "Wordpress", icon: "W" },
   ]
 
   const services = [
