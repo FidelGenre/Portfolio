@@ -10,6 +10,7 @@ export function About() {
     { name: "Node.js", icon: "📗" },
     { name: "Express.js", icon: "🚀" },
     { name: "JAVA", icon: "☕" },
+    { name: "SpringBoot", icon: "🌱" },
     { name: "RESTful APIs", icon: "🔗" },
     { name: "PosgreSQL", icon: "🐘" },
     { name: "MongoDB", icon: "🍃" },
@@ -25,7 +26,7 @@ export function About() {
     { name: "GitHub", icon: "🎮" },
     { name: "Chrome DevTools", icon: "🔧" },
     { name: "Npm", icon: "📦" },
-    { name: "Wordpress", icon: "W" },
+    { name: "Render", icon: "☁️" },
   ]
 
   const services = [

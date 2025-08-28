@@ -1,15 +1,17 @@
 import styles from "./Projects.module.css"
 import projectImage from "../../assets/projects/projectImage.png"
+import project1Img from "../../assets/projects/E-Commerce.png"
 
 export function Projects() {
   const projects = [
     {
       id: 1,
-      title: "Project-1",
+      title: "E-Commerce",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea quo in nostrum hic, eaque quisquam, eos vero suscipit vitae sequi nihil recusandae odit delectus ex quia perferendis. Accusantium, sed dolorum.",
-      technologies: ["</>", "</>", "</>", "</>"],
-      demoLink: "",
+        "Restaurant e-commerce project built for my portfolio. Users can browse the menu, add items to the cart, and place orders online. Developed with React and Node.js/Express.",
+      technologies: ["React", "Express.js", "PostgreSQL"],
+      demoLink: "https://e-commerce-nine-kohl-13.vercel.app/",
+      image: project1Img,
       isBlog: false,
     },
     {
@@ -30,33 +32,7 @@ export function Projects() {
       demoLink: "",
       isBlog: false,
     },
-    {
-      id: 4,
-      title: "Project-4",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea quo in nostrum hic, eaque quisquam, eos vero suscipit vitae sequi nihil recusandae odit delectus ex quia perferendis. Accusantium, sed dolorum.",
-      technologies: ["</>", "</>", "</>", "</>"],
-      demoLink: "",
-      isBlog: false,
-    },
-    {
-      id: 5,
-      title: "Project-5",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea quo in nostrum hic, eaque quisquam, eos vero suscipit vitae sequi nihil recusandae odit delectus ex quia perferendis. Accusantium, sed dolorum.",
-      technologies: ["</>", "</>", "</>", "</>"],
-      demoLink: "",
-      isBlog: false,
-    },
-    {
-      id: 6,
-      title: "Project-6",
-      description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea quo in nostrum hic, eaque quisquam, eos vero suscipit vitae sequi nihil recusandae odit delectus ex quia perferendis. Accusantium, sed dolorum.",
-      technologies: ["</>", "</>", "</>", "</>"],
-      demoLink: "",
-      isBlog: false,
-    },
+
   ]
 
   const ProjectCard = ({ project }) => {
