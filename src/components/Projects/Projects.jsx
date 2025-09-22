@@ -1,6 +1,7 @@
 import styles from "./Projects.module.css"
 import projectImage from "../../assets/projects/projectImage.png"
 import project1Img from "../../assets/projects/E-Commerce.png"
+import project2Img from "../../assets/projects/StudentSystem.png"
 
 export function Projects() {
   const projects = [
@@ -16,11 +17,12 @@ export function Projects() {
     },
     {
       id: 2,
-      title: "Project-2",
+      title: "Student Management System",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea quo in nostrum hic, eaque quisquam, eos vero suscipit vitae sequi nihil recusandae odit delectus ex quia perferendis. Accusantium, sed dolorum.",
-      technologies: ["</>", "</>", "</>", "</>"],
-      demoLink: "",
+        "Student management system. Allows registering and managing students with CRUD operations. Developed with Java Spring Boot and React. not yet finished.",
+      technologies: ["React", "SpringBoot", "MongoDB"],
+      demoLink: "https://studentsystemf.onrender.com/",
+      image: project2Img,
       isBlog: false,
     },
     {
