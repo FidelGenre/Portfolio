@@ -1,4 +1,4 @@
-import styles from "./About.module.css"
+import styles from "./About.module.css";
 import meImage from "../../assets/about/aboutImage.jpg";
 
 export function About() {
@@ -14,7 +14,7 @@ export function About() {
     { name: "RESTful APIs", icon: "🔗" },
     { name: "PosgreSQL", icon: "🐘" },
     { name: "MongoDB", icon: "🍃" },
-  ]
+  ];
 
   const tools = [
     { name: "Git", icon: "🐙" },
@@ -24,10 +24,10 @@ export function About() {
     { name: "Vercel", icon: "▲" },
     { name: "Hosting", icon: "🌐" },
     { name: "GitHub", icon: "🎮" },
-    { name: "Chrome DevTools", icon: "🔧" },
+    { name: "Maven", icon: "⚙️" },
     { name: "Npm", icon: "📦" },
     { name: "Render", icon: "☁️" },
-  ]
+  ];
 
   const services = [
     {
@@ -52,18 +52,7 @@ export function About() {
       title: "Backend",
       subtitle: "Developer",
     },
-    /*
-    {
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-        </svg>
-      ),
-      title: "Game",
-      subtitle: "Developer",
-    },
-    */
-  ]
+  ];
 
   return (
     <section id="about" className={styles.about}>
@@ -73,34 +62,48 @@ export function About() {
         <div className={styles.aboutMain}>
           <div className={styles.aboutText}>
             <p>
-            I'm Fidel Genre, a passionate full-stack developer currently in my final year of university. I specialize in frontend development and backend development, bringing ideas to life through clean code and thoughtful design.
+              I'm Fidel Genre, a passionate full-stack developer currently in my
+              final year of university. I specialize in frontend development and
+              backend development, bringing ideas to life through clean code and
+              thoughtful design.
             </p>
             <p>
-            I love crafting beautiful, functional digital experiences with a strong focus on performance and user experience. Whether it's building web apps, I enjoy turning complex problems into elegant, scalable solutions.
+              I love crafting beautiful, functional digital experiences with a
+              strong focus on performance and user experience. Whether it's
+              building web apps, I enjoy turning complex problems into elegant,
+              scalable solutions.
             </p>
             <p>
-            Outside of coding, I stay curious by exploring new technologies, contributing to open source, and continuously learning to grow as a developer.
+              Outside of coding, I stay curious by exploring new technologies,
+              contributing to open source, and continuously learning to grow as a
+              developer.
             </p>
 
-            <div className={styles.experienceStats}>
-              <div className={styles.statItem}>
-                <h3>x+</h3>
-                <p>Years Experience</p>
-              </div>
-              <div className={styles.statItem}>
-                <h3>x+</h3>
-                <p>Projects Completed</p>
-              </div>
-              <div className={styles.statItem}>
-                <h3>x+</h3>
-                <p>Happy Clients</p>
-              </div>
+            <div className={styles.ctaRow}>
+              <a
+                href="https://drive.google.com/file/d/1d9XvUgy1OfpkU3SSfUdJOG7dDp4fEcpr/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.viewCV}
+                aria-label="View CV on Google Drive"
+              >
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6z" />
+                </svg>
+                View CV
+              </a>
             </div>
           </div>
 
           <div className={styles.aboutImage}>
             <div className={styles.imageContainer}>
-            <img src={meImage} alt="About me" className={styles.myImage} />
+              <img src={meImage} alt="About me" className={styles.myImage} />
             </div>
           </div>
         </div>
@@ -111,7 +114,12 @@ export function About() {
               <span className={styles.overviewLabel}>INTRODUCTION</span>
               <h2 className={styles.overviewTitle}>Overview.</h2>
               <p className={styles.overviewDescription}>
-              I'm a passionate software developer focused on frontend development and backend development. I enjoy creating intuitive user interfaces, building robust backend systems, and bringing interactive experiences to life. I'm a fast learner who works closely with clients to deliver efficient, scalable, and user-friendly solutions that solve real-world problems.
+                I'm a passionate software developer focused on frontend
+                development and backend development. I enjoy creating intuitive
+                user interfaces, building robust backend systems, and bringing
+                interactive experiences to life. I'm a fast learner who works
+                closely with clients to deliver efficient, scalable, and
+                user-friendly solutions that solve real-world problems.
               </p>
             </div>
 
@@ -132,7 +140,10 @@ export function About() {
             <h3 className={styles.skillsTitle}>Technologies</h3>
             <div className={styles.skillsGrid}>
               {technologies.map((tech, index) => (
-                <div key={index} className={`${styles.skillItem} ${styles.techItem}`}>
+                <div
+                  key={index}
+                  className={`${styles.skillItem} ${styles.techItem}`}
+                >
                   <span className={styles.skillIcon}>{tech.icon}</span>
                   <span className={styles.skillName}>{tech.name}</span>
                 </div>
@@ -144,7 +155,10 @@ export function About() {
             <h3 className={styles.skillsTitle}>Tools & Platforms</h3>
             <div className={styles.skillsGrid}>
               {tools.map((tool, index) => (
-                <div key={index} className={`${styles.skillItem} ${styles.toolItem}`}>
+                <div
+                  key={index}
+                  className={`${styles.skillItem} ${styles.toolItem}`}
+                >
                   <span className={styles.skillIcon}>{tool.icon}</span>
                   <span className={styles.skillName}>{tool.name}</span>
                 </div>
@@ -154,5 +168,5 @@ export function About() {
         </div>
       </div>
     </section>
-  )
+  );
 }

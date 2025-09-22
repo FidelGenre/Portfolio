@@ -34,7 +34,6 @@ export function Projects() {
       demoLink: "",
       isBlog: false,
     },
-
   ]
 
   const ProjectCard = ({ project }) => {
@@ -45,7 +44,12 @@ export function Projects() {
           <div className={styles.projectOverlay}>
             <div className={styles.projectLinks}>
               {project.demoLink && (
-                <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className={styles.projectLink}>
+                <a
+                  href={project.demoLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={styles.projectLink}
+                >
                   <span>View</span>
                 </a>
               )}
@@ -74,7 +78,9 @@ export function Projects() {
           <h1 className={styles.projectHeading}>
             My Recent <span className={styles.purple}>Works</span>
           </h1>
-          <p className={styles.projectSubheading}>Here are a few projects I've worked on recently.</p>
+          <p className={styles.projectSubheading}>
+            Here are a few projects I've worked on recently.
+          </p>
         </div>
 
         <div className={styles.projectsGrid}>
@@ -83,6 +89,17 @@ export function Projects() {
               <ProjectCard project={project} />
             </div>
           ))}
+        </div>
+
+        <div className={styles.githubButtonWrapper}>
+          <a
+            href="https://github.com/fidelgenre" 
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.githubButton}
+          >
+            See More on GitHub
+          </a>
         </div>
       </div>
     </section>

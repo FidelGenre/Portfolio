@@ -24,7 +24,7 @@
   align-items: center;
 }
 
-.titleAbout{
+.titleAbout {
   font-size: 3.5rem;
   font-weight: 900;
   color: rgb(218, 218, 218);
@@ -46,34 +46,45 @@
   font-weight: 500;
 }
 
-.experienceStats {
+.ctaRow {
+  margin-top: 2.5rem;
   display: flex;
-  gap: 2.5rem;
-  margin-top: 3rem;
-  padding-top: 2.5rem;
-  border-top: 2px solid #e2e8f0;
+  justify-content: center;
 }
 
-.statItem {
-  text-align: center;
-}
-
-.statItem h3 {
-  font-size: 2.5rem;
-  color: #838282;
-  margin-bottom: 0.5rem;
+.viewCV {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.9rem 1.6rem;
+  border-radius: 14px;
+  text-decoration: none;
   font-weight: 700;
-  background: linear-gradient(135deg, #050505, #868686);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-size: 1rem;
+
+  color: #ffffff;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.06));
+  border: 1.5px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
 }
 
-.statItem p {
-  color: #838282;
-  font-size: 1rem;
-  margin: 0;
-  font-weight: 500;
+.viewCV:hover,
+.viewCV:focus-visible {
+  background: transparent;
+  color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 20px 40px rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  outline: none;
+}
+
+.viewCV:active {
+  transform: translateY(0);
+  box-shadow: 0 10px 24px rgba(255, 255, 255, 0.2);
 }
 
 .aboutImage {
@@ -354,8 +365,12 @@
     text-align: center;
   }
 
-  .about{
+  .about {
     padding: 0rem 0;
+  }
+
+  .titleAbout {
+    text-align: center;
   }
 
   .skillsContainer {
@@ -368,4 +383,3 @@
     gap: 1.5rem;
   }
 }
-
