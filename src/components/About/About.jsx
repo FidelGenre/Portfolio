@@ -111,15 +111,10 @@ export function About() {
         <section className={styles.overview}>
           <div className={styles.overviewContainer}>
             <div className={styles.overviewHeader}>
-              <span className={styles.overviewLabel}>INTRODUCTION</span>
+            <span className={styles.overviewLabel}>INTRODUCTION</span>
               <h2 className={styles.overviewTitle}>Overview.</h2>
               <p className={styles.overviewDescription}>
-                I'm a passionate software developer focused on frontend
-                development and backend development. I enjoy creating intuitive
-                user interfaces, building robust backend systems, and bringing
-                interactive experiences to life. I'm a fast learner who works
-                closely with clients to deliver efficient, scalable, and
-                user-friendly solutions that solve real-world problems.
+              These are the areas I work on, along with the technologies and tools I use to build efficient, scalable, and user-friendly solutions.
               </p>
             </div>
 

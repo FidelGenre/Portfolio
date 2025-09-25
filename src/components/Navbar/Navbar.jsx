@@ -21,6 +21,7 @@ export const Navbar = () => {
   };
 
   return (
+    <section id="navbar">
     <nav className={styles.navbar}>
       <a className={styles.title} href="/">
         Portfolio
@@ -38,6 +39,9 @@ export const Navbar = () => {
           className={`${styles.menuItems} ${menuOpen ? styles.menuOpen : ""}`}
         >
           <li className={styles.navItem}>
+          <a href="navbar" onClick={(e) => handleClick(e, "navbar")}>Home</a>
+          </li>
+          <li className={styles.navItem}>
             <a href="#about" onClick={(e) => handleClick(e, "about")}>About</a>
           </li>
           <li className={styles.navItem}>
@@ -49,5 +53,6 @@ export const Navbar = () => {
         </ul>
       </div>
     </nav>
+    </section>
   );
 };

@@ -5,13 +5,13 @@ import heroImage from '../../assets/hero/herito.png';
 
 export const Hero = () => {
   return (
-    <section className={styles.container}>
+    <section id="hero" className={styles.container}>
       <div className={styles.content}>
         <h1 className={styles.title}>Hi, I'm Fidel</h1>
         <p className={styles.description}>
-        "I'm a Programmer. I write code so you don’t have to. Let’s connect!"
+        "I'm a Programmer. I write code so you don’t have to. <br /> Let’s connect!"
         </p>
-        <a href="mailto:trabajosfidel4@gmail.com" className={styles.contactBtn}>
+        <a href="#contact" className={styles.contactBtn}>
           Contact Me
         </a>
       </div>
