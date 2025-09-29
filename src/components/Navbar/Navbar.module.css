@@ -5,17 +5,31 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 61px;
+  padding-top: 20px;
   z-index: 1000;
   margin: 0 10%; 
   font-family: sans-serif;
 }
 
-.title {
-  font-size: 30px;
-  font-weight: 600;
-  text-decoration: none;
-  color: var(--color-text);
+.heroImg {
+  width: 14%;
+  z-index: 1;
+  animation-name: floating;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes floating {
+  0% {
+    transform: translate(0, 0px);
+  }
+  50% {
+    transform: translate(0, 14px);
+  }
+  100% {
+    transform: translate(0, -0px);
+  }
 }
 
 .menu {
@@ -34,14 +48,14 @@
 
 .menuItems {
   display: flex;
-  gap: 47px;
+  gap: 40px;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .menuItems a {
-  font-size: 25px;
+  font-size: 23px;
   color: var(--color-text);
   text-decoration: none;
   padding: 8px 16px;
@@ -55,13 +69,17 @@
   text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
 }
 
-@media screen and (max-width: 830px) {
+@media screen and (max-width: 1024px) {
   .navbar {
     flex-direction: row;
     align-items: center;
     padding-top: 24px;
     margin: 0 5%;
   }
+
+  .heroImg{
+    width: 20%;
+    }
 
   .menuBtn {
     display: block; 

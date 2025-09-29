@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./Navbar.module.css";
 import menuIcon from "../../assets/nav/menuIcon.png";
 import closeIcon from "../../assets/nav/closeIcon.png";
+import heroImage from '../../assets/hero/herito.png';
 
 export const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,8 +24,8 @@ export const Navbar = () => {
   return (
     <section id="navbar">
     <nav className={styles.navbar}>
-      <a className={styles.title} href="/">
-        Portfolio
+      <a href="/">
+            <img src={heroImage} alt="Hero image of me" className={styles.heroImg} />
       </a>
 
       <div className={styles.menu}>
