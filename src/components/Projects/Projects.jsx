@@ -12,6 +12,7 @@ export function Projects() {
         "Restaurant e-commerce project built for my portfolio. Users can browse the menu, add items to the cart, and place orders online. Developed with React and Node.js/Express.",
       technologies: ["React", "Express.js", "PostgreSQL"],
       demoLink: "https://e-commerce-nine-kohl-13.vercel.app/",
+      githubLink: "https://github.com/fidelgenre/E-Commerce", 
       image: project1Img,
       isBlog: false,
     },
@@ -22,6 +23,7 @@ export function Projects() {
         "Student management system. Allows registering and managing students with CRUD operations. Developed with Java Spring Boot and React. not yet finished.",
       technologies: ["React", "SpringBoot", "MongoDB"],
       demoLink: "https://studentsystemf.onrender.com/",
+      githubLink: "https://github.com/FidelGenre/StudentSystem",
       image: project2Img,
       isBlog: false,
     },
@@ -32,6 +34,7 @@ export function Projects() {
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea quo in nostrum hic, eaque quisquam, eos vero suscipit vitae sequi nihil recusandae odit delectus ex quia perferendis. Accusantium, sed dolorum.",
       technologies: ["</>", "</>", "</>", "</>"],
       demoLink: "",
+      githubLink: "", 
       isBlog: false,
     },
   ]
@@ -50,12 +53,23 @@ export function Projects() {
                   rel="noopener noreferrer"
                   className={styles.projectLink}
                 >
-                  <span>View</span>
+                  Demo
+                </a>
+              )}
+              {project.githubLink && (
+                <a
+                  href={project.githubLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${styles.projectLink} ${styles.secondaryLink}`}
+                >
+                  Code
                 </a>
               )}
             </div>
           </div>
         </div>
+
         <div className={styles.projectContent}>
           <h3 className={styles.projectTitle}>{project.title}</h3>
           <p className={styles.projectDescription}>{project.description}</p>
@@ -93,7 +107,7 @@ export function Projects() {
 
         <div className={styles.githubButtonWrapper}>
           <a
-            href="https://github.com/fidelgenre" 
+            href="https://github.com/fidelgenre"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.githubButton}
