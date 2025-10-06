@@ -1,0 +1,133 @@
+/* === HERO CONTENEDOR === */
+.hero {
+  min-height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+  padding: 0rem 2rem 4rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* === TEXTOS (estilo del bloque original adaptado) === */
+.greeting {
+  font-size: clamp(12px, 1.4vw, 18px);
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: rgba(255,255,255,.7);
+  margin: 0 0 12px 0;
+}
+
+.name {
+  margin: 0;
+  font-family: var(--font-roboto);
+  font-weight: 900;
+  line-height: 1.05;
+  font-size: clamp(32px, 5vw, 96px);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(241, 241, 241, 0.1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.title {
+  margin: 4px 0 0 0;
+  font-weight: 800;
+  font-size: clamp(20px, 3.2vw, 40px);
+  color: #ffffff;
+}
+
+.description {
+  max-width: 880px;
+  margin: 8px auto 10px;
+  font-size: clamp(16px, 2.1vw, 22px);
+  line-height: 1.7;
+  color: rgba(255,255,255,.75);
+}
+
+.tagline {
+  max-width: 880px;
+  margin: 0 auto 32px;
+  font-size: clamp(16px, 2.1vw, 22px);
+  line-height: 1.7;
+  color: rgba(255,255,255,.75);
+}
+
+/* === BOTONES === */
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.primaryButton,
+.secondaryButton {
+  padding: 1rem 2.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.primaryButton {
+  background: linear-gradient(135deg, #6b7280 0%, #8b92a0 100%);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(107, 114, 128, 0.5);
+}
+
+.primaryButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(107, 114, 128, 0.7);
+}
+
+.secondaryButton {
+  background: transparent;
+  color: #fff;
+  border-color: #8b92a0;
+  box-shadow: 0 0 15px rgba(139, 146, 160, 0.3);
+}
+
+.secondaryButton:hover {
+  background: rgba(139, 146, 160, 0.15);
+  border-color: #b8bcc4;
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px rgba(139, 146, 160, 0.5);
+}
+
+/* === ICONO SCROLL === */
+.scrollIndicator {
+  color: #b8bcc4;
+  animation: bounce 2s infinite;
+  font-size: 1.5rem;
+  filter: drop-shadow(0 0 10px rgba(184, 188, 196, 0.6));
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(15px); }
+}

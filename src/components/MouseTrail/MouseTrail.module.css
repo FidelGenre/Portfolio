@@ -1,0 +1,18 @@
+.circle {
+    width: 24px;
+    height: 24px;
+    position: fixed;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 1000;
+    background-color: #ababab;
+    opacity: 0.6;
+    transition: background-color 0.2s ease;
+  }
+
+  @media screen and (max-width: 830px) {
+    .circle {
+      display: none;
+    }
+  }
+  

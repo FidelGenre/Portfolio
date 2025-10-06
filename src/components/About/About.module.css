@@ -1,0 +1,373 @@
+/* Sin @import aquí para evitar errores de ruta. 
+   Si usás vars globales, importalas en tu main.css/index.css */
+
+/* ===== Sección centrada como el Hero ===== */
+.about {
+  min-height: 100vh;                 /* ocupa toda la pantalla */
+  display: flex;
+  align-items: center;               /* centra vertical */
+  justify-content: center;           /* centra horizontal */
+  padding: 2rem 0;
+  background: #1a1a1a;               /* mismo tono base que el Hero */
+  position: relative;
+  overflow: hidden;
+}
+
+/* decoración sutil */
+.about::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 50%, rgba(160,160,160,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(140,140,140,0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.aboutWrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== TIPOGRAFÍA (mismos estilos que tu Hero) ===== */
+.titleAbout {
+  margin: 0 0 2rem 0;
+  font-weight: 800;
+  line-height: 1.05;
+  font-size: clamp(42px, 5.5vw, 72px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(241,241,241,0.1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.aboutText p {
+  margin-bottom: 1.6rem;
+  color: rgba(255,255,255,.75);
+  font-size: clamp(16px, 1.9vw, 20px);
+  line-height: 1.75;
+  font-weight: 400;
+  font-family: var(--font-roboto, 'Inter', 'Roboto', 'Open Sans', sans-serif);
+}
+
+.aboutText p:first-child {
+  font-weight: 500;
+}
+
+/* Subtítulos y textos de Overview */
+.overviewLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255,255,255,.7);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.overviewTitle {
+  margin: 0 0 1rem 0;
+  font-weight: 900;
+  font-size: clamp(32px, 4.5vw, 56px);
+  background: linear-gradient(135deg, rgba(255,255,255,0.75), rgba(241,241,241,0.1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+
+.overviewDescription {
+  font-size: clamp(16px, 1.8vw, 20px);
+  color: rgba(255,255,255,.75);
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+  font-family: var(--font-roboto, 'Inter', 'Roboto', 'Open Sans', sans-serif);
+}
+
+/* Títulos de secciones de skills */
+.skillsTitle {
+  font-size: clamp(22px, 3vw, 28px);
+  margin-bottom: 2rem;
+  text-align: center;
+  font-weight: 800;
+  background: linear-gradient(135deg, rgba(245,245,245,1), rgba(184,188,196,1));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+}
+
+.skillsTitle::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #8b92a0, #b8bcc4);
+  border-radius: 2px;
+}
+
+/* ===== Layout principal ===== */
+.aboutMain {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  align-items: center; /* centra vertical dentro del grid */
+}
+
+.aboutText {
+  text-align: left;
+}
+
+.aboutImage {
+  display: flex;
+  justify-content: center;
+}
+
+/* Imagen */
+.imageContainer {
+  position: relative;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  transition: all 0.4s ease;
+  max-width: 480px;
+}
+
+.imageContainer:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2);
+}
+
+.imageContainer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.1), rgba(255,255,255,0.15));
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.imageContainer:hover::before {
+  opacity: 0;
+}
+
+.myImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* CTA */
+.ctaRow {
+  margin-top: 2.2rem;
+  display: flex;
+  justify-content: center;
+}
+
+/* estilo igual al Contact Me pero más chico */
+.viewCV {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.7rem 1.8rem;     /* 🔹 más chico que 1rem 2.5rem */
+  font-size: 0.95rem;         /* 🔹 tamaño reducido */
+  font-weight: 600;
+  border-radius: 0.6rem;
+  text-decoration: none;
+  color: #ffffff;
+  background: transparent;
+  border: 2px solid #8b92a0;
+  box-shadow: 0 0 12px rgba(139, 146, 160, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.viewCV:hover,
+.viewCV:focus-visible {
+  background: rgba(139, 146, 160, 0.15);
+  border-color: #b8bcc4;
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(139, 146, 160, 0.5);
+  outline: none;
+}
+
+.viewCV svg {
+  width: 18px;   /* 🔹 icono ligeramente más pequeño */
+  height: 18px;
+}
+/* Overview y servicios */
+.overview {
+  padding: 3.5rem 0;
+  margin: 2rem -2rem 0;
+}
+
+.overviewContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.overviewHeader {
+  text-align: center;
+  margin-bottom: 3rem;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.servicesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2.25rem;
+}
+
+.serviceCard {
+  background: rgba(35, 35, 35, 0.85);
+  backdrop-filter: blur(10px);
+  padding: 2.2rem 2rem;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(139, 146, 160, 0.3);
+}
+
+.serviceCard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(14,14,14,0.1), rgba(206,206,206,0.12));
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.serviceCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  border-color: rgba(139,146,160,0.6);
+}
+
+.serviceCard:hover::before {
+  opacity: 1;
+}
+
+.serviceIconWrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.serviceIconWrapper svg {
+  width: 40px;
+  height: 40px;
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.serviceCard:hover .serviceIconWrapper svg {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+.serviceTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f0f1f3;
+  margin-bottom: 0.35rem;
+}
+
+.serviceSubtitle {
+  font-size: 1rem;
+  color: #cfd3da;
+  margin: 0;
+}
+
+/* Skills */
+.skillsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 3rem;
+}
+
+.skillsSection {
+  padding: 2.5rem;
+  border-radius: 20px;
+  border: 1px solid rgba(139, 146, 160, 0.35);
+  background: rgba(35,35,35,0.85);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+}
+
+.skillsSection:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+  border-color: rgba(139,146,160,0.6);
+}
+
+.skillsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+}
+
+.skillItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem 0.8rem;
+  border-radius: 15px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  min-height: 80px;
+  justify-content: center;
+  color: #f0f1f3;
+  background: linear-gradient(135deg, rgba(107,114,128,0.08), rgba(139,146,160,0.08));
+  border: 1px solid rgba(139,146,160,0.3);
+  transition: all 0.3s ease;
+}
+
+.skillItem:hover {
+  background: linear-gradient(135deg, rgba(107,114,128,0.2), rgba(139,146,160,0.2));
+  border-color: rgba(139,146,160,0.6);
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 10px 30px rgba(107,114,128,0.35);
+}
+
+.skillIcon {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.skillName {
+  font-size: 0.92rem;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 980px) {
+  .aboutMain {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    text-align: center;
+  }
+  .aboutText { text-align: center; }
+  .imageContainer { margin: 0 auto; }
+  .skillsContainer { grid-template-columns: 1fr; gap: 2rem; }
+}
