@@ -26,15 +26,15 @@ export default function Contact() {
   return (
     <section id="contact" className={styles.contact}>
       <div className={styles.container}>
-        <h2 className={styles.title}>Contacto</h2>
+        <h2 className={styles.title}>Contact</h2>
         <p className={styles.subtitle}>
-          ¿Tienes un proyecto en mente? No dudes en contactarme. Estoy siempre abierto a discutir nuevos proyectos,
-          ideas creativas u oportunidades.
+          Do you have a project in mind? Don’t hesitate to contact me. I’m always open to discussing new projects,
+          creative ideas, or opportunities.
         </p>
 
         <div className={styles.content}>
           <div className={styles.contactInfo}>
-            <h3 className={styles.infoTitle}>Información de contacto</h3>
+            <h3 className={styles.infoTitle}>Contact Information</h3>
 
             <div className={styles.infoItem}>
               <div className={styles.iconWrapper}>
@@ -101,7 +101,7 @@ export default function Contact() {
           <form className={styles.form} onSubmit={handleSubmit}>
             <div className={styles.formGroup}>
               <label htmlFor="name" className={styles.label}>
-                Nombre
+                Name
               </label>
               <input
                 type="text"
@@ -131,7 +131,7 @@ export default function Contact() {
 
             <div className={styles.formGroup}>
               <label htmlFor="message" className={styles.label}>
-                Mensaje
+                Message
               </label>
               <textarea
                 id="message"
@@ -145,7 +145,7 @@ export default function Contact() {
             </div>
 
             <button type="submit" className={styles.submitButton}>
-              Enviar Mensaje
+              Send Message
             </button>
           </form>
         </div>
