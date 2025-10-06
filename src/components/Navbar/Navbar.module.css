@@ -8,7 +8,7 @@
   /* mismos colores/estilo que tenías */
   background: rgba(26, 26, 26, 0.9);
   backdrop-filter: blur(20px);
-  z-index: 1000;
+  z-index: 999;
   border-bottom: 1px solid rgba(156, 163, 175, 0.2);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
