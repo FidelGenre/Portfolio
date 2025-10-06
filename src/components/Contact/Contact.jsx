@@ -4,23 +4,45 @@ import { useState } from "react"
 import styles from "./Contact.module.css"
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  })
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" })
+  const [status, setStatus] = useState({ sending: false, text: "" })
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    })
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
-    // Add your form submission logic here
+    setStatus({ sending: true, text: "Sending..." })
+
+    try {
+      const fd = new FormData(e.target)
+      // ✅ Tu access key
+      fd.append("access_key", "09f4b68c-4a39-4326-a907-ee51665d7b97")
+      // Opcionales pero recomendados
+      fd.append("subject", "New message from portfolio contact form")
+      fd.append("replyto", formData.email)
+      fd.append("to", "trabajosfidel4@gmail.com")
+
+      const res = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: fd,
+      })
+
+      const data = await res.json()
+      console.log("Web3Forms response:", data)
+
+      if (data.success) {
+        setStatus({ sending: false, text: "✅ Message sent successfully!" })
+        setFormData({ name: "", email: "", message: "" })
+        e.target.reset()
+      } else {
+        setStatus({ sending: false, text: `❌ ${data.message || "Something went wrong."}` })
+      }
+    } catch (err) {
+      console.error("Network error:", err)
+      setStatus({ sending: false, text: "❌ Network error. Please try again." })
+    }
   }
 
   return (
@@ -99,10 +121,11 @@ export default function Contact() {
           </div>
 
           <form className={styles.form} onSubmit={handleSubmit}>
+            <input type="hidden" name="from_name" value="Portfolio Contact" />
+            <input type="checkbox" name="botcheck" style={{ display: "none" }} tabIndex={-1} autoComplete="off" />
+
             <div className={styles.formGroup}>
-              <label htmlFor="name" className={styles.label}>
-                Name
-              </label>
+              <label htmlFor="name" className={styles.label}>Name</label>
               <input
                 type="text"
                 id="name"
@@ -115,9 +138,7 @@ export default function Contact() {
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="email" className={styles.label}>
-                Email
-              </label>
+              <label htmlFor="email" className={styles.label}>Email</label>
               <input
                 type="email"
                 id="email"
@@ -130,9 +151,7 @@ export default function Contact() {
             </div>
 
             <div className={styles.formGroup}>
-              <label htmlFor="message" className={styles.label}>
-                Message
-              </label>
+              <label htmlFor="message" className={styles.label}>Message</label>
               <textarea
                 id="message"
                 name="message"
@@ -144,9 +163,11 @@ export default function Contact() {
               />
             </div>
 
-            <button type="submit" className={styles.submitButton}>
-              Send Message
+            <button type="submit" className={styles.submitButton} disabled={status.sending}>
+              {status.sending ? "Sending..." : "Send Message"}
             </button>
+
+            {status.text && <p className={styles.status}>{status.text}</p>}
           </form>
         </div>
       </div>
