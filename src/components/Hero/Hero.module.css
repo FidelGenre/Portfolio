@@ -1,21 +1,28 @@
-/* === HERO CONTENEDOR === */
 .hero {
   min-height: 95vh;
   display: flex;
   align-items: center;
   justify-content: center;
+
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #404040 100%);
   background-size: 200% 200%;
   animation: gradientShift 15s ease infinite;
+
   padding: 0rem 2rem 4rem;
   text-align: center;
+
   position: relative;
-  overflow: hidden;
+  overflow: hidden;              /* corta cualquier desborde interno */
+
+  touch-action: pan-y;           /* SOLO scroll vertical dentro del hero */
+  overscroll-behavior: contain;  /* evita “chaining” de scroll y el rebote */
+  contain: layout paint;         /* aísla efectos/animaciones del layout global */
+  -webkit-overflow-scrolling: touch; /* scroll suave en iOS */
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
@@ -24,9 +31,10 @@
   margin: 0 auto;
   position: relative;
   z-index: 1;
+  min-width: 0;                  /* IMPORTANTÍSIMO en móvil */
 }
 
-/* === TEXTOS (estilo del bloque original adaptado) === */
+/* === TEXTOS === */
 .greeting {
   font-size: clamp(12px, 1.4vw, 18px);
   font-weight: 600;
@@ -53,21 +61,18 @@
   color: #ffffff;
 }
 
-.description {
+.description,
+.tagline {
   max-width: 880px;
   margin: 8px auto 10px;
   font-size: clamp(16px, 2.1vw, 22px);
   line-height: 1.7;
   color: rgba(255,255,255,.75);
+  overflow-wrap: anywhere;       /* evita que un texto largo “arrastre” */
+  word-break: break-word;
 }
 
-.tagline {
-  max-width: 880px;
-  margin: 0 auto 32px;
-  font-size: clamp(16px, 2.1vw, 22px);
-  line-height: 1.7;
-  color: rgba(255,255,255,.75);
-}
+.tagline { margin: 0 auto 32px; }
 
 /* === BOTONES === */
 .buttons {
@@ -85,10 +90,12 @@
   font-weight: 600;
   border-radius: 0.75rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
+  will-change: transform;        /* evita “jitters” en móvil */
+  touch-action: manipulation;    /* previene gestos que arrastren el viewport */
 }
 
 .primaryButton {
@@ -125,9 +132,18 @@
   display: flex;
   justify-content: center;
   margin: 0 auto;
+  user-select: none;            /* evita selección/arrastre accidental */
+  -webkit-user-select: none;
 }
 
 @keyframes bounce {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(15px); }
+  50%      { transform: translateY(15px); }
+}
+
+/* ==== TUNING EXTRA PARA MÓVIL PEQUEÑO ==== */
+@media (max-width: 380px) {
+  .hero { padding: 0 1rem 3rem; }
+  .buttons { gap: .75rem; }
+  .primaryButton, .secondaryButton { padding: .9rem 1.5rem; }
 }

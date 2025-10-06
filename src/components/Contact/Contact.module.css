@@ -1,8 +1,8 @@
 .contact {
   padding: 6rem 2rem;
-  /* Lighter gray background */
   background: #1a1a1a;
   position: relative;
+  overflow-x: clip; /* ✅ evita desbordes horizontales */
 }
 
 /* Added decorative background pattern */
@@ -13,7 +13,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* Gray gradient pattern */
   background-image: radial-gradient(circle at 70% 30%, rgba(156, 163, 175, 0.05) 0%, transparent 50%);
   pointer-events: none;
 }
@@ -31,7 +30,6 @@
   color: #fff;
   margin-bottom: 1rem;
   text-align: center;
-  /* Gray gradient text effect */
   background: linear-gradient(135deg, #d1d5db, #9ca3af);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -51,18 +49,27 @@
 
 .content {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr); /* ✅ evita overflow */
   gap: 3rem;
 }
 
+/* ✅ columnas seguras en pantallas grandes */
+@media (min-width: 768px) {
+  .content {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+  }
+}
+
 .contactInfo {
-  /* Enhanced card with gradient border and backdrop blur */
   background: rgba(38, 38, 38, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(156, 163, 175, 0.2);
   border-radius: 1.5rem;
   padding: 2.5rem;
   transition: all 0.3s ease;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden; /* ✅ evita salidas de sombras/bordes */
 }
 
 .contactInfo:hover {
@@ -82,7 +89,6 @@
   align-items: center;
   gap: 1rem;
   padding: 1.5rem;
-  /* Enhanced with gradient background */
   background: linear-gradient(135deg, rgba(107, 114, 128, 0.05), rgba(75, 85, 99, 0.05));
   border: 1px solid rgba(156, 163, 175, 0.2);
   border-radius: 1rem;
@@ -106,7 +112,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* Gradient background for icons */
   background: linear-gradient(135deg, #6b7280, #4b5563);
   border-radius: 0.75rem;
   color: #fff;
@@ -117,15 +122,20 @@
 .infoItem span {
   color: #e5e7eb;
   font-size: 1rem;
+  word-break: break-word; /* ✅ previene desbordes de texto largo */
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .form {
-  /* Enhanced form card styling */
   background: rgba(38, 38, 38, 0.8);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(156, 163, 175, 0.2);
   border-radius: 1.5rem;
   padding: 2.5rem;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .formGroup {
@@ -144,13 +154,15 @@
 .textarea {
   width: 100%;
   padding: 1rem;
-  /* Enhanced input styling with better borders */
   background: rgba(55, 65, 81, 0.5);
   border: 1px solid rgba(156, 163, 175, 0.2);
   border-radius: 0.75rem;
   color: #fff;
   font-size: 1rem;
   transition: all 0.3s ease;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  min-width: 0;
 }
 
 .input:focus,
@@ -169,7 +181,6 @@
 .submitButton {
   width: 100%;
   padding: 1.125rem;
-  /* Enhanced button with gradient and glow effect */
   background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
   color: #fff;
   border: none;
@@ -185,10 +196,4 @@
   transform: translateY(-3px);
   box-shadow: 0 6px 25px rgba(107, 114, 128, 0.6);
   background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
-}
-
-@media (min-width: 768px) {
-  .content {
-    grid-template-columns: 1fr 1.5fr;
-  }
 }
