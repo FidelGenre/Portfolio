@@ -11,6 +11,7 @@
   background: #1a1a1a;               /* mismo tono base que el Hero */
   position: relative;
   overflow: hidden;
+  font-family: var(--font-roboto);
 }
 
 /* decoración sutil */

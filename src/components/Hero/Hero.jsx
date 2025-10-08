@@ -19,9 +19,8 @@ export default function Hero() {
           Crafting web experiences with modern technologies and clean code.
         </p>
         <p className={styles.tagline}>
-          I write the code so you don’t have to — let’s connect!
+        I write the code so you don’t have to — let’s connect!
         </p>
-
         <div className={styles.buttons}>
           <button
             className={styles.primaryButton}

@@ -4,6 +4,7 @@
   top: 0;
   left: 0;
   right: 0;
+  font-family: var(--font-roboto);
 
   /* mismos colores/estilo que tenías */
   background: rgba(26, 26, 26, 0.9);

@@ -2,6 +2,7 @@
   padding: 6rem 2rem;
   background: #1f1f1f;
   position: relative;
+  font-family: var(--font-roboto);
 }
 
 .projects::before {

@@ -3,6 +3,7 @@
   background: #1a1a1a;
   position: relative;
   overflow-x: clip; /* ✅ evita desbordes horizontales */
+  font-family: var(--font-roboto);
 }
 
 /* Added decorative background pattern */
