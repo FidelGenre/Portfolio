@@ -12,7 +12,7 @@ export default function Projects() {
         "Restaurant e-commerce project built for my portfolio. Users can browse the menu, add items to the cart, and place orders online. Developed with React and Node.js/Express.",
       image: ecommerceImg,
       tags: ["React", "Express.js", "PostgreSQL"],
-      projectUrl: "https://e-commerce-nine-kohl-13.vercel.app/",
+      projectUrl: "https://ecommerceclient-w2q7.onrender.com/",
       codeUrl: "https://github.com/fidelgenre/E-Commerce"
     },
     {
