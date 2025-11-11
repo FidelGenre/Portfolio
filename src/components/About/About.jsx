@@ -1,7 +1,11 @@
+import { useState } from "react";
 import styles from "./About.module.css";
 import meImage from "../../assets/aboutImage.jpg";
 
 export default function About() {
+  const [showAllTech, setShowAllTech] = useState(false);
+  const [showAllTools, setShowAllTools] = useState(false);
+
   const technologies = [
     { name: "HTML5", icon: "🌐" },
     { name: "CSS3", icon: "🎨" },
@@ -132,9 +136,14 @@ export default function About() {
         </section>
 
         <div className={styles.skillsContainer}>
+          {/* Technologies */}
           <div className={styles.skillsSection}>
             <h3 className={styles.skillsTitle}>Technologies</h3>
-            <div className={styles.skillsGrid}>
+            <div
+              className={`${styles.skillsGrid} ${styles.techGrid} ${
+                showAllTech ? styles.expanded : ""
+              }`}
+            >
               {technologies.map((tech, index) => (
                 <div key={index} className={`${styles.skillItem} ${styles.techItem}`}>
                   <span className={styles.skillIcon}>{tech.icon}</span>
@@ -142,11 +151,30 @@ export default function About() {
                 </div>
               ))}
             </div>
+
+            <button
+              type="button"
+              className={styles.showMoreBtn}
+              onClick={() => setShowAllTech((prev) => !prev)}
+            >
+              <span>{showAllTech ? "Ver menos" : "Ver más"}</span>
+              <span
+                className={`${styles.arrow} ${showAllTech ? styles.arrowUp : ""}`}
+                aria-hidden="true"
+              >
+                ▾
+              </span>
+            </button>
           </div>
 
+          {/* Tools & Platforms */}
           <div className={styles.skillsSection}>
             <h3 className={styles.skillsTitle}>Tools & Platforms</h3>
-            <div className={styles.skillsGrid}>
+            <div
+              className={`${styles.skillsGrid} ${styles.toolGrid} ${
+                showAllTools ? styles.expanded : ""
+              }`}
+            >
               {tools.map((tool, index) => (
                 <div key={index} className={`${styles.skillItem} ${styles.toolItem}`}>
                   <span className={styles.skillIcon}>{tool.icon}</span>
@@ -154,6 +182,20 @@ export default function About() {
                 </div>
               ))}
             </div>
+
+            <button
+              type="button"
+              className={styles.showMoreBtn}
+              onClick={() => setShowAllTools((prev) => !prev)}
+            >
+              <span>{showAllTools ? "Ver menos" : "Ver más"}</span>
+              <span
+                className={`${styles.arrow} ${showAllTools ? styles.arrowUp : ""}`}
+                aria-hidden="true"
+              >
+                ▾
+              </span>
+            </button>
           </div>
         </div>
       </div>

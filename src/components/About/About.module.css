@@ -361,6 +361,34 @@
   font-size: 0.92rem;
 }
 
+.showMoreBtn {
+  display: none; /* solo visible en mobile */
+  margin: 1.6rem auto 0; /* centrado horizontal */
+  padding: 0.7rem 1.8rem;
+  border-radius: 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ffffff;
+  background: transparent;
+  border: 2px solid #8b92a0;
+  box-shadow: 0 0 12px rgba(139, 146, 160, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+
+
+}
+
+.showMoreBtn:hover,
+.showMoreBtn:focus-visible {
+  background: rgba(139, 146, 160, 0.15);
+  border-color: #b8bcc4;
+  transform: translateY(-3px);
+  box-shadow: 0 0 20px rgba(139, 146, 160, 0.5);
+  outline: none;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 980px) {
   .aboutMain {
@@ -371,4 +399,21 @@
   .aboutText { text-align: center; }
   .imageContainer { margin: 0 auto; }
   .skillsContainer { grid-template-columns: 1fr; gap: 2rem; }
+
+  .showMoreBtn {
+    display: flex; /* visible en mobile */
+  }
+
+  /* mostrar solo 3 ítems por defecto */
+  .techGrid .skillItem:nth-child(n + 4),
+  .toolGrid .skillItem:nth-child(n + 4) {
+    display: none;
+  }
+
+  /* al expandir muestra todos */
+  .techGrid.expanded .skillItem,
+  .toolGrid.expanded .skillItem {
+    display: flex;
+  }
 }
+

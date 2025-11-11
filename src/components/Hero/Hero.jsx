@@ -19,8 +19,9 @@ export default function Hero() {
           Crafting web experiences with modern technologies and clean code.
         </p>
         <p className={styles.tagline}>
-        I write the code so you don’t have to — let’s connect!
+          I write the code so you don’t have to — let’s connect!
         </p>
+
         <div className={styles.buttons}>
           <button
             className={styles.primaryButton}
@@ -36,7 +37,13 @@ export default function Hero() {
           </button>
         </div>
 
-        <div className={styles.scrollIndicator}>
+        {/* 🔽 FLECHITA que lleva al ABOUT */}
+        <div
+          className={styles.scrollIndicator}
+          onClick={() => scrollToSection("about")}
+          style={{ cursor: "pointer" }}
+          title="Go to About"
+        >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path
               d="M12 5v14m0 0l-7-7m7 7l7-7"

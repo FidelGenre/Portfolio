@@ -1,12 +1,10 @@
 .navbar {
-  /* 🔸 En flujo normal, arriba del Hero */
-  position: relative;           /* <- SIN fixed/sticky */
+  position: relative;
   top: 0;
   left: 0;
   right: 0;
   font-family: var(--font-roboto);
 
-  /* mismos colores/estilo que tenías */
   background: rgba(26, 26, 26, 0.9);
   backdrop-filter: blur(20px);
   z-index: 999;
@@ -17,23 +15,36 @@
 .container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 1.2rem 2rem; /* altura cómoda pero sin tapar el Hero */
+  padding: 1.2rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* Logo */
+/* ===== Logo ===== */
+.heroImg {
+  width: 70px;
+  height: auto;
+  transition: transform 0.2s ease;
+  will-change: transform;
+}
+
+.heroImg:hover {
+  transform: translateY(-3px); /* 🔺 se levanta */
+}
+
+/* Si querés mantener el flotando, podés usar esto:
 .heroImg {
   width: 70px;
   height: auto;
   animation: floating 2.5s ease-in-out infinite;
   transition: transform 0.3s ease;
+  will-change: transform;
 }
-
 .heroImg:hover {
-  transform: scale(1.1);
+  transform: scale(1.1) translateY(-3px);
 }
+*/
 
 @keyframes floating {
   0% { transform: translateY(0); }
@@ -41,7 +52,7 @@
   100% { transform: translateY(0); }
 }
 
-/* Links (Desktop) */
+/* ===== Navegación Desktop ===== */
 .navLinks {
   display: none;
   list-style: none;
@@ -57,29 +68,34 @@
   font-size: 1.125rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
   padding: 0.5rem 0;
   position: relative;
+  transition: color 0.3s ease, transform 0.2s ease;
+
+  will-change: transform;
 }
 
 .navLinks li button::after {
-  content: "";
+  content: none;
   position: absolute;
-  bottom: 0; left: 0;
-  width: 0; height: 2px;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
   background: linear-gradient(90deg, #9ca3af, #6b7280);
   transition: width 0.3s ease;
 }
 
 .navLinks li button:hover {
   color: #d1d5db;
+  transform: translateY(-3px); /* 🔺 efecto levantar texto */
 }
 
 .navLinks li button:hover::after {
   width: 100%;
 }
 
-/* Hamburguesa (Mobile) */
+/* ===== Hamburguesa (Mobile) ===== */
 .hamburger {
   display: flex;
   flex-direction: column;
@@ -91,16 +107,19 @@
   transition: transform 0.3s ease;
 }
 
-.hamburger:hover { transform: scale(1.1); }
+.hamburger:hover {
+  transform: scale(1.1);
+}
 
 .hamburger span {
-  width: 25px; height: 2px;
+  width: 25px;
+  height: 2px;
   background: linear-gradient(90deg, #9ca3af, #6b7280);
   transition: all 0.3s ease;
   border-radius: 2px;
 }
 
-/* Mobile Menu */
+/* ===== Mobile Menu ===== */
 .mobileMenu {
   position: fixed;
   inset: 0;
@@ -114,18 +133,35 @@
   animation: fadeIn 0.3s ease;
 }
 
-@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 
+/* ===== Botón Cerrar ===== */
 .closeButton {
-  position: absolute; top: 2rem; right: 2rem;
-  background: none; border: none; color: #fff;
-  font-size: 2rem; cursor: pointer; width: 40px; height: 40px;
-  display: flex; align-items: center; justify-content: center;
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.3s ease;
 }
 
-.closeButton:hover { color:#d1d5db; transform: rotate(90deg); }
+.closeButton:hover {
+  color: #d1d5db;
+  transform: rotate(90deg);
+}
 
+/* ===== Menú móvil ===== */
 .mobileNav {
   display: flex;
   flex-direction: column;
@@ -134,9 +170,16 @@
 }
 
 .mobileNav button {
-  background: none; border: none; color: #fff;
-  font-size: 1.5rem; font-weight: 500; cursor: pointer;
-  transition: all 0.3s ease; padding: 0.5rem; position: relative;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+  padding: 0.5rem;
+  position: relative;
+  will-change: transform;
 }
 
 .mobileNav button:hover {
@@ -144,15 +187,22 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  transform: scale(1.1);
+  transform: translateY(-3px); /* 🔺 efecto levantar texto */
 }
 
-/* Responsive */
+/* ===== Responsive ===== */
 @media (min-width: 768px) {
-  .navLinks { display: flex; }
-  .hamburger { display: none; }
+  .navLinks {
+    display: flex;
+  }
+
+  .hamburger {
+    display: none;
+  }
 }
 
 @media (max-width: 768px) {
-  .heroImg { width: 42px; }
+  .heroImg {
+    width: 42px;
+  }
 }
