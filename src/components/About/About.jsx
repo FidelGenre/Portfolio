@@ -157,7 +157,7 @@ export default function About() {
               className={styles.showMoreBtn}
               onClick={() => setShowAllTech((prev) => !prev)}
             >
-              <span>{showAllTech ? "Ver menos" : "Ver más"}</span>
+              <span>{showAllTech ? "View Less" : "View More"}</span>
               <span
                 className={`${styles.arrow} ${showAllTech ? styles.arrowUp : ""}`}
                 aria-hidden="true"
