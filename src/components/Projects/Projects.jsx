@@ -13,7 +13,7 @@ export default function Projects() {
       image: ecommerceImg,
       tags: ["React", "Express.js", "PostgreSQL"],
       projectUrl: "https://ecommerceclient-w2q7.onrender.com/",
-      codeUrl: "https://github.com/fidelgenre/E-Commerce"
+      codeUrl: "https://github.com/fidelgenre/ECommerce"
     },
     {
       title: "Student Management System",
