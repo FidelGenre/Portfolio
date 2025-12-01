@@ -16,16 +16,16 @@ export default function Projects() {
       codeUrl: "https://github.com/fidelgenre/ECommerce"
     },
     {
-      title: "Student Management System",
+      title: "University Management System",
       description:
-        "Student management system. Allows registering and managing students with CRUD operations. Developed with Java Spring Boot and React, not yet finished.",
+        "University management system. Allows registering and managing students with CRUD operations. Developed with Java Spring Boot and React, not yet finished.",
       image: studentImg,
-      tags: ["React", "SpringBoot", "MongoDB"],
+      tags: ["React", "SpringBoot", "PostgreSQL"],
       projectUrl: "https://unisystemclient.onrender.com/",
       codeUrl: "https://github.com/FidelGenre/StudentSystem"
     },
     {
-      title: "Project-3",
+      title: "Web3",
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea quo in nostrum hic, eaque quia quam, eos vero suscipit vitae sequi nihil recusandae odit delectus ex quia perferendis. Accusantium, sed dolorum.",
       image: "",
