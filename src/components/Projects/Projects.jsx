@@ -21,7 +21,7 @@ export default function Projects() {
         "Student management system. Allows registering and managing students with CRUD operations. Developed with Java Spring Boot and React, not yet finished.",
       image: studentImg,
       tags: ["React", "SpringBoot", "MongoDB"],
-      projectUrl: "https://your-live-project-url.com",
+      projectUrl: "https://unisystemclient.onrender.com/",
       codeUrl: "https://github.com/FidelGenre/StudentSystem"
     },
     {
