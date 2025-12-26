@@ -10,27 +10,29 @@ export default function About() {
     { name: "HTML5", icon: "🌐" },
     { name: "CSS3", icon: "🎨" },
     { name: "JavaScript", icon: "JS" },
+    { name: "TypeScript", icon: "TS" },
     { name: "React", icon: "⚛️" },
+    /*
     { name: "Node.js", icon: "📗" },
     { name: "Express.js", icon: "🚀" },
+     */
     { name: "JAVA", icon: "☕" },
     { name: "SpringBoot", icon: "🌱" },
     { name: "RESTful APIs", icon: "🔗" },
     { name: "PostgreSQL", icon: "🐘" },
-    { name: "MongoDB", icon: "🍃" },
   ];
 
   const tools = [
     { name: "Git", icon: "🐙" },
     { name: "VS Code", icon: "💙" },
+    { name: "IntellijIdea", icon: "🧠" },
     { name: "Figma", icon: "🎨" },
     { name: "Docker", icon: "🐳" },
-    { name: "Vercel", icon: "▲" },
     { name: "Hosting", icon: "🌐" },
     { name: "GitHub", icon: "🐱" },
     { name: "Maven", icon: "⚙️" },
     { name: "Npm", icon: "📦" },
-    { name: "Render", icon: "☁️" },
+    { name: "Postman", icon: "📮" }
   ];
 
   const services = [
