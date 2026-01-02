@@ -3,35 +3,36 @@ import styles from "./Projects.module.css"
 // Importación de imágenes desde src/assets
 import ecommerceImg from "../../assets/E-Commerce.png"
 import studentImg from "../../assets/StudentSystem.png"
+import socialImg from "../../assets/SocialNetwork.png"
 
 export default function Projects() {
   const projects = [
     {
-      title: "E-Commerce",
+      title: "E-Commerce/Inventory-Gestor",
       description:
-        "Restaurant e-commerce project built for my portfolio. Users can browse the menu, add items to the cart, and place orders online. Developed with React and Node.js/Express.",
+        "e-commerce project for a coffee beans brand. Users can explore different coffee products, view detailed information, add items to the cart, and place orders. The system also includes basic product and inventory management features",
       image: ecommerceImg,
-      tags: ["React", "Express.js", "PostgreSQL"],
+      tags: ["React","JavaScript","CSS","Node.js","Express.js", "PostgreSQL"],
       projectUrl: "https://ecommerceclient-w2q7.onrender.com/",
       codeUrl: "https://github.com/fidelgenre/ECommerce"
     },
     {
       title: "University Management System",
       description:
-        "University management system. Allows registering and managing students with CRUD operations. Developed with Java Spring Boot and React, not yet finished.",
+        "University management system designed to manage academic entities. Allows registering, updating, and managing students through full CRUD operations. Focused on organizing student data and supporting basic administrative workflows. Project currently in progress.",
       image: studentImg,
-      tags: ["React", "SpringBoot", "PostgreSQL"],
+      tags: ["React","JavaScript","CSS","Java", "SpringBoot", "PostgreSQL"],
       projectUrl: "https://unisystemclient.onrender.com/",
       codeUrl: "https://github.com/FidelGenre/StudentSystem"
     },
     {
-      title: "Web3",
+      title: "Social Network",
       description:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea quo in nostrum hic, eaque quia quam, eos vero suscipit vitae sequi nihil recusandae odit delectus ex quia perferendis. Accusantium, sed dolorum.",
-      image: "",
-      tags: ["</>", "</>", "</>", "</>"],
-      projectUrl: "https://your-live-project-url.com",
-      codeUrl: "https://github.com/tuusuario/tu-repo"
+      image: socialImg,
+      tags: ["React", "TypeScript","CSS","Java","SpringBoot", "PostgreSQL"],
+      projectUrl: "https://socialnetwork-m3m4.onrender.com/",
+      codeUrl: "https://github.com/FidelGenre/SocialNetwork"
     },
   ]
 
