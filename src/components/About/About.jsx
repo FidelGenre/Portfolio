@@ -87,7 +87,7 @@ export default function About() {
 
             <div className={styles.ctaRow}>
               <a
-                href="https://drive.google.com/file/d/15JYMuOPgcbs_nNURcGkDcDLjEh0DsU45/view?usp=sharing"
+                href="https://drive.google.com/file/d/1ALkf1qSNmx1zuK2e4XBoHAekU2me_D9q/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.viewCV}
