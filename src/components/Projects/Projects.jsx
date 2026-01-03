@@ -28,7 +28,7 @@ export default function Projects() {
     {
       title: "Social Network",
       description:
-        "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea quo in nostrum hic, eaque quia quam, eos vero suscipit vitae sequi nihil recusandae odit delectus ex quia perferendis. Accusantium, sed dolorum.",
+        "Social network project designed to connect users through profiles and interactions. Allows user registration, content sharing, and basic social interactions such as following and engagement. Focused on core social features and user experience.",
       image: socialImg,
       tags: ["React", "TypeScript","CSS","Java","SpringBoot", "PostgreSQL"],
       projectUrl: "https://socialnetwork-m3m4.onrender.com/",
