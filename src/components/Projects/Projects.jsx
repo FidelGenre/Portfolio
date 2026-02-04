@@ -30,7 +30,7 @@ export default function Projects() {
       description:
         "Social network project designed to connect users through profiles and interactions. Allows user registration, content sharing, and basic social interactions such as following and engagement. Focused on core social features and user experience.",
       image: socialImg,
-      tags: ["Next","TypeScript","Tailwind CSS","Java","SpringBoot","PostgreSQL"],
+      tags: ["Next.js","TypeScript","Tailwind CSS","Java","SpringBoot","PostgreSQL"],
       projectUrl: "https://socialnetworkclient-oyjw.onrender.com/",
       codeUrl: "https://github.com/FidelGenre/SocialNetwork"
     },

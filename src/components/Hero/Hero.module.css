@@ -12,12 +12,14 @@
   text-align: center;
 
   position: relative;
-  overflow: hidden;              /* corta cualquier desborde interno */
-
-  touch-action: pan-y;           /* SOLO scroll vertical dentro del hero */
-  overscroll-behavior: contain;  /* evita “chaining” de scroll y el rebote */
-  contain: layout paint;         /* aísla efectos/animaciones del layout global */
-  -webkit-overflow-scrolling: touch; /* scroll suave en iOS */
+  /* Cambio: Solo ocultamos el desborde horizontal para evitar scroll lateral */
+  overflow-x: hidden; 
+  
+  /* Cambio: Eliminamos overscroll-behavior: contain para permitir el paso del scroll */
+  overscroll-behavior: auto; 
+  
+  /* Cambio: Quitamos touch-action de aquí para que no interfiera en desktop */
+  -webkit-overflow-scrolling: touch;
 }
 
 @keyframes gradientShift {
@@ -31,7 +33,7 @@
   margin: 0 auto;
   position: relative;
   z-index: 1;
-  min-width: 0;                  /* IMPORTANTÍSIMO en móvil */
+  min-width: 0;
 }
 
 /* === TEXTOS === */
@@ -67,7 +69,7 @@
   font-size: clamp(16px, 2.1vw, 22px);
   line-height: 1.7;
   color: rgba(255,255,255,.75);
-  overflow-wrap: anywhere;       /* evita que un texto largo “arrastre” */
+  overflow-wrap: anywhere;
   word-break: break-word;
 }
 
@@ -93,8 +95,7 @@
   border: 2px solid transparent;
   position: relative;
   overflow: hidden;
-  will-change: transform;        /* evita “jitters” en móvil */
-  touch-action: manipulation;    /* previene gestos que arrastren el viewport */
+  will-change: transform;
 }
 
 .primaryButton {
@@ -131,7 +132,7 @@
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  user-select: none;            /* evita selección/arrastre accidental */
+  user-select: none;
   -webkit-user-select: none;
 }
 
@@ -142,7 +143,11 @@
 
 /* ==== TUNING EXTRA PARA MÓVIL PEQUEÑO ==== */
 @media (max-width: 380px) {
-  .hero { padding: 0 1rem 3rem; }
+  .hero { 
+    padding: 0 1rem 3rem; 
+    /* Solo activamos pan-y en pantallas táctiles si es necesario */
+    touch-action: pan-y;
+  }
   .buttons { gap: .75rem; }
   .primaryButton, .secondaryButton { padding: .9rem 1.5rem; }
 }
