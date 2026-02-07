@@ -2,7 +2,7 @@ import styles from "./Projects.module.css"
 
 // Importación de imágenes desde src/assets
 import ecommerceImg from "../../assets/E-Commerce.png"
-import studentImg from "../../assets/StudentSystem.png"
+import dappweb3Img from "../../assets/Dappweb3.webp"
 import socialImg from "../../assets/SocialNetwork.png"
 
 export default function Projects() {
@@ -12,25 +12,25 @@ export default function Projects() {
       description:
         "e-commerce project for a coffee beans brand. Users can explore different coffee products, view detailed information, add items to the cart, and place orders. The system also includes basic product and inventory management features",
       image: ecommerceImg,
-      tags: ["React","JavaScript","CSS","Node.js","Express.js", "PostgreSQL"],
+      tags: ["React", "JavaScript", "CSS", "Node.js", "Express.js", "PostgreSQL"],
       projectUrl: "https://ecommerceclient-w2q7.onrender.com/",
       codeUrl: "https://github.com/fidelgenre/ECommerce"
     },
     {
-      title: "University Management System",
+      title: "Crowdfunding (Web3)",
       description:
-        "University management system designed to manage academic entities. Allows registering, updating, and managing students through full CRUD operations. Focused on organizing student data and supporting basic administrative workflows. Project currently in progress.",
-      image: studentImg,
-      tags: ["React","JavaScript","CSS","Java", "SpringBoot", "PostgreSQL"],
-      projectUrl: "https://unisystemclient.onrender.com/",
-      codeUrl: "https://github.com/FidelGenre/StudentSystem"
+        "Crowdfunding platform designed to raise funds for projects. Allows users to create campaigns, contribute funds, and track project progress. Focused on transparency and community engagement.",
+      image: dappweb3Img,
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Solidity", "Foundry", "RainbowKit", "Wagmi+Viem"],
+      projectUrl: "https://crowdfundingfidelgenre.vercel.app/",
+      codeUrl: "https://github.com/FidelGenre/Crowdfunding"
     },
     {
       title: "Social Network",
       description:
         "Social network project designed to connect users through profiles and interactions. Allows user registration, content sharing, and basic social interactions such as following and engagement. Focused on core social features and user experience.",
       image: socialImg,
-      tags: ["Next.js","TypeScript","Tailwind CSS","Java","SpringBoot","PostgreSQL"],
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
       projectUrl: "https://socialnetworkclient-oyjw.onrender.com/",
       codeUrl: "https://github.com/FidelGenre/SocialNetwork"
     },
