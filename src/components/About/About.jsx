@@ -87,7 +87,7 @@ export default function About() {
 
             <div className={styles.ctaRow}>
               <a
-                href="https://drive.google.com/file/d/1CK7EhyEn_ELL8vmVcXBSVcTLJ8SQudYf/view?usp=sharing"
+                href="https://drive.google.com/file/d/1Ya09emnd8xseyywXLFAfjrIjISqAknjb/view?usp=sharing"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.viewCV}
@@ -142,9 +142,8 @@ export default function About() {
           <div className={styles.skillsSection}>
             <h3 className={styles.skillsTitle}>Technologies</h3>
             <div
-              className={`${styles.skillsGrid} ${styles.techGrid} ${
-                showAllTech ? styles.expanded : ""
-              }`}
+              className={`${styles.skillsGrid} ${styles.techGrid} ${showAllTech ? styles.expanded : ""
+                }`}
             >
               {technologies.map((tech, index) => (
                 <div key={index} className={`${styles.skillItem} ${styles.techItem}`}>
@@ -173,9 +172,8 @@ export default function About() {
           <div className={styles.skillsSection}>
             <h3 className={styles.skillsTitle}>Tools & Platforms</h3>
             <div
-              className={`${styles.skillsGrid} ${styles.toolGrid} ${
-                showAllTools ? styles.expanded : ""
-              }`}
+              className={`${styles.skillsGrid} ${styles.toolGrid} ${showAllTools ? styles.expanded : ""
+                }`}
             >
               {tools.map((tool, index) => (
                 <div key={index} className={`${styles.skillItem} ${styles.toolItem}`}>
