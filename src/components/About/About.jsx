@@ -7,32 +7,32 @@ export default function About() {
   const [showAllTools, setShowAllTools] = useState(false);
 
   const technologies = [
-    { name: "HTML5", icon: "🌐" },
-    { name: "CSS3", icon: "🎨" },
-    { name: "JavaScript", icon: "JS" },
-    { name: "TypeScript", icon: "TS" },
+    { name: "Next.js", icon: "▲" },
     { name: "React", icon: "⚛️" },
-    /*
-    { name: "Node.js", icon: "📗" },
-    { name: "Express.js", icon: "🚀" },
-     */
+    { name: "Tailwind CSS", icon: "🌊" },
+    { name: "Solidity", icon: "⛓️" },
+    { name: "Foundry", icon: "⚒️" },
+    { name: "Node.js", icon: "📗" }, // Agregado
+    { name: "TypeScript", icon: "TS" },
+    { name: "JavaScript", icon: "JS" },
     { name: "JAVA", icon: "☕" },
     { name: "SpringBoot", icon: "🌱" },
-    { name: "RESTful APIs", icon: "🔗" },
     { name: "PostgreSQL", icon: "🐘" },
   ];
 
   const tools = [
     { name: "Git", icon: "🐙" },
+    { name: "Docker", icon: "🐳" },
+    { name: "Wagmi/Viem", icon: "🔌" },
+    { name: "Alchemy", icon: "⚗️" },
+    { name: "Pinata/IPFS", icon: "📌" },
     { name: "VS Code", icon: "💙" },
     { name: "IntellijIdea", icon: "🧠" },
-    { name: "Figma", icon: "🎨" },
-    { name: "Docker", icon: "🐳" },
-    { name: "Hosting", icon: "🌐" },
+    { name: "Postman", icon: "📮" },
     { name: "GitHub", icon: "🐱" },
+    { name: "Figma", icon: "🎨" },
     { name: "Maven", icon: "⚙️" },
-    { name: "Npm", icon: "📦" },
-    { name: "Postman", icon: "📮" }
+    { name: "Npm", icon: "📦" }, // Importante ya que usas Node
   ];
 
   const services = [
@@ -68,21 +68,22 @@ export default function About() {
         <div className={styles.aboutMain}>
           <div className={styles.aboutText}>
             <p>
-              I'm Fidel Genre, a passionate full-stack developer currently in my
-              final year of university. I specialize in frontend development and
-              backend development, bringing ideas to life through clean code and
-              thoughtful design.
+              <p>
+                I'm Fidel Genre, a Software Engineer dedicated to building scalable
+                digital solutions that bridge the gap between traditional software
+                architectures and the decentralized web.
+              </p>
             </p>
             <p>
-              I love crafting beautiful, functional digital experiences with a
-              strong focus on performance and user experience. Whether it's
-              building web apps, I enjoy turning complex problems into elegant,
-              scalable solutions.
+              I specialize in crafting high-performance applications with a strong
+              focus on security, efficiency, and user experience. Whether I'm
+              developing robust backend systems or secure smart contracts, I enjoy
+              transforming complex challenges into elegant, production-ready solutions.
             </p>
             <p>
-              Outside of coding, I stay curious by exploring new technologies,
-              contributing to open source, and continuously learning to grow as a
-              developer.
+              I am driven by a constant curiosity for emerging technologies and a
+              commitment to clean code. My goal is to create impactful digital
+              experiences that are both functional and future-proof.
             </p>
 
             <div className={styles.ctaRow}>

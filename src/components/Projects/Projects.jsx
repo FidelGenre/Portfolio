@@ -17,12 +17,12 @@ export default function Projects() {
       codeUrl: "https://github.com/fidelgenre/ECommerce"
     },
     {
-      title: "Crowdfunding (Web3)",
+      title: "StealthBid (Agentic Commerce Web3)",
       description:
-        "Crowdfunding platform designed to raise funds for projects. Allows users to create campaigns, contribute funds, and track project progress. Focused on transparency and community engagement.",
+        "First B2B marketplace for autonomous AI agents. Features privacy-first negotiations using SKALE BITE v2 (Threshold Encryption), gasless settlements via Coinbase x402, and verifiable audit trails with Google AP2.",
       image: dappweb3Img,
-      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Solidity", "Foundry", "RainbowKit", "Wagmi+Viem"],
-      projectUrl: "https://crowdfundingfidelgenre.vercel.app/",
+      tags: ["Next.js", "SKALE BITE v2", "Coinbase x402", "Google (AP2 + Gemini)", "TypeScript", "Tailwind CSS", "Solidity", "Foundry",],
+      projectUrl: "https://stealthbidagents.vercel.app/",
       codeUrl: "https://github.com/FidelGenre/Crowdfunding"
     },
     {
