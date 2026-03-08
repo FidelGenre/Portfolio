@@ -12,8 +12,8 @@ export default function Projects() {
       description:
         "e-commerce project for a coffee beans brand. Users can explore different coffee products, view detailed information, add items to the cart, and place orders. The system also includes basic product and inventory management features",
       image: ecommerceImg,
-      tags: ["React", "JavaScript", "CSS", "Node.js", "Express.js", "PostgreSQL"],
-      projectUrl: "https://ecommerceclient-w2q7.onrender.com/",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
+      projectUrl: "https://ecommerceclient-reqo.onrender.com",
       codeUrl: "https://github.com/fidelgenre/ECommerce"
     },
     {
