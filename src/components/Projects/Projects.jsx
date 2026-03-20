@@ -13,7 +13,7 @@ export default function Projects() {
         "e-commerce project for a coffee beans brand. Users can explore different coffee products, view detailed information, add items to the cart, and place orders. The system also includes basic product and inventory management features",
       image: ecommerceImg,
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
-      projectUrl: "https://ecommerceclient-reqo.onrender.com",
+      projectUrl: "https://ecommerceclient-production.up.railway.app/",
       codeUrl: "https://github.com/fidelgenre/ECommerce"
     },
     {
@@ -31,7 +31,7 @@ export default function Projects() {
         "Social network project designed to connect users through profiles and interactions. Allows user registration, content sharing, and basic social interactions such as following and engagement. Focused on core social features and user experience.",
       image: socialImg,
       tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
-      projectUrl: "https://socialnetworkclient-oyjw.onrender.com/",
+      projectUrl: "https://socialnetworkclient-production.up.railway.app/",
       codeUrl: "https://github.com/FidelGenre/SocialNetwork"
     },
   ]
