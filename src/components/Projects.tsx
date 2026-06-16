@@ -187,7 +187,7 @@ export default function Projects() {
                       }`}
                     />
 
-                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-[linear-gradient(135deg,#3a3a3a,#2b2b2b)]">
+                    <div className="relative aspect-[4/3] w-full overflow-hidden bg-[linear-gradient(135deg,#3a3a3a,#2b2b2b)]">
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={project.image}
@@ -227,11 +227,11 @@ export default function Projects() {
                       </div>
                     </div>
 
-                    <div className="flex flex-1 flex-col px-[1.4rem] py-5">
+                    <div className="flex flex-1 flex-col px-[1.4rem] py-7">
                       <h3 className="mb-[0.6rem] text-[1.25rem] font-bold leading-[1.25] text-white">
                         {project.title}
                       </h3>
-                      <p className="mb-4 line-clamp-3 text-[0.9rem] leading-[1.6] text-[#c4c9d1] max-[1023px]:line-clamp-4">
+                      <p className="mb-5 line-clamp-4 text-[0.9rem] leading-[1.6] text-[#c4c9d1]">
                         {project.description}
                       </p>
                       <div className="mt-auto flex flex-wrap gap-2">
