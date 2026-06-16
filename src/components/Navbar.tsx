@@ -78,7 +78,7 @@ export default function Navbar() {
                   transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <svg width="46" height="46" viewBox="0 0 24 24" fill="none">
                   <g
                     stroke="currentColor"
                     strokeWidth="1.5"
