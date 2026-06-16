@@ -12,67 +12,62 @@ export default function Navbar() {
   const toggleMenu = () => setIsMenuOpen((v) => !v);
 
   const handleLangToggle = () => {
-    setSpin((s) => s + 360); // todo el ícono da una vuelta
+    setSpin((s) => s + 180); // media vuelta: los círculos quedan intercambiados
     toggleLang();
   };
 
+  const spinTransition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
+
   // Botón de idioma: dos círculos (ES/EN) unidos por flechas.
-  // Al clickear, TODO el ícono (círculos + flechas) gira una vuelta y cambia el idioma.
+  // Al clickear, todo gira media vuelta (las flechas también) y los círculos
+  // intercambian lugar; las letras se contra-rotan para no quedar de cabeza.
   const langButton = (className = "") => (
     <button
       type="button"
       onClick={handleLangToggle}
       aria-label={lang === "en" ? "Cambiar a español" : "Switch to English"}
       title={lang === "en" ? "Español" : "English"}
-      className={`flex cursor-pointer items-center justify-center border-none bg-transparent text-[#cbd0d8] transition-colors duration-200 hover:text-white ${className}`}
+      className={`relative h-[50px] w-[50px] shrink-0 cursor-pointer border-none bg-transparent text-[#cbd0d8] transition-colors duration-200 hover:text-white ${className}`}
     >
-      <span
-        className="flex items-center justify-center"
-        style={{
-          transform: `rotate(${spin}deg)`,
-          transition: "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
-        }}
-      >
-        <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
-          {/* flechas que conectan los círculos */}
-          <g stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M26 6 Q44 6 44 24" />
-            <path d="M39.5 19.5 44 24 48 19.5" />
-            <path d="M24 44 Q6 44 6 26" />
-            <path d="M10.5 30.5 6 26 2 30.5" />
-          </g>
-          {/* círculo ES (arriba-izquierda) */}
-          <g style={{ opacity: lang === "es" ? 1 : 0.45, transition: "opacity 0.4s ease" }}>
-            <circle cx="14" cy="14" r="11" fill="currentColor" />
-            <text
-              x="14"
-              y="14"
-              fontSize="10"
-              fontWeight="800"
-              fill="#1f1f1f"
-              textAnchor="middle"
-              dominantBaseline="central"
-            >
-              ES
-            </text>
-          </g>
-          {/* círculo EN (abajo-derecha) */}
-          <g style={{ opacity: lang === "en" ? 1 : 0.45, transition: "opacity 0.4s ease" }}>
-            <circle cx="36" cy="36" r="11" fill="currentColor" />
-            <text
-              x="36"
-              y="36"
-              fontSize="10"
-              fontWeight="800"
-              fill="#1f1f1f"
-              textAnchor="middle"
-              dominantBaseline="central"
-            >
-              EN
-            </text>
-          </g>
+      {/* capa que gira (flechas + círculos) */}
+      <div className="absolute inset-0" style={{ transform: `rotate(${spin}deg)`, transition: spinTransition }}>
+        <svg
+          viewBox="0 0 50 50"
+          className="absolute inset-0 h-full w-full"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.6"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M26 6 Q44 6 44 24" />
+          <path d="M39.5 19.5 44 24 48 19.5" />
+          <path d="M24 44 Q6 44 6 26" />
+          <path d="M10.5 30.5 6 26 2 30.5" />
         </svg>
-      </span>
+
+        {(["es", "en"] as const).map((code) => {
+          const active = lang === code;
+          const topLeft = code === "es"; // ES arranca arriba-izquierda, EN abajo-derecha
+          return (
+            <span
+              key={code}
+              className={`absolute flex h-6 w-6 items-center justify-center rounded-full bg-current text-[10px] font-extrabold leading-none ${
+                active ? "opacity-100" : "opacity-45"
+              }`}
+              style={{
+                top: topLeft ? 1 : 25,
+                left: topLeft ? 1 : 25,
+                // contra-rotación para que la letra quede siempre derecha
+                transform: `rotate(${-spin}deg)`,
+                transition: `${spinTransition}, opacity 0.4s ease`,
+              }}
+            >
+              <span className="text-[#1f1f1f]">{code.toUpperCase()}</span>
+            </span>
+          );
+        })}
+      </div>
     </button>
   );
 
