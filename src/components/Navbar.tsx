@@ -12,68 +12,65 @@ export default function Navbar() {
   const toggleMenu = () => setIsMenuOpen((v) => !v);
 
   const handleLangToggle = () => {
-    setSpin((s) => s + 360); // gira una vuelta en cada click
+    setSpin((s) => s + 360); // todo el ícono da una vuelta
     toggleLang();
   };
 
+  // Botón de idioma: dos círculos (ES/EN) unidos por flechas.
+  // Al clickear, TODO el ícono (círculos + flechas) gira una vuelta y cambia el idioma.
   const langButton = (className = "") => (
     <button
       type="button"
       onClick={handleLangToggle}
       aria-label={lang === "en" ? "Cambiar a español" : "Switch to English"}
       title={lang === "en" ? "Español" : "English"}
-      className={`flex cursor-pointer items-center justify-center border-none bg-transparent p-1 text-[#cbd0d8] transition-colors duration-200 hover:text-white ${className}`}
+      className={`flex cursor-pointer items-center justify-center border-none bg-transparent text-[#cbd0d8] transition-colors duration-200 hover:text-white ${className}`}
     >
       <span
         className="flex items-center justify-center"
         style={{
           transform: `rotate(${spin}deg)`,
-          transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+          transition: "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       >
-        <svg width="50" height="50" viewBox="0 0 100 100" fill="none">
-          <g stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
-            {/* globo con grilla */}
-            <circle cx="50" cy="50" r="21" />
-            <clipPath id="globeClip">
-              <circle cx="50" cy="50" r="21" />
-            </clipPath>
-            <g clipPath="url(#globeClip)">
-              <ellipse cx="50" cy="50" rx="10" ry="21" />
-              <line x1="50" y1="0" x2="50" y2="100" />
-              <line x1="0" y1="39" x2="100" y2="39" />
-              <line x1="0" y1="50" x2="100" y2="50" />
-              <line x1="0" y1="61" x2="100" y2="61" />
-            </g>
-            {/* flechas que rodean */}
-            <path d="M 19 68 A 36 36 0 0 1 62 16" />
-            <path d="M 52 14 L 62 16 L 58 26" />
-            <path d="M 81 32 A 36 36 0 0 1 38 84" />
-            <path d="M 48 86 L 38 84 L 42 74" />
+        <svg width="50" height="50" viewBox="0 0 50 50" fill="none">
+          {/* flechas que conectan los círculos */}
+          <g stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M26 6 Q44 6 44 24" />
+            <path d="M39.5 19.5 44 24 48 19.5" />
+            <path d="M24 44 Q6 44 6 26" />
+            <path d="M10.5 30.5 6 26 2 30.5" />
           </g>
-          {/* EN (donde iba la A) / ES (donde iba el 文) */}
-          <text
-            x="73"
-            y="27"
-            fontSize="23"
-            fontWeight="800"
-            fill="currentColor"
-            textAnchor="middle"
-            dominantBaseline="central"
-          >
-            EN
-          </text>
-          <text
-            x="25"
-            y="76"
-            fontSize="23"
-            fontWeight="800"
-            fill="currentColor"
-            textAnchor="middle"
-            dominantBaseline="central"
-          >
-            ES
-          </text>
+          {/* círculo ES (arriba-izquierda) */}
+          <g style={{ opacity: lang === "es" ? 1 : 0.45, transition: "opacity 0.4s ease" }}>
+            <circle cx="14" cy="14" r="11" fill="currentColor" />
+            <text
+              x="14"
+              y="14"
+              fontSize="10"
+              fontWeight="800"
+              fill="#1f1f1f"
+              textAnchor="middle"
+              dominantBaseline="central"
+            >
+              ES
+            </text>
+          </g>
+          {/* círculo EN (abajo-derecha) */}
+          <g style={{ opacity: lang === "en" ? 1 : 0.45, transition: "opacity 0.4s ease" }}>
+            <circle cx="36" cy="36" r="11" fill="currentColor" />
+            <text
+              x="36"
+              y="36"
+              fontSize="10"
+              fontWeight="800"
+              fill="#1f1f1f"
+              textAnchor="middle"
+              dominantBaseline="central"
+            >
+              EN
+            </text>
+          </g>
         </svg>
       </span>
     </button>
@@ -145,7 +142,7 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="animate-fade-in fixed inset-0 z-[2000] flex flex-col items-center justify-center bg-[linear-gradient(135deg,rgba(26,26,26,0.98),rgba(38,38,38,0.98))] backdrop-blur-[10px]">
           {/* idioma: arriba a la izquierda, espejando la X */}
-          {langButton("absolute left-6 top-6")}
+          <div className="absolute left-6 top-6">{langButton()}</div>
 
           <button
             className="absolute right-8 top-8 flex h-10 w-10 cursor-pointer items-center justify-center border-none bg-transparent text-[2rem] text-white transition-all duration-300 hover:rotate-90 hover:text-[#d1d5db]"
