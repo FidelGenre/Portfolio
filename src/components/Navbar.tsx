@@ -78,7 +78,7 @@ export default function Navbar() {
                   transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
-                <svg width="46" height="46" viewBox="0 0 24 24" fill="none">
+                <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
                   <g
                     stroke="currentColor"
                     strokeWidth="1.5"
@@ -96,28 +96,28 @@ export default function Navbar() {
                     <path d="M5.8 17a6.3 6.3 0 0 1-1.9-4.5" />
                     <path d="m6.9 16.7-1.2.4-.5-1.2" />
                   </g>
-                  {/* letras A / 文 */}
+                  {/* códigos EN / ES en cada punta */}
                   <text
-                    x="18.6"
-                    y="8"
-                    fontSize="6.5"
+                    x="18.7"
+                    y="7.2"
+                    fontSize="5"
                     fontWeight="700"
                     fill="currentColor"
                     textAnchor="middle"
                     dominantBaseline="central"
                   >
-                    A
+                    EN
                   </text>
                   <text
-                    x="4.4"
-                    y="17.6"
-                    fontSize="6"
+                    x="4.6"
+                    y="18"
+                    fontSize="5"
                     fontWeight="700"
                     fill="currentColor"
                     textAnchor="middle"
                     dominantBaseline="central"
                   >
-                    文
+                    ES
                   </text>
                 </svg>
               </span>
