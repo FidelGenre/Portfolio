@@ -32,21 +32,21 @@ export default function Navbar() {
         }}
       >
         <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
-          <g stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+          <g stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
             {/* globo con grilla */}
-            <circle cx="11" cy="12" r="4.2" />
-            <path d="M6.8 12h8.4" />
-            <path d="M11 7.8c1.7 1.5 1.7 6.9 0 8.4" />
-            <path d="M11 7.8c-1.7 1.5-1.7 6.9 0 8.4" />
-            <path d="M7.6 9.8c2 1.1 4.8 1.1 6.8 0" />
-            <path d="M7.6 14.2c2-1.1 4.8-1.1 6.8 0" />
-            {/* flecha superior (rodea por arriba, punta hacia abajo-derecha) */}
-            <path d="M4.8 8.4A7.2 7.2 0 0 0 17.2 8.4" />
-            <path d="M15.5 8 17.2 8.4 16.8 6.6" />
-            {/* flecha inferior = rotación 180° de la superior */}
+            <circle cx="11" cy="12" r="4.5" />
+            <path d="M6.5 12h9" />
+            <path d="M11 7.5c1.8 1.6 1.8 7.4 0 9" />
+            <path d="M11 7.5c-1.8 1.6-1.8 7.4 0 9" />
+            <path d="M7.4 9.6c2.2 1.2 5 1.2 7.2 0" />
+            <path d="M7.4 14.4c2.2-1.2 5-1.2 7.2 0" />
+            {/* flecha que rodea (mitad izquierda+arriba), punta abajo-derecha */}
+            <path d="M7.6 17.9A6.8 6.8 0 0 1 14.4 6.1" />
+            <path d="M13.5 4.3 14.4 6.1 12.4 6.2" />
+            {/* flecha opuesta = rotación 180° */}
             <g transform="rotate(180 11 12)">
-              <path d="M4.8 8.4A7.2 7.2 0 0 0 17.2 8.4" />
-              <path d="M15.5 8 17.2 8.4 16.8 6.6" />
+              <path d="M7.6 17.9A6.8 6.8 0 0 1 14.4 6.1" />
+              <path d="M13.5 4.3 14.4 6.1 12.4 6.2" />
             </g>
           </g>
           {/* códigos EN / ES en cada punta */}
