@@ -6,9 +6,15 @@ import { useLang } from "@/i18n/LanguageContext";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { lang, setLang, t } = useLang();
+  const [spin, setSpin] = useState(0);
+  const { lang, toggleLang, t } = useLang();
 
   const toggleMenu = () => setIsMenuOpen((v) => !v);
+
+  const handleLangToggle = () => {
+    setSpin((s) => s + 360); // gira una vuelta en cada click
+    toggleLang();
+  };
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -58,32 +64,64 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-4">
-            <div
-              role="group"
-              aria-label="Language selector"
-              className="inline-flex items-center gap-0.5 rounded-full border border-[rgba(156,163,175,0.3)] bg-[rgba(156,163,175,0.12)] p-[3px] pl-2"
+            <button
+              type="button"
+              onClick={handleLangToggle}
+              aria-label={lang === "en" ? "Cambiar a español" : "Switch to English"}
+              title={lang === "en" ? "Español" : "English"}
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(156,163,175,0.3)] bg-[rgba(156,163,175,0.12)] text-[#cbd0d8] transition-colors duration-200 hover:border-[rgba(156,163,175,0.55)] hover:text-white"
             >
-              <span className="mr-1 flex items-center text-[#cbd0d8]" aria-hidden="true">
-                <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z" />
+              <span
+                className="flex items-center justify-center"
+                style={{
+                  transform: `rotate(${spin}deg)`,
+                  transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+                }}
+              >
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <g
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    {/* globo */}
+                    <circle cx="11" cy="12" r="4.3" />
+                    <path d="M6.7 12h8.6" />
+                    <path d="M11 7.7c1.7 1.2 1.7 7.2 0 8.6" />
+                    <path d="M11 7.7c-1.7 1.2-1.7 7.2 0 8.6" />
+                    {/* flechas de ciclo */}
+                    <path d="M16.2 7a6.3 6.3 0 0 1 1.9 4.5" />
+                    <path d="m15.1 7.3 1.2-.4.5 1.2" />
+                    <path d="M5.8 17a6.3 6.3 0 0 1-1.9-4.5" />
+                    <path d="m6.9 16.7-1.2.4-.5-1.2" />
+                  </g>
+                  {/* letras A / 文 */}
+                  <text
+                    x="18.6"
+                    y="8"
+                    fontSize="6.5"
+                    fontWeight="700"
+                    fill="currentColor"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                  >
+                    A
+                  </text>
+                  <text
+                    x="4.4"
+                    y="17.6"
+                    fontSize="6"
+                    fontWeight="700"
+                    fill="currentColor"
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                  >
+                    文
+                  </text>
                 </svg>
               </span>
-              {(["en", "es"] as const).map((code) => (
-                <button
-                  key={code}
-                  type="button"
-                  onClick={() => setLang(code)}
-                  aria-pressed={lang === code}
-                  className={`cursor-pointer rounded-full border-none px-[0.7rem] py-[0.32rem] text-[0.8rem] font-bold tracking-wide transition-all duration-200 ${
-                    lang === code
-                      ? "bg-[linear-gradient(135deg,#6b7280_0%,#4b5563_100%)] text-white shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
-                      : "bg-transparent text-[#cbd0d8] hover:text-white"
-                  }`}
-                >
-                  {code.toUpperCase()}
-                </button>
-              ))}
-            </div>
+            </button>
 
             <button
               className="flex cursor-pointer flex-col gap-[5px] border-none bg-transparent p-2 transition-transform duration-300 hover:scale-110 md:hidden"
