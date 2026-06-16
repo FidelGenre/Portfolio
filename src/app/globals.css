@@ -1,0 +1,88 @@
+@import "tailwindcss";
+
+:root {
+  --font-roboto: "Inter", "Roboto", "Open Sans", sans-serif;
+}
+
+@theme inline {
+  --font-sans: var(--font-roboto);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #1a1a1a;
+  color: #fff;
+  font-family: var(--font-roboto);
+  -webkit-font-smoothing: antialiased;
+  /* Evita scroll/“warp” horizontal por elementos fuera del viewport
+     (p. ej. el botón flotante de volver arriba en right:-210px). */
+  overflow-x: hidden;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #1f1f1f;
+}
+::-webkit-scrollbar-thumb {
+  background: #6b7280;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* ===== Animaciones ===== */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(15px); }
+}
+.animate-bounce-arrow {
+  animation: bounceArrow 2s infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Texto con degradado (reutilizado en títulos) */
+.text-gradient-light {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75), rgba(241, 241, 241, 0.1));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.text-gradient-gray {
+  background: linear-gradient(135deg, #d1d5db, #9ca3af);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Ocultar scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
