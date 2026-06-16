@@ -16,6 +16,68 @@ export default function Navbar() {
     toggleLang();
   };
 
+  const langButton = (className = "") => (
+    <button
+      type="button"
+      onClick={handleLangToggle}
+      aria-label={lang === "en" ? "Cambiar a español" : "Switch to English"}
+      title={lang === "en" ? "Español" : "English"}
+      className={`flex cursor-pointer items-center justify-center border-none bg-transparent p-1 text-[#cbd0d8] transition-colors duration-200 hover:text-white ${className}`}
+    >
+      <span
+        className="flex items-center justify-center"
+        style={{
+          transform: `rotate(${spin}deg)`,
+          transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+        }}
+      >
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
+          <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+            {/* globo */}
+            <circle cx="11" cy="12" r="4.3" />
+            <path d="M6.7 12h8.6" />
+            <path d="M11 7.7c1.7 1.2 1.7 7.2 0 8.6" />
+            <path d="M11 7.7c-1.7 1.2-1.7 7.2 0 8.6" />
+            {/* flechas de ciclo */}
+            <path d="M16.2 7a6.3 6.3 0 0 1 1.9 4.5" />
+            <path d="m15.1 7.3 1.2-.4.5 1.2" />
+            <path d="M5.8 17a6.3 6.3 0 0 1-1.9-4.5" />
+            <path d="m6.9 16.7-1.2.4-.5-1.2" />
+          </g>
+          {/* códigos EN / ES en cada punta (blanco + contorno para que resalten) */}
+          <text
+            x="20"
+            y="4"
+            fontSize="6"
+            fontWeight="800"
+            fill="#ffffff"
+            stroke="#171717"
+            strokeWidth="0.5"
+            paintOrder="stroke"
+            textAnchor="middle"
+            dominantBaseline="central"
+          >
+            EN
+          </text>
+          <text
+            x="3.6"
+            y="20.2"
+            fontSize="6"
+            fontWeight="800"
+            fill="#ffffff"
+            stroke="#171717"
+            strokeWidth="0.5"
+            paintOrder="stroke"
+            textAnchor="middle"
+            dominantBaseline="central"
+          >
+            ES
+          </text>
+        </svg>
+      </span>
+    </button>
+  );
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -64,64 +126,7 @@ export default function Navbar() {
           </ul>
 
           <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={handleLangToggle}
-              aria-label={lang === "en" ? "Cambiar a español" : "Switch to English"}
-              title={lang === "en" ? "Español" : "English"}
-              className="flex cursor-pointer items-center justify-center border-none bg-transparent p-1 text-[#cbd0d8] transition-colors duration-200 hover:text-white"
-            >
-              <span
-                className="flex items-center justify-center"
-                style={{
-                  transform: `rotate(${spin}deg)`,
-                  transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
-                }}
-              >
-                <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
-                  <g
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    {/* globo */}
-                    <circle cx="11" cy="12" r="4.3" />
-                    <path d="M6.7 12h8.6" />
-                    <path d="M11 7.7c1.7 1.2 1.7 7.2 0 8.6" />
-                    <path d="M11 7.7c-1.7 1.2-1.7 7.2 0 8.6" />
-                    {/* flechas de ciclo */}
-                    <path d="M16.2 7a6.3 6.3 0 0 1 1.9 4.5" />
-                    <path d="m15.1 7.3 1.2-.4.5 1.2" />
-                    <path d="M5.8 17a6.3 6.3 0 0 1-1.9-4.5" />
-                    <path d="m6.9 16.7-1.2.4-.5-1.2" />
-                  </g>
-                  {/* códigos EN / ES en cada punta */}
-                  <text
-                    x="18.7"
-                    y="7.2"
-                    fontSize="5"
-                    fontWeight="700"
-                    fill="currentColor"
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                  >
-                    EN
-                  </text>
-                  <text
-                    x="4.6"
-                    y="18"
-                    fontSize="5"
-                    fontWeight="700"
-                    fill="currentColor"
-                    textAnchor="middle"
-                    dominantBaseline="central"
-                  >
-                    ES
-                  </text>
-                </svg>
-              </span>
-            </button>
+            {langButton()}
 
             <button
               className="flex cursor-pointer flex-col gap-[5px] border-none bg-transparent p-2 transition-transform duration-300 hover:scale-110 md:hidden"
@@ -138,6 +143,9 @@ export default function Navbar() {
 
       {isMenuOpen && (
         <div className="animate-fade-in fixed inset-0 z-[2000] flex flex-col items-center justify-center bg-[linear-gradient(135deg,rgba(26,26,26,0.98),rgba(38,38,38,0.98))] backdrop-blur-[10px]">
+          {/* idioma: arriba a la izquierda, espejando la X */}
+          {langButton("absolute left-6 top-6")}
+
           <button
             className="absolute right-8 top-8 flex h-10 w-10 cursor-pointer items-center justify-center border-none bg-transparent text-[2rem] text-white transition-all duration-300 hover:rotate-90 hover:text-[#d1d5db]"
             onClick={toggleMenu}
