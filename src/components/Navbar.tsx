@@ -137,8 +137,8 @@ export default function Navbar() {
 
       {isMenuOpen && (
         <div className="animate-fade-in fixed inset-0 z-[2000] flex flex-col items-center justify-center bg-[linear-gradient(135deg,rgba(26,26,26,0.98),rgba(38,38,38,0.98))] backdrop-blur-[10px]">
-          {/* idioma: arriba a la izquierda, al mismo nivel que la X (lado opuesto) */}
-          <div className="absolute left-6 top-7">{langButton()}</div>
+          {/* idioma: arriba a la izquierda, mismo margen que la X (lado opuesto) */}
+          <div className="absolute left-8 top-7">{langButton()}</div>
 
           <button
             className="absolute right-8 top-8 flex h-10 w-10 cursor-pointer items-center justify-center border-none bg-transparent text-[2rem] text-white transition-all duration-300 hover:rotate-90 hover:text-[#d1d5db]"
