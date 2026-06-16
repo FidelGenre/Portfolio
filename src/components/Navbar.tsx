@@ -31,48 +31,44 @@ export default function Navbar() {
           transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
         }}
       >
-        <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
-          <g stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="50" height="50" viewBox="0 0 100 100" fill="none">
+          <g stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round">
             {/* globo con grilla */}
-            <circle cx="11" cy="12" r="4.5" />
-            <path d="M6.5 12h9" />
-            <path d="M11 7.5c1.8 1.6 1.8 7.4 0 9" />
-            <path d="M11 7.5c-1.8 1.6-1.8 7.4 0 9" />
-            <path d="M7.4 9.6c2.2 1.2 5 1.2 7.2 0" />
-            <path d="M7.4 14.4c2.2-1.2 5-1.2 7.2 0" />
-            {/* flecha que rodea (mitad izquierda+arriba), punta abajo-derecha */}
-            <path d="M7.6 17.9A6.8 6.8 0 0 1 14.4 6.1" />
-            <path d="M13.5 4.3 14.4 6.1 12.4 6.2" />
-            {/* flecha opuesta = rotación 180° */}
-            <g transform="rotate(180 11 12)">
-              <path d="M7.6 17.9A6.8 6.8 0 0 1 14.4 6.1" />
-              <path d="M13.5 4.3 14.4 6.1 12.4 6.2" />
+            <circle cx="50" cy="50" r="21" />
+            <clipPath id="globeClip">
+              <circle cx="50" cy="50" r="21" />
+            </clipPath>
+            <g clipPath="url(#globeClip)">
+              <ellipse cx="50" cy="50" rx="10" ry="21" />
+              <line x1="50" y1="0" x2="50" y2="100" />
+              <line x1="0" y1="39" x2="100" y2="39" />
+              <line x1="0" y1="50" x2="100" y2="50" />
+              <line x1="0" y1="61" x2="100" y2="61" />
             </g>
+            {/* flechas que rodean */}
+            <path d="M 19 68 A 36 36 0 0 1 62 16" />
+            <path d="M 52 14 L 62 16 L 58 26" />
+            <path d="M 81 32 A 36 36 0 0 1 38 84" />
+            <path d="M 48 86 L 38 84 L 42 74" />
           </g>
-          {/* códigos EN / ES en cada punta */}
+          {/* EN (donde iba la A) / ES (donde iba el 文) */}
           <text
-            x="20.2"
-            y="4.2"
-            fontSize="5.8"
+            x="73"
+            y="27"
+            fontSize="23"
             fontWeight="800"
-            fill="#ffffff"
-            stroke="#171717"
-            strokeWidth="0.5"
-            paintOrder="stroke"
+            fill="currentColor"
             textAnchor="middle"
             dominantBaseline="central"
           >
             EN
           </text>
           <text
-            x="3.8"
-            y="19.8"
-            fontSize="5.8"
+            x="25"
+            y="76"
+            fontSize="23"
             fontWeight="800"
-            fill="#ffffff"
-            stroke="#171717"
-            strokeWidth="0.5"
-            paintOrder="stroke"
+            fill="currentColor"
             textAnchor="middle"
             dominantBaseline="central"
           >
