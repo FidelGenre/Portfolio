@@ -69,7 +69,7 @@ export default function Navbar() {
               onClick={handleLangToggle}
               aria-label={lang === "en" ? "Cambiar a español" : "Switch to English"}
               title={lang === "en" ? "Español" : "English"}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-[rgba(156,163,175,0.3)] bg-[rgba(156,163,175,0.12)] text-[#cbd0d8] transition-colors duration-200 hover:border-[rgba(156,163,175,0.55)] hover:text-white"
+              className="flex cursor-pointer items-center justify-center border-none bg-transparent p-1 text-[#cbd0d8] transition-colors duration-200 hover:text-white"
             >
               <span
                 className="flex items-center justify-center"
@@ -78,7 +78,7 @@ export default function Navbar() {
                   transition: "transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
                 }}
               >
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
                   <g
                     stroke="currentColor"
                     strokeWidth="1.5"
