@@ -6,69 +6,33 @@ import { useLang } from "@/i18n/LanguageContext";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [spin, setSpin] = useState(0);
-  const { lang, toggleLang, t } = useLang();
+  const { lang, setLang, t } = useLang();
 
   const toggleMenu = () => setIsMenuOpen((v) => !v);
 
-  const handleLangToggle = () => {
-    setSpin((s) => s + 180); // media vuelta: los círculos quedan intercambiados
-    toggleLang();
-  };
-
-  const spinTransition = "transform 0.7s cubic-bezier(0.22, 1, 0.36, 1)";
-
-  // Botón de idioma: dos círculos (ES/EN) unidos por flechas.
-  // Al clickear, todo gira media vuelta (las flechas también) y los círculos
-  // intercambian lugar; las letras se contra-rotan para no quedar de cabeza.
+  // Switch simple EN / ES (la versión original).
   const langButton = (className = "") => (
-    <button
-      type="button"
-      onClick={handleLangToggle}
-      aria-label={lang === "en" ? "Cambiar a español" : "Switch to English"}
-      title={lang === "en" ? "Español" : "English"}
-      className={`relative h-[50px] w-[50px] shrink-0 cursor-pointer border-none bg-transparent text-[#cbd0d8] transition-colors duration-200 hover:text-white ${className}`}
+    <div
+      role="group"
+      aria-label="Language selector"
+      className={`inline-flex items-center gap-0.5 rounded-full border border-[rgba(156,163,175,0.3)] bg-[rgba(156,163,175,0.12)] p-[3px] ${className}`}
     >
-      {/* capa que gira (flechas + círculos) */}
-      <div className="absolute inset-0" style={{ transform: `rotate(${spin}deg)`, transition: spinTransition }}>
-        <svg
-          viewBox="0 0 50 50"
-          className="absolute inset-0 h-full w-full"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.6"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+      {(["en", "es"] as const).map((code) => (
+        <button
+          key={code}
+          type="button"
+          onClick={() => setLang(code)}
+          aria-pressed={lang === code}
+          className={`cursor-pointer rounded-full border-none px-[0.7rem] py-[0.32rem] text-[0.8rem] font-bold tracking-wide transition-all duration-200 ${
+            lang === code
+              ? "bg-[linear-gradient(135deg,#6b7280_0%,#4b5563_100%)] text-white shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
+              : "bg-transparent text-[#cbd0d8] hover:text-white"
+          }`}
         >
-          <path d="M26 6 Q44 6 44 24" />
-          <path d="M39.5 19.5 44 24 48 19.5" />
-          <path d="M24 44 Q6 44 6 26" />
-          <path d="M10.5 30.5 6 26 2 30.5" />
-        </svg>
-
-        {(["es", "en"] as const).map((code) => {
-          const active = lang === code;
-          const topLeft = code === "es"; // ES arranca arriba-izquierda, EN abajo-derecha
-          return (
-            <span
-              key={code}
-              className={`absolute flex h-6 w-6 items-center justify-center rounded-full bg-current text-[10px] font-extrabold leading-none ${
-                active ? "opacity-100" : "opacity-45"
-              }`}
-              style={{
-                top: topLeft ? 1 : 25,
-                left: topLeft ? 1 : 25,
-                // contra-rotación para que la letra quede siempre derecha
-                transform: `rotate(${-spin}deg)`,
-                transition: `${spinTransition}, opacity 0.4s ease`,
-              }}
-            >
-              <span className="text-[#1f1f1f]">{code.toUpperCase()}</span>
-            </span>
-          );
-        })}
-      </div>
-    </button>
+          {code.toUpperCase()}
+        </button>
+      ))}
+    </div>
   );
 
   const scrollToSection = (sectionId: string) => {
@@ -120,7 +84,7 @@ export default function Navbar() {
 
           <div className="flex items-center gap-4">
             {/* en desktop visible en el navbar; en mobile va dentro del menú */}
-            {langButton("hidden md:block")}
+            {langButton("hidden md:inline-flex")}
 
             <button
               className="flex cursor-pointer flex-col gap-[5px] border-none bg-transparent p-2 transition-transform duration-300 hover:scale-110 md:hidden"
