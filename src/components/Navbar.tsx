@@ -32,23 +32,28 @@ export default function Navbar() {
         }}
       >
         <svg width="52" height="52" viewBox="0 0 24 24" fill="none">
-          <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-            {/* globo */}
-            <circle cx="11" cy="12" r="4.3" />
-            <path d="M6.7 12h8.6" />
-            <path d="M11 7.7c1.7 1.2 1.7 7.2 0 8.6" />
-            <path d="M11 7.7c-1.7 1.2-1.7 7.2 0 8.6" />
-            {/* flechas de ciclo */}
-            <path d="M16.2 7a6.3 6.3 0 0 1 1.9 4.5" />
-            <path d="m15.1 7.3 1.2-.4.5 1.2" />
-            <path d="M5.8 17a6.3 6.3 0 0 1-1.9-4.5" />
-            <path d="m6.9 16.7-1.2.4-.5-1.2" />
+          <g stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+            {/* globo con grilla */}
+            <circle cx="11" cy="12" r="4.2" />
+            <path d="M6.8 12h8.4" />
+            <path d="M11 7.8c1.7 1.5 1.7 6.9 0 8.4" />
+            <path d="M11 7.8c-1.7 1.5-1.7 6.9 0 8.4" />
+            <path d="M7.6 9.8c2 1.1 4.8 1.1 6.8 0" />
+            <path d="M7.6 14.2c2-1.1 4.8-1.1 6.8 0" />
+            {/* flecha superior (rodea por arriba, punta hacia abajo-derecha) */}
+            <path d="M4.8 8.4A7.2 7.2 0 0 0 17.2 8.4" />
+            <path d="M15.5 8 17.2 8.4 16.8 6.6" />
+            {/* flecha inferior = rotación 180° de la superior */}
+            <g transform="rotate(180 11 12)">
+              <path d="M4.8 8.4A7.2 7.2 0 0 0 17.2 8.4" />
+              <path d="M15.5 8 17.2 8.4 16.8 6.6" />
+            </g>
           </g>
-          {/* códigos EN / ES en cada punta (blanco + contorno para que resalten) */}
+          {/* códigos EN / ES en cada punta */}
           <text
-            x="20"
-            y="4"
-            fontSize="6"
+            x="20.2"
+            y="4.2"
+            fontSize="5.8"
             fontWeight="800"
             fill="#ffffff"
             stroke="#171717"
@@ -60,9 +65,9 @@ export default function Navbar() {
             EN
           </text>
           <text
-            x="3.6"
-            y="20.2"
-            fontSize="6"
+            x="3.8"
+            y="19.8"
+            fontSize="5.8"
             fontWeight="800"
             fill="#ffffff"
             stroke="#171717"
