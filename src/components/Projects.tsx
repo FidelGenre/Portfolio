@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState, useLayoutEffect, useCallback } from "react";
 import { useLang } from "@/i18n/LanguageContext";
+import ProjectModal from "@/components/ProjectModal";
 
 import ecommerceImg from "@/assets/E-Commerce.png";
 import dappweb3Img from "@/assets/dappweb3.webp";
@@ -14,6 +15,7 @@ type ProjectKey = "ecommerce" | "lpticket" | "elpacto" | "stealthbid" | "social"
 const projectsBase: {
   key: ProjectKey;
   image: string;
+  screenshots: string[];
   tags: string[];
   projectUrl: string;
   codeUrl: string;
@@ -21,6 +23,12 @@ const projectsBase: {
   {
     key: "ecommerce",
     image: ecommerceImg.src,
+    screenshots: [
+      "/screenshots/ecommerce-1.png",
+      "/screenshots/ecommerce-2.png",
+      "/screenshots/ecommerce-3.png",
+      "/screenshots/ecommerce-4.png",
+    ],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
     projectUrl: "https://ecommerceclient-production.up.railway.app/",
     codeUrl: "https://github.com/fidelgenre/ECommerce",
@@ -28,6 +36,12 @@ const projectsBase: {
   {
     key: "lpticket",
     image: lpticketImg.src,
+    screenshots: [
+      "/screenshots/lpticket-1.png",
+      "/screenshots/lpticket-2.png",
+      "/screenshots/lpticket-3.png",
+      "/screenshots/lpticket-4.png",
+    ],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "NestJS", "PostgreSQL", "Stripe"],
     projectUrl: "https://lpticket.com",
     codeUrl: "https://github.com/LpTicket/TicketSystem",
@@ -35,6 +49,7 @@ const projectsBase: {
   {
     key: "elpacto",
     image: elpactoImg.src,
+    screenshots: [],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "NestJS", "Socket.IO", "PWA"],
     projectUrl: "https://elpactoclub-frontend.fly.dev/",
     codeUrl: "https://github.com/FidelGenre/ElPactoClub",
@@ -42,6 +57,7 @@ const projectsBase: {
   {
     key: "stealthbid",
     image: dappweb3Img.src,
+    screenshots: [],
     tags: ["Next.js", "SKALE BITE v2", "Coinbase x402", "Google (AP2 + Gemini)", "TypeScript", "Tailwind CSS", "Solidity", "Foundry"],
     projectUrl: "https://stealthbidagents.vercel.app/",
     codeUrl: "https://github.com/FidelGenre/Crowdfunding",
@@ -49,6 +65,7 @@ const projectsBase: {
   {
     key: "social",
     image: socialImg.src,
+    screenshots: [],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
     projectUrl: "https://socialnetworkclient-production.up.railway.app/",
     codeUrl: "https://github.com/FidelGenre/SocialNetwork",
@@ -78,6 +95,7 @@ export default function Projects() {
   const [animate, setAnimate] = useState(true);
   const [metrics, setMetrics] = useState({ step: 0, cardW: 0, vw: 0 });
   const [sharpRadius, setSharpRadius] = useState(1);
+  const [activeKey, setActiveKey] = useState<ProjectKey | null>(null);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -174,9 +192,10 @@ export default function Projects() {
                   <article
                     key={index}
                     aria-hidden={!isCenter}
+                    onClick={isCenter ? () => setActiveKey(project.key) : undefined}
                     className={`group relative flex shrink-0 basis-[78%] flex-col overflow-hidden rounded-[1.25rem] border border-[rgba(156,163,175,0.16)] bg-[linear-gradient(160deg,#2e2e2e_0%,#252525_100%)] shadow-[0_18px_45px_rgba(0,0,0,0.4)] transition-[transform,opacity,filter,border-color,box-shadow] duration-[550ms] min-[641px]:basis-[60%] min-[1024px]:basis-[29%] ${
                       isCenter
-                        ? "scale-100 opacity-100 hover:-translate-y-2 hover:border-[rgba(156,163,175,0.45)] hover:shadow-[0_26px_60px_rgba(107,114,128,0.3)]"
+                        ? "cursor-pointer scale-100 opacity-100 hover:-translate-y-2 hover:border-[rgba(156,163,175,0.45)] hover:shadow-[0_26px_60px_rgba(107,114,128,0.3)]"
                         : "pointer-events-none scale-[0.84] opacity-50 blur-[4px] brightness-[0.65]"
                     }`}
                   >
@@ -274,6 +293,25 @@ export default function Projects() {
           </a>
         </div>
       </div>
+
+      {activeKey && (() => {
+        const base = projectsBase.find((p) => p.key === activeKey)!;
+        return (
+          <ProjectModal
+            project={{
+              title: t.projects.items[activeKey].title,
+              description: t.projects.items[activeKey].description,
+              features: t.projects.items[activeKey].features,
+              tags: base.tags,
+              screenshots: base.screenshots.length > 0 ? base.screenshots : [base.image],
+              projectUrl: base.projectUrl,
+              codeUrl: base.codeUrl,
+            }}
+            onClose={() => setActiveKey(null)}
+            labels={{ viewProject: t.projects.viewProject, code: t.projects.code }}
+          />
+        );
+      })()}
     </section>
   );
 }
