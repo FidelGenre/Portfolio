@@ -23,12 +23,7 @@ const projectsBase: {
   {
     key: "ecommerce",
     image: ecommerceImg.src,
-    screenshots: [
-      "/screenshots/ecommerce-1.png",
-      "/screenshots/ecommerce-2.png",
-      "/screenshots/ecommerce-3.png",
-      "/screenshots/ecommerce-4.png",
-    ],
+    screenshots: [],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
     projectUrl: "https://ecommerceclient-production.up.railway.app/",
     codeUrl: "https://github.com/fidelgenre/ECommerce",
@@ -36,12 +31,7 @@ const projectsBase: {
   {
     key: "lpticket",
     image: lpticketImg.src,
-    screenshots: [
-      "/screenshots/lpticket-1.png",
-      "/screenshots/lpticket-2.png",
-      "/screenshots/lpticket-3.png",
-      "/screenshots/lpticket-4.png",
-    ],
+    screenshots: [],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "NestJS", "PostgreSQL", "Stripe"],
     projectUrl: "https://lpticket.com",
     codeUrl: "https://github.com/LpTicket/TicketSystem",
