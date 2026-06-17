@@ -31,8 +31,13 @@ const projectsBase: {
   {
     key: "lpticket",
     image: lpticketImg.src,
-    screenshots: [],
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "NestJS", "PostgreSQL", "Stripe"],
+    screenshots: [
+      "/screenshots/lpticket-1.png",
+      "/screenshots/lpticket-2.png",
+      "/screenshots/lpticket-3.png",
+      "/screenshots/lpticket-4.png",
+    ],
+    tags: ["Next.js", "React Native", "TypeScript", "Tailwind CSS", "NestJS", "PostgreSQL", "Stripe"],
     projectUrl: "https://lpticket.com",
     codeUrl: "https://github.com/LpTicket/TicketSystem",
   },

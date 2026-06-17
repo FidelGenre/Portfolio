@@ -54,7 +54,7 @@ export const translations = {
         lpticket: {
           title: "LPTicket",
           description:
-            "Digital ticketing platform to buy, sell, publish and validate tickets for concerts, festivals, conferences, sports and more. Includes QR / PDF / Apple & Google Wallet tickets, Stripe payments, and an AI support assistant.",
+            "Digital ticketing platform to buy, sell, publish and validate tickets. Features a fully responsive web app and native iOS & Android applications built with React Native. Includes QR / PDF / Apple & Google Wallet tickets, Stripe payments, and an AI support assistant.",
           features: [
             "Multi-format tickets: QR code, PDF, Apple Wallet & Google Wallet passes",
             "Stripe payment processing with organizer dashboard and analytics",
@@ -170,7 +170,7 @@ export const translations = {
         lpticket: {
           title: "LPTicket",
           description:
-            "Plataforma de ticketing digital para comprar, vender, publicar y validar entradas para conciertos, festivales, conferencias, deportes y más. Incluye tickets con QR / PDF / Apple & Google Wallet, pagos con Stripe y un asistente de soporte con IA.",
+            "Plataforma de ticketing digital para comprar, vender, publicar y validar entradas. Cuenta con una versión web responsiva y aplicaciones nativas para iOS y Android desarrolladas con React Native. Incluye tickets con QR / PDF / Apple & Google Wallet, pagos con Stripe y un asistente con IA.",
           features: [
             "Tickets en múltiples formatos: QR, PDF, Apple Wallet y Google Wallet",
             "Pagos con Stripe, dashboard para organizadores y analíticas de eventos",
