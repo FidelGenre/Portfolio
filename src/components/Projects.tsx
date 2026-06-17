@@ -23,7 +23,12 @@ const projectsBase: {
   {
     key: "ecommerce",
     image: ecommerceImg.src,
-    screenshots: [],
+    screenshots: [
+      "/screenshots/ecommerce-1.png",
+      "/screenshots/ecommerce-2.png",
+      "/screenshots/ecommerce-3.png",
+      "/screenshots/ecommerce-4.png",
+    ],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
     projectUrl: "https://ecommerceclient-production.up.railway.app/",
     codeUrl: "https://github.com/fidelgenre/ECommerce",
