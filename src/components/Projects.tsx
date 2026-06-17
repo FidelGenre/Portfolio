@@ -4,11 +4,11 @@ import { useRef, useEffect, useState, useLayoutEffect, useCallback } from "react
 import { useLang } from "@/i18n/LanguageContext";
 import ProjectModal from "@/components/ProjectModal";
 
-import ecommerceImg from "@/assets/E-Commerce.png";
-import dappweb3Img from "@/assets/dappweb3.webp";
+import ecommerceImg from "@/assets/ecommerce_real.png";
+import dappweb3Img from "@/assets/stealthbid_real.png";
 import socialImg from "@/assets/SocialNetwork.png";
-import lpticketImg from "@/assets/lpticket.webp";
-import elpactoImg from "@/assets/elpacto.png";
+import lpticketImg from "@/assets/lpticket_real.png";
+import elpactoImg from "@/assets/elpacto_real.png";
 
 type ProjectKey = "ecommerce" | "lpticket" | "elpacto" | "stealthbid" | "social";
 
