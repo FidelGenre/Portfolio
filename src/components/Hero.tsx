@@ -16,13 +16,13 @@ export default function Hero() {
       className="animate-gradient-shift relative flex min-h-[95svh] items-center justify-center overflow-x-hidden bg-[linear-gradient(135deg,#1a1a1a_0%,#2d2d2d_50%,#404040_100%)] px-8 pb-16 pt-0 text-center max-[380px]:px-4 max-[380px]:pb-12"
     >
       <div className="relative z-[1] mx-auto min-w-0 max-w-[900px]">
-        <p className="m-0 mb-3 text-[clamp(12px,1.4vw,18px)] font-semibold tracking-[0.08em] text-white/70">
+        <p className="m-0 mb-3 text-[clamp(15px,1.4vw,18px)] font-semibold tracking-[0.08em] text-white/70">
           {t.hero.greeting}
         </p>
-        <h1 className="text-gradient-light m-0 text-[clamp(32px,5vw,96px)] font-black leading-[1.05]">
+        <h1 className="text-gradient-light m-0 text-[clamp(42px,5vw,96px)] font-black leading-[1.05]">
           Fidel Genre
         </h1>
-        <h2 className="mt-1 text-[clamp(20px,3.2vw,40px)] font-extrabold text-white">
+        <h2 className="mt-1 text-[clamp(26px,3.2vw,40px)] font-extrabold text-white">
           {t.hero.title}
         </h2>
 
