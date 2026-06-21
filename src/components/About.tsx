@@ -79,7 +79,7 @@ function SkillsSection({
 }
 
 export default function About() {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   const [showAllTech, setShowAllTech] = useState(false);
   const [showAllTools, setShowAllTools] = useState(false);
 
@@ -134,7 +134,7 @@ export default function About() {
 
             <div className="mt-[2.2rem] flex justify-center">
               <a
-                href="https://drive.google.com/file/d/1ofg-6UhkmJ9tg9aOoaYebRmtxl4irzYB/view?usp=sharing"
+                href={lang === "es" ? "https://drive.google.com/file/d/1jpUGlD1EsTc5D2I67mbtG7PYwXWCMR_k/view?usp=sharing" : "https://drive.google.com/file/d/1TYO0y6rcLHgqBirCxuUzRQvG3Fkh8JlI/view?usp=sharing"}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t.about.viewCV}
