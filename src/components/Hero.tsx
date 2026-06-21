@@ -13,7 +13,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="animate-gradient-shift relative flex min-h-[95vh] items-center justify-center overflow-x-hidden bg-[linear-gradient(135deg,#1a1a1a_0%,#2d2d2d_50%,#404040_100%)] px-8 pb-16 pt-0 text-center max-[380px]:px-4 max-[380px]:pb-12"
+      className="animate-gradient-shift relative flex min-h-[95svh] items-center justify-center overflow-x-hidden bg-[linear-gradient(135deg,#1a1a1a_0%,#2d2d2d_50%,#404040_100%)] px-8 pb-16 pt-0 text-center max-[380px]:px-4 max-[380px]:pb-12"
     >
       <div className="relative z-[1] mx-auto min-w-0 max-w-[900px]">
         <p className="m-0 mb-3 text-[clamp(12px,1.4vw,18px)] font-semibold tracking-[0.08em] text-white/70">
