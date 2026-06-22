@@ -45,7 +45,7 @@ export default function Contact() {
   };
 
   const inputClass =
-    "w-full min-w-0 rounded-xl border border-[rgba(156,163,175,0.2)] bg-[rgba(55,65,81,0.5)] p-4 text-base text-white transition-all duration-300 [overflow-wrap:anywhere] focus:border-[rgba(156,163,175,0.6)] focus:bg-[rgba(55,65,81,0.8)] focus:shadow-[0_0_0_3px_rgba(156,163,175,0.1)] focus:outline-none";
+    "w-full min-w-0 rounded-xl border border-[rgba(156,163,175,0.2)] bg-[rgba(55,65,81,0.5)] px-4 py-2.5 text-base text-white transition-all duration-300 [overflow-wrap:anywhere] focus:border-[rgba(156,163,175,0.6)] focus:bg-[rgba(55,65,81,0.8)] focus:shadow-[0_0_0_3px_rgba(156,163,175,0.1)] focus:outline-none";
 
   const infoItems = [
     {
