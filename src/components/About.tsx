@@ -2,6 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import aboutImage from "@/assets/aboutImage.jpg";
+import yocopiaImage from "@/assets/yocopia.jpg";
 import { useLang } from "@/i18n/LanguageContext";
 
 const technologies = [
@@ -159,6 +160,12 @@ export default function About() {
               <div className="absolute inset-0 z-[1] bg-[linear-gradient(135deg,rgba(0,0,0,0.1),rgba(255,255,255,0.15))] transition-opacity duration-300 group-hover:opacity-0" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={aboutImage.src} alt="About me" className="block h-auto w-full" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={yocopiaImage.src}
+                alt="Fidel Genre"
+                className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              />
             </div>
           </div>
         </div>
