@@ -1,9 +1,15 @@
 "use client";
 
+import { useEffect } from "react";
 import { useLang } from "@/i18n/LanguageContext";
 
 export default function Hero() {
   const { t } = useLang();
+
+  useEffect(() => {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);

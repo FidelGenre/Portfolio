@@ -16,15 +16,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        {/* Fix Safari iOS viewport jump: set --vh once on load, never update on scroll */}
-        <script dangerouslySetInnerHTML={{ __html: `
-          (function(){
-            var vh = window.innerHeight * 0.01;
-            document.documentElement.style.setProperty('--vh', vh + 'px');
-          })();
-        `}} />
-      </head>
       <body className="bg-[#1a1a1a] text-white">
         <LanguageProvider>{children}</LanguageProvider>
         <Analytics />
