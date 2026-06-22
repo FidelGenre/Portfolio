@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, useRef, type ReactNode } from "react";
 import aboutImage from "@/assets/aboutImage.jpg";
 import yocopiaImage from "@/assets/yocopia.jpg";
 import { useLang } from "@/i18n/LanguageContext";
@@ -89,6 +89,8 @@ export default function About() {
   const { t, lang } = useLang();
   const [showAllTech, setShowAllTech] = useState(false);
   const [showAllTools, setShowAllTools] = useState(false);
+  const [photoRevealed, setPhotoRevealed] = useState(false);
+  const isTouchRef = useRef(false);
 
   const services: { icon: ReactNode; title: string; subtitle: string }[] = [
     {
@@ -156,7 +158,12 @@ export default function About() {
           </div>
 
           <div className="flex justify-center">
-            <div className="group relative max-w-[480px] overflow-hidden rounded-[25px] shadow-[0_25px_50px_rgba(0,0,0,0.15)] transition-all duration-[400ms] hover:-translate-y-[15px] hover:scale-[1.02] hover:shadow-[0_35px_70px_rgba(0,0,0,0.2)] max-[980px]:mx-auto">
+            <div
+              className="group relative max-w-[480px] overflow-hidden rounded-[25px] shadow-[0_25px_50px_rgba(0,0,0,0.15)] transition-all duration-[400ms] hover:-translate-y-[15px] hover:scale-[1.02] hover:shadow-[0_35px_70px_rgba(0,0,0,0.2)] max-[980px]:mx-auto"
+              onTouchStart={() => { isTouchRef.current = true; setPhotoRevealed((v) => !v); }}
+              onMouseEnter={() => { if (!isTouchRef.current) setPhotoRevealed(true); }}
+              onMouseLeave={() => { if (!isTouchRef.current) setPhotoRevealed(false); }}
+            >
               <div className="absolute inset-0 z-[1] bg-[linear-gradient(135deg,rgba(0,0,0,0.1),rgba(255,255,255,0.15))] transition-opacity duration-300 group-hover:opacity-0" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={aboutImage.src} alt="About me" className="block h-auto w-full" />
@@ -164,7 +171,7 @@ export default function About() {
               <img
                 src={yocopiaImage.src}
                 alt="Fidel Genre"
-                className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ${photoRevealed ? "opacity-100" : "opacity-0"}`}
               />
             </div>
           </div>
