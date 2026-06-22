@@ -103,7 +103,7 @@ export default function Contact() {
           {t.contact.subtitle}
         </p>
 
-        <div className="grid gap-12 [grid-template-columns:minmax(0,1fr)] md:[grid-template-columns:minmax(0,1fr)_minmax(0,1.5fr)]">
+        <div className="grid gap-12 [grid-template-columns:minmax(0,1fr)] md:[grid-template-columns:minmax(0,1fr)_minmax(0,1.5fr)] mx-auto max-w-4xl md:max-w-none">
           {/* Info */}
           <div className="w-full max-w-full overflow-hidden rounded-3xl border border-[rgba(156,163,175,0.2)] bg-[rgba(38,38,38,0.8)] p-10 backdrop-blur-[10px] transition-all duration-300 hover:border-[rgba(156,163,175,0.4)] hover:shadow-[0_10px_40px_rgba(107,114,128,0.15)]">
             <h3 className="mb-8 text-[1.75rem] font-bold text-white">{t.contact.infoTitle}</h3>
