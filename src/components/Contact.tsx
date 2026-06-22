@@ -108,30 +108,53 @@ export default function Contact() {
           <div className="w-full max-w-full overflow-hidden rounded-3xl border border-[rgba(156,163,175,0.2)] bg-[rgba(38,38,38,0.8)] p-10 backdrop-blur-[10px] transition-all duration-300 hover:border-[rgba(156,163,175,0.4)] hover:shadow-[0_10px_40px_rgba(107,114,128,0.15)]">
             <h3 className="mb-8 text-[1.75rem] font-bold text-white">{t.contact.infoTitle}</h3>
 
-            {infoItems.map((item, i) => {
-              const inner = (
-                <>
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#6b7280,#4b5563)] text-white shadow-[0_4px_15px_rgba(107,114,128,0.3)]">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            {/* Desktop: fila con texto — Mobile: solo iconos en fila */}
+            <div className="hidden md:flex md:flex-col">
+              {infoItems.map((item, i) => {
+                const inner = (
+                  <>
+                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#6b7280,#4b5563)] text-white shadow-[0_4px_15px_rgba(107,114,128,0.3)]">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        {item.svg}
+                      </svg>
+                    </div>
+                    <span className="min-w-0 break-words text-base text-[#e5e7eb] [overflow-wrap:anywhere]">
+                      {item.text}
+                    </span>
+                  </>
+                );
+                const rowClass = "mb-4 flex items-center gap-4 rounded-2xl border border-[rgba(156,163,175,0.2)] bg-[linear-gradient(135deg,rgba(107,114,128,0.05),rgba(75,85,99,0.05))] p-6 transition-all duration-300 last:mb-0 hover:translate-x-[5px] hover:border-[rgba(156,163,175,0.4)] hover:bg-[linear-gradient(135deg,rgba(107,114,128,0.1),rgba(75,85,99,0.1))]";
+                return item.href ? (
+                  <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" className={rowClass}>
+                    {inner}
+                  </a>
+                ) : (
+                  <div key={i} className={rowClass}>
+                    {inner}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Mobile: solo iconos en fila */}
+            <div className="flex flex-wrap gap-3 md:hidden">
+              {infoItems.map((item, i) => {
+                const icon = (
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#6b7280,#4b5563)] text-white shadow-[0_4px_15px_rgba(107,114,128,0.3)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_20px_rgba(107,114,128,0.5)]">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
                       {item.svg}
                     </svg>
                   </div>
-                  <span className="min-w-0 break-words text-base text-[#e5e7eb] [overflow-wrap:anywhere]">
-                    {item.text}
-                  </span>
-                </>
-              );
-              const rowClass = "mb-4 flex items-center gap-4 rounded-2xl border border-[rgba(156,163,175,0.2)] bg-[linear-gradient(135deg,rgba(107,114,128,0.05),rgba(75,85,99,0.05))] p-6 transition-all duration-300 last:mb-0 hover:translate-x-[5px] hover:border-[rgba(156,163,175,0.4)] hover:bg-[linear-gradient(135deg,rgba(107,114,128,0.1),rgba(75,85,99,0.1))]";
-              return item.href ? (
-                <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" className={rowClass}>
-                  {inner}
-                </a>
-              ) : (
-                <div key={i} className={rowClass}>
-                  {inner}
-                </div>
-              );
-            })}
+                );
+                return item.href ? (
+                  <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" aria-label={item.text}>
+                    {icon}
+                  </a>
+                ) : (
+                  <div key={i}>{icon}</div>
+                );
+              })}
+            </div>
           </div>
 
           {/* Form */}
