@@ -45,7 +45,7 @@ export default function Contact() {
   };
 
   const inputClass =
-    "w-full min-w-0 rounded-xl border border-[rgba(156,163,175,0.2)] bg-[rgba(55,65,81,0.5)] px-4 py-2.5 text-base text-white transition-all duration-300 [overflow-wrap:anywhere] focus:border-[rgba(156,163,175,0.6)] focus:bg-[rgba(55,65,81,0.8)] focus:shadow-[0_0_0_3px_rgba(156,163,175,0.1)] focus:outline-none";
+    "w-full min-w-0 rounded-lg border border-[rgba(156,163,175,0.2)] bg-[rgba(55,65,81,0.5)] px-3 py-1.5 text-sm text-white transition-all duration-300 [overflow-wrap:anywhere] focus:border-[rgba(156,163,175,0.6)] focus:bg-[rgba(55,65,81,0.8)] focus:shadow-[0_0_0_3px_rgba(156,163,175,0.1)] focus:outline-none";
 
   const infoItems = [
     {
@@ -137,13 +137,13 @@ export default function Contact() {
           {/* Form */}
           <form
             onSubmit={handleSubmit}
-            className="w-full max-w-full overflow-hidden rounded-3xl border border-[rgba(156,163,175,0.2)] bg-[rgba(38,38,38,0.8)] p-10 backdrop-blur-[10px]"
+            className="w-full max-w-full overflow-hidden rounded-3xl border border-[rgba(156,163,175,0.2)] bg-[rgba(38,38,38,0.8)] p-6 backdrop-blur-[10px]"
           >
             <input type="hidden" name="from_name" value="Portfolio Contact" />
             <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
 
-            <div className="mb-6">
-              <label htmlFor="name" className="mb-2 block text-base font-semibold text-[#e5e7eb]">
+            <div className="mb-4">
+              <label htmlFor="name" className="mb-1 block text-sm font-semibold text-[#e5e7eb]">
                 {t.contact.name}
               </label>
               <input
@@ -157,8 +157,8 @@ export default function Contact() {
               />
             </div>
 
-            <div className="mb-6">
-              <label htmlFor="email" className="mb-2 block text-base font-semibold text-[#e5e7eb]">
+            <div className="mb-4">
+              <label htmlFor="email" className="mb-1 block text-sm font-semibold text-[#e5e7eb]">
                 {t.contact.email}
               </label>
               <input
@@ -172,8 +172,8 @@ export default function Contact() {
               />
             </div>
 
-            <div className="mb-6">
-              <label htmlFor="message" className="mb-2 block text-base font-semibold text-[#e5e7eb]">
+            <div className="mb-4">
+              <label htmlFor="message" className="mb-1 block text-sm font-semibold text-[#e5e7eb]">
                 {t.contact.message}
               </label>
               <textarea
