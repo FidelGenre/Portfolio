@@ -137,11 +137,11 @@ export default function Contact() {
             </div>
 
             {/* Mobile: solo iconos en fila */}
-            <div className="flex flex-wrap gap-3 md:hidden">
+            <div className="flex gap-2 md:hidden">
               {infoItems.map((item, i) => {
                 const icon = (
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#6b7280,#4b5563)] text-white shadow-[0_4px_15px_rgba(107,114,128,0.3)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_20px_rgba(107,114,128,0.5)]">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#6b7280,#4b5563)] text-white shadow-[0_4px_15px_rgba(107,114,128,0.3)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_20px_rgba(107,114,128,0.5)]">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                       {item.svg}
                     </svg>
                   </div>
