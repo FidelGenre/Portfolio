@@ -71,10 +71,10 @@ export default function Navbar() {
 
           <ul className="hidden list-none gap-12 md:flex">
             {navItems.map((item) => (
-              <li key={item.id}>
+              <li key={item.id} className="w-[90px] text-center">
                 <button
                   onClick={() => scrollToSection(item.id)}
-                  className="cursor-pointer border-none bg-transparent py-2 text-[1.125rem] font-medium text-[#e5e7eb] transition-[color,transform] duration-300 hover:-translate-y-[3px] hover:text-[#d1d5db]"
+                  className="w-full cursor-pointer border-none bg-transparent py-2 text-[1.125rem] font-medium text-[#e5e7eb] transition-[color,transform] duration-300 hover:-translate-y-[3px] hover:text-[#d1d5db]"
                 >
                   {item.label}
                 </button>
