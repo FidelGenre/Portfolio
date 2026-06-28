@@ -143,7 +143,7 @@ export default function About() {
 
             <div className="mt-[2.2rem] flex justify-center">
               <a
-                href={lang === "es" ? "https://drive.google.com/file/d/1jpUGlD1EsTc5D2I67mbtG7PYwXWCMR_k/view?usp=sharing" : "https://drive.google.com/file/d/1TYO0y6rcLHgqBirCxuUzRQvG3Fkh8JlI/view?usp=sharing"}
+                href={lang === "es" ? "https://drive.google.com/file/d/1Ooa2Xjsa6ldLW5j0AMXDVyYJdR-2pq6a/view?usp=sharing" : "https://drive.google.com/file/d/1VP-aXKMigTxaacbQ7yrKFyT5lHqNcqlH/view?usp=sharing"}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t.about.viewCV}
