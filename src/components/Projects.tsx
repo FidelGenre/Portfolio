@@ -101,6 +101,7 @@ export default function Projects() {
   const [metrics, setMetrics] = useState({ step: 0, cardW: 0, vw: 0 });
   const [sharpRadius, setSharpRadius] = useState(1);
   const [activeKey, setActiveKey] = useState<ProjectKey | null>(null);
+  const isPausedRef = useRef(false);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -136,6 +137,15 @@ export default function Projects() {
 
   const posRef = useRef(pos);
 
+  const goRef = useRef<(dir: number) => void>(() => {});
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (!isPausedRef.current) goRef.current(1);
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
+
   const go = (dir: number) => {
     const prev = posRef.current;
     const target = prev + dir;
@@ -160,6 +170,8 @@ export default function Projects() {
     );
   };
 
+  goRef.current = go;
+
   return (
     <section id="projects" className="relative bg-[#1f1f1f] px-8 py-24">
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(156,163,175,0.05)_0%,transparent_55%)]" />
@@ -182,7 +194,14 @@ export default function Projects() {
             </svg>
           </button>
 
-          <div ref={viewportRef} className="overflow-hidden py-8">
+          <div
+            ref={viewportRef}
+            className="overflow-hidden py-8"
+            onMouseEnter={() => { isPausedRef.current = true; }}
+            onMouseLeave={() => { isPausedRef.current = false; }}
+            onTouchStart={() => { isPausedRef.current = true; }}
+            onTouchEnd={() => { isPausedRef.current = false; }}
+          >
             <div
               ref={trackRef}
               className="flex gap-5"
