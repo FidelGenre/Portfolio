@@ -81,8 +81,8 @@ const projectsBase: {
     image: petparadiseImg.src,
     screenshots: [],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Shopify", "Storefront API", "Nodemailer", "Vercel"],
-    projectUrl: "https://github.com/perezlindoignacio8-hash/petparadise",
-    codeUrl: "https://github.com/perezlindoignacio8-hash/petparadise",
+    projectUrl: "https://github.com/FidelGenre/petparadiseshop",
+    codeUrl: "https://github.com/FidelGenre/petparadiseshop",
   },
 ];
 
