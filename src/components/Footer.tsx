@@ -35,7 +35,7 @@ export default function Footer() {
                 href={l.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative py-1 text-base font-medium text-[#9ca3af] transition-colors duration-300 hover:text-[#d1d5db] after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-[linear-gradient(90deg,#9ca3af,#6b7280)] after:transition-[width] after:duration-300 hover:after:w-full"
+                className="text-base font-medium text-[#9ca3af] transition-colors duration-300 hover:text-[#d1d5db]"
               >
                 {l.label}
               </a>
