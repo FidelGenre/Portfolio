@@ -29,6 +29,8 @@ const tools = [
   { name: "Vercel", icon: "🚀" },
   { name: "Fly.io", icon: "✈️" },
   { name: "Stripe", icon: "💳" },
+  { name: "Shopify", icon: "🛍️" },
+  { name: "Supabase", icon: "🟢" },
   { name: "Cursor", icon: "✨" },
   { name: "IntelliJ IDEA", icon: "🧠" },
   { name: "VS Code", icon: "💙" },
