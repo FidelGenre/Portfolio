@@ -59,12 +59,12 @@ export default function ProjectModal({ project, onClose, labels }: Props) {
         </button>
 
         {/* Gallery */}
-        <div className="relative aspect-[16/9] overflow-hidden rounded-t-2xl bg-[#2a2a2a]">
+        <div className="relative aspect-[16/9] overflow-hidden rounded-t-2xl bg-[#1a1a1a]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={shots[imgIdx]}
             alt={`${project.title} screenshot ${imgIdx + 1}`}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
           />
 
           {hasMultiple && (
