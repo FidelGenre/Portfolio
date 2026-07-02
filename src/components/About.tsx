@@ -31,6 +31,7 @@ const tools = [
   { name: "Stripe", icon: "💳" },
   { name: "Shopify", icon: "🛍️" },
   { name: "Supabase", icon: "🟢" },
+  { name: "AI Integration", icon: "🤖" },
   { name: "Cursor", icon: "✨" },
   { name: "Postman", icon: "📮" },
   { name: "Figma", icon: "🎨" },
