@@ -9,8 +9,9 @@ import dappweb3Img from "@/assets/stealthbid_real.png";
 import socialImg from "@/assets/SocialNetwork.png";
 import lpticketImg from "@/assets/lpticket_real.png";
 import elpactoImg from "@/assets/elpacto_real.png";
+import petparadiseImg from "@/assets/petparadise_card.png";
 
-type ProjectKey = "ecommerce" | "lpticket" | "elpacto" | "stealthbid" | "social";
+type ProjectKey = "ecommerce" | "lpticket" | "elpacto" | "stealthbid" | "social" | "petparadise";
 
 const projectsBase: {
   key: ProjectKey;
@@ -74,6 +75,14 @@ const projectsBase: {
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
     projectUrl: "https://socialnetworkclient-production.up.railway.app/",
     codeUrl: "https://github.com/FidelGenre/SocialNetwork",
+  },
+  {
+    key: "petparadise",
+    image: petparadiseImg.src,
+    screenshots: [],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Shopify", "Storefront API", "Nodemailer", "Vercel"],
+    projectUrl: "https://github.com/perezlindoignacio8-hash/petparadise",
+    codeUrl: "https://github.com/perezlindoignacio8-hash/petparadise",
   },
 ];
 

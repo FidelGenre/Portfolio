@@ -95,6 +95,17 @@ export const translations = {
             "Java Spring Boot REST API backed by PostgreSQL",
           ],
         },
+        petparadise: {
+          title: "Pet Paradise Shop",
+          description:
+            "Online pet products store built with Next.js and Tailwind CSS, connected to Shopify as a headless backend via the Storefront API. Features a product catalog, shopping cart, Shopify checkout, and a contact form sent via Gmail.",
+          features: [
+            "Shopify Storefront API integration: real-time catalog, cart and checkout",
+            "Demo mode: works with sample products when Shopify is not configured",
+            "Contact form with Nodemailer + Gmail email delivery",
+            "Fully responsive design with dynamic product detail pages",
+          ],
+        },
       },
     },
     contact: {
@@ -113,7 +124,7 @@ export const translations = {
       network: "❌ Network error. Please try again.",
     },
     footer: {
-      rights: "© 2025 Fidel Genre. All rights reserved.",
+      rights: "© 2026 Fidel Genre. All rights reserved.",
     },
   },
 
@@ -211,6 +222,17 @@ export const translations = {
             "API REST con Java Spring Boot y base de datos PostgreSQL",
           ],
         },
+        petparadise: {
+          title: "Pet Paradise Shop",
+          description:
+            "Tienda online de productos para mascotas construida con Next.js y Tailwind CSS, conectada a Shopify como backend headless a través de la Storefront API. Incluye catálogo de productos, carrito, checkout de Shopify y formulario de contacto enviado por Gmail.",
+          features: [
+            "Integración con Shopify Storefront API: catálogo, carrito y checkout en tiempo real",
+            "Modo demo: funciona con productos de muestra si Shopify no está configurado",
+            "Formulario de contacto con Nodemailer + envío de email via Gmail",
+            "Diseño completamente responsivo con páginas de detalle de producto dinámicas",
+          ],
+        },
       },
     },
     contact: {
@@ -229,7 +251,7 @@ export const translations = {
       network: "❌ Error de red. Intentá de nuevo.",
     },
     footer: {
-      rights: "© 2025 Fidel Genre. Todos los derechos reservados.",
+      rights: "© 2026 Fidel Genre. Todos los derechos reservados.",
     },
   },
 } as const;
