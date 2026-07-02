@@ -36,8 +36,6 @@ const tools = [
   { name: "VS Code", icon: "💙" },
   { name: "Postman", icon: "📮" },
   { name: "Figma", icon: "🎨" },
-  { name: "Maven", icon: "⚙️" },
-  { name: "npm", icon: "📦" },
 ];
 
 const skillItemClass =
