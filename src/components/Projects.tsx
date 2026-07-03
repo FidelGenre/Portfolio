@@ -99,23 +99,19 @@ export default function Projects() {
   }));
 
   const n = projects.length;
-  // Large buffer — reposition back to center silently when idle
-  const COPIES = 99;
-  const CENTER_COPY = Math.floor(COPIES / 2);
-  const START = CENTER_COPY * n + 1; // index 1 within center copy = LPTicket
-  const slides = Array.from({ length: COPIES }, () => projects).flat();
+  // Virtual infinite scroll: pos is unbounded, slides repeat via mod
+  const RENDER_COUNT = 11; // how many slides to render around current pos
+  const START = Math.floor(RENDER_COUNT / 2) * n + 1;
 
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const [pos, setPos] = useState(START);
-  const [transitioning, setTransitioning] = useState(true);
   const [metrics, setMetrics] = useState({ step: 0, cardW: 0, vw: 0 });
   const [sharpRadius, setSharpRadius] = useState(1);
   const [activeKey, setActiveKey] = useState<ProjectKey | null>(null);
   const isPausedRef = useRef(false);
   const posRef = useRef(START);
-  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -147,23 +143,15 @@ export default function Projects() {
     };
   }, [measure]);
 
-  const offset = metrics.vw / 2 - (pos * metrics.step + metrics.cardW / 2);
+  // Render a window of slides centered around pos, mapped via mod
+  const half = Math.floor(RENDER_COUNT / 2);
+  const slideWindow = Array.from({ length: RENDER_COUNT }, (_, i) => {
+    const absIdx = pos - half + i;
+    const project = projects[((absIdx % n) + n) % n];
+    return { ...project, absIdx };
+  });
 
-  // Silently reposition back to center copy when user is idle
-  const scheduleReposition = useCallback(() => {
-    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
-    idleTimerRef.current = setTimeout(() => {
-      const cur = posRef.current;
-      const offset = ((cur % n) + n) % n; // position within a copy
-      const newPos = CENTER_COPY * n + offset;
-      if (newPos === cur) return;
-      posRef.current = newPos;
-      setTransitioning(false);
-      setPos(newPos);
-      // re-enable transition next frame
-      requestAnimationFrame(() => setTransitioning(true));
-    }, 800);
-  }, [n, CENTER_COPY]);
+  const offset = metrics.vw / 2 - (half * metrics.step + metrics.cardW / 2);
 
   const goRef = useRef<(dir: number) => void>(() => {});
 
@@ -178,7 +166,6 @@ export default function Projects() {
     const next = posRef.current + dir;
     posRef.current = next;
     setPos(next);
-    scheduleReposition();
   };
 
   goRef.current = go;
@@ -218,15 +205,15 @@ export default function Projects() {
               className="flex gap-5"
               style={{
                 transform: `translate3d(${offset}px, 0, 0)`,
-                transition: transitioning ? "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)" : "none",
+                transition: "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
                 willChange: "transform",
               }}
             >
-              {slides.map((project, index) => {
-                const isCenter = Math.abs(index - pos) <= sharpRadius;
+              {slideWindow.map((project, index) => {
+                const isCenter = Math.abs(index - half) <= sharpRadius;
                 return (
                   <article
-                    key={index}
+                    key={project.absIdx}
                     aria-hidden={!isCenter}
                     onClick={isCenter ? () => setActiveKey(project.key) : undefined}
                     className={`group relative flex shrink-0 basis-[78%] flex-col overflow-hidden rounded-[1.25rem] border border-[rgba(156,163,175,0.16)] bg-[linear-gradient(160deg,#2e2e2e_0%,#252525_100%)] shadow-[0_18px_45px_rgba(0,0,0,0.4)] transition-[transform,opacity,filter,border-color,box-shadow] duration-[550ms] min-[641px]:basis-[60%] min-[1024px]:basis-[29%] ${
