@@ -99,20 +99,23 @@ export default function Projects() {
   }));
 
   const n = projects.length;
-  // ×9 copies — enough buffer that spam-clicking never reaches an edge
-  const COPIES = 9;
-  const START = Math.floor(COPIES / 2) * n + 1; // center of middle copy, index 1 = LPTicket
+  // Large buffer — reposition back to center silently when idle
+  const COPIES = 99;
+  const CENTER_COPY = Math.floor(COPIES / 2);
+  const START = CENTER_COPY * n + 1; // index 1 within center copy = LPTicket
   const slides = Array.from({ length: COPIES }, () => projects).flat();
 
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const [pos, setPos] = useState(START);
+  const [transitioning, setTransitioning] = useState(true);
   const [metrics, setMetrics] = useState({ step: 0, cardW: 0, vw: 0 });
   const [sharpRadius, setSharpRadius] = useState(1);
   const [activeKey, setActiveKey] = useState<ProjectKey | null>(null);
   const isPausedRef = useRef(false);
   const posRef = useRef(START);
+  const idleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -146,6 +149,22 @@ export default function Projects() {
 
   const offset = metrics.vw / 2 - (pos * metrics.step + metrics.cardW / 2);
 
+  // Silently reposition back to center copy when user is idle
+  const scheduleReposition = useCallback(() => {
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    idleTimerRef.current = setTimeout(() => {
+      const cur = posRef.current;
+      const offset = ((cur % n) + n) % n; // position within a copy
+      const newPos = CENTER_COPY * n + offset;
+      if (newPos === cur) return;
+      posRef.current = newPos;
+      setTransitioning(false);
+      setPos(newPos);
+      // re-enable transition next frame
+      requestAnimationFrame(() => setTransitioning(true));
+    }, 800);
+  }, [n, CENTER_COPY]);
+
   const goRef = useRef<(dir: number) => void>(() => {});
 
   useEffect(() => {
@@ -159,6 +178,7 @@ export default function Projects() {
     const next = posRef.current + dir;
     posRef.current = next;
     setPos(next);
+    scheduleReposition();
   };
 
   goRef.current = go;
@@ -198,7 +218,7 @@ export default function Projects() {
               className="flex gap-5"
               style={{
                 transform: `translate3d(${offset}px, 0, 0)`,
-                transition: "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
+                transition: transitioning ? "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)" : "none",
                 willChange: "transform",
               }}
             >
