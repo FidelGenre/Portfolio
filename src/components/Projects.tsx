@@ -146,6 +146,8 @@ export default function Projects() {
 
   const posRef = useRef(pos);
   const isAnimatingRef = useRef(false);
+  // posForCenter se usa solo para calcular isCenter, se actualiza DESPUÉS del reposition
+  const [posForCenter, setPosForCenter] = useState(n + 1);
 
   const goRef = useRef<(dir: number) => void>(() => {});
 
@@ -167,22 +169,31 @@ export default function Projects() {
       posRef.current = target;
       setAnimate(true);
       setPos(target);
+      setPosForCenter(target);
       setTimeout(() => { isAnimatingRef.current = false; }, 580);
       return;
     }
 
+    // Necesitamos saltar: primero animamos hacia el borde (sin cambiar posForCenter)
+    // luego reposicionamos sin animación y actualizamos posForCenter al mismo tiempo
     const shifted = prev - dir * n;
-    posRef.current = shifted;
-    setAnimate(false);
-    setPos(shifted);
-    requestAnimationFrame(() =>
+    const final = shifted + dir;
+    posRef.current = target; // mueve al borde animado
+    setAnimate(true);
+    setPos(target);
+    setPosForCenter(target);
+
+    setTimeout(() => {
+      // reposition instantáneo + actualiza posForCenter juntos para evitar flash
+      posRef.current = final;
+      setAnimate(false);
+      setPos(final);
+      setPosForCenter(final);
       requestAnimationFrame(() => {
-        posRef.current = shifted + dir;
         setAnimate(true);
-        setPos(shifted + dir);
-        setTimeout(() => { isAnimatingRef.current = false; }, 580);
-      })
-    );
+        isAnimatingRef.current = false;
+      });
+    }, 560);
   };
 
   goRef.current = go;
@@ -226,7 +237,7 @@ export default function Projects() {
               }}
             >
               {slides.map((project, index) => {
-                const isCenter = Math.abs(index - pos) <= sharpRadius;
+                const isCenter = Math.abs(index - posForCenter) <= sharpRadius;
                 return (
                   <article
                     key={index}
