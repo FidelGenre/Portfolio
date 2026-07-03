@@ -145,6 +145,7 @@ export default function Projects() {
   const offset = metrics.vw / 2 - (pos * metrics.step + metrics.cardW / 2);
 
   const posRef = useRef(pos);
+  const isAnimatingRef = useRef(false);
 
   const goRef = useRef<(dir: number) => void>(() => {});
 
@@ -156,6 +157,9 @@ export default function Projects() {
   }, []);
 
   const go = (dir: number) => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+
     const prev = posRef.current;
     const target = prev + dir;
 
@@ -163,6 +167,7 @@ export default function Projects() {
       posRef.current = target;
       setAnimate(true);
       setPos(target);
+      setTimeout(() => { isAnimatingRef.current = false; }, 580);
       return;
     }
 
@@ -175,6 +180,7 @@ export default function Projects() {
         posRef.current = shifted + dir;
         setAnimate(true);
         setPos(shifted + dir);
+        setTimeout(() => { isAnimatingRef.current = false; }, 580);
       })
     );
   };
