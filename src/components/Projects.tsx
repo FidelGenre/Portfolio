@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useLayoutEffect, useCallback, useMemo } from "react";
+import { useRef, useEffect, useState, useLayoutEffect, useCallback } from "react";
 import { useLang } from "@/i18n/LanguageContext";
 import ProjectModal from "@/components/ProjectModal";
 
@@ -99,23 +99,32 @@ export default function Projects() {
   }));
 
   const n = projects.length;
-  const COPIES = 201; // effectively infinite — no reposition ever needed
-  const START = Math.floor(COPIES / 2) * n + 1;
-  const slides = useMemo(
-    () => Array.from({ length: COPIES }, () => projects).flat(),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [n]
-  );
+  const COPIES = 3;
+  const START = n + 1; // middle copy, index 1 = LPTicket
+  const slides = [...projects, ...projects, ...projects];
 
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
   const [pos, setPos] = useState(START);
-  const [metrics, setMetrics] = useState({ step: 0, cardW: 0, vw: 0 });
   const [sharpRadius, setSharpRadius] = useState(1);
   const [activeKey, setActiveKey] = useState<ProjectKey | null>(null);
   const isPausedRef = useRef(false);
   const posRef = useRef(START);
+  const stepRef = useRef(0); // cardW + gap, kept in sync imperatively
+  const vwRef = useRef(0);
+  const cardWRef = useRef(0);
+
+  const calcOffset = useCallback((p: number) => {
+    return vwRef.current / 2 - (p * stepRef.current + cardWRef.current / 2);
+  }, []);
+
+  const applyTransform = useCallback((p: number, animated: boolean) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.style.transition = animated ? "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)" : "none";
+    track.style.transform = `translate3d(${calcOffset(p)}px, 0, 0)`;
+  }, [calcOffset]);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -123,10 +132,12 @@ export default function Projects() {
     if (!track || !viewport) return;
     const card = track.children[0] as HTMLElement | undefined;
     if (!card) return;
-    const cardW = card.offsetWidth;
+    cardWRef.current = card.offsetWidth;
     const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-    setMetrics({ step: cardW + gap, cardW, vw: viewport.offsetWidth });
-  }, []);
+    stepRef.current = cardWRef.current + gap;
+    vwRef.current = viewport.offsetWidth;
+    applyTransform(posRef.current, false);
+  }, [applyTransform]);
 
   useLayoutEffect(() => {
     measure();
@@ -147,8 +158,6 @@ export default function Projects() {
     };
   }, [measure]);
 
-  const offset = metrics.vw / 2 - (pos * metrics.step + metrics.cardW / 2);
-
   const goRef = useRef<(dir: number) => void>(() => {});
 
   useEffect(() => {
@@ -158,11 +167,38 @@ export default function Projects() {
     return () => clearInterval(id);
   }, []);
 
-  const go = (dir: number) => {
-    const next = posRef.current + dir;
-    posRef.current = next;
-    setPos(next);
-  };
+  const go = useCallback((dir: number) => {
+    const prev = posRef.current;
+    let next = prev + dir;
+
+    // If next is within the middle copy, just animate
+    if (next >= n && next < 2 * n) {
+      posRef.current = next;
+      applyTransform(next, true);
+      setPos(next);
+      return;
+    }
+
+    // Need to loop: animate to the edge copy first, then instantly reposition
+    // to the equivalent position in the middle copy (no React re-render during reposition)
+    const edgePos = next;
+    const middlePos = next - dir * n;
+
+    posRef.current = edgePos;
+    applyTransform(edgePos, true);
+    setPos(edgePos);
+
+    setTimeout(() => {
+      posRef.current = middlePos;
+      applyTransform(middlePos, false); // instant, no transition
+      requestAnimationFrame(() => {
+        // restore transition after one frame (browser won't animate the jump)
+        const track = trackRef.current;
+        if (track) track.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
+      });
+      setPos(middlePos);
+    }, 460);
+  }, [n, applyTransform]);
 
   goRef.current = go;
 
@@ -199,11 +235,7 @@ export default function Projects() {
             <div
               ref={trackRef}
               className="flex gap-5"
-              style={{
-                transform: `translate3d(${offset}px, 0, 0)`,
-                transition: "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
-                willChange: "transform",
-              }}
+              style={{ willChange: "transform" }}
             >
               {slides.map((project, index) => {
                 const isCenter = Math.abs(index - pos) <= sharpRadius;
