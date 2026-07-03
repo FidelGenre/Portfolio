@@ -99,18 +99,20 @@ export default function Projects() {
   }));
 
   const n = projects.length;
-  const slides = [...projects, ...projects, ...projects];
+  // ×9 copies — enough buffer that spam-clicking never reaches an edge
+  const COPIES = 9;
+  const START = Math.floor(COPIES / 2) * n + 1; // center of middle copy, index 1 = LPTicket
+  const slides = Array.from({ length: COPIES }, () => projects).flat();
 
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  // Empezamos centrados en LPTicket (índice 1): Ecommerce · LPTicket · El Pacto BC.
-  const [pos, setPos] = useState(n + 1);
-  const [animate, setAnimate] = useState(true);
+  const [pos, setPos] = useState(START);
   const [metrics, setMetrics] = useState({ step: 0, cardW: 0, vw: 0 });
   const [sharpRadius, setSharpRadius] = useState(1);
   const [activeKey, setActiveKey] = useState<ProjectKey | null>(null);
   const isPausedRef = useRef(false);
+  const posRef = useRef(START);
 
   const measure = useCallback(() => {
     const track = trackRef.current;
@@ -144,11 +146,6 @@ export default function Projects() {
 
   const offset = metrics.vw / 2 - (pos * metrics.step + metrics.cardW / 2);
 
-  const posRef = useRef(pos);
-  const isAnimatingRef = useRef(false);
-  // posForCenter se usa solo para calcular isCenter, se actualiza DESPUÉS del reposition
-  const [posForCenter, setPosForCenter] = useState(n + 1);
-
   const goRef = useRef<(dir: number) => void>(() => {});
 
   useEffect(() => {
@@ -159,41 +156,9 @@ export default function Projects() {
   }, []);
 
   const go = (dir: number) => {
-    if (isAnimatingRef.current) return;
-    isAnimatingRef.current = true;
-
-    const prev = posRef.current;
-    const target = prev + dir;
-
-    if (target >= n && target < 2 * n) {
-      posRef.current = target;
-      setAnimate(true);
-      setPos(target);
-      setPosForCenter(target);
-      setTimeout(() => { isAnimatingRef.current = false; }, 580);
-      return;
-    }
-
-    // Necesitamos saltar: primero animamos hacia el borde (sin cambiar posForCenter)
-    // luego reposicionamos sin animación y actualizamos posForCenter al mismo tiempo
-    const shifted = prev - dir * n;
-    const final = shifted + dir;
-    posRef.current = target; // mueve al borde animado
-    setAnimate(true);
-    setPos(target);
-    setPosForCenter(target);
-
-    setTimeout(() => {
-      // reposition instantáneo + actualiza posForCenter juntos para evitar flash
-      posRef.current = final;
-      setAnimate(false);
-      setPos(final);
-      setPosForCenter(final);
-      requestAnimationFrame(() => {
-        setAnimate(true);
-        isAnimatingRef.current = false;
-      });
-    }, 560);
+    const next = posRef.current + dir;
+    posRef.current = next;
+    setPos(next);
   };
 
   goRef.current = go;
@@ -233,11 +198,12 @@ export default function Projects() {
               className="flex gap-5"
               style={{
                 transform: `translate3d(${offset}px, 0, 0)`,
-                transition: animate ? "transform 0.55s cubic-bezier(0.22, 1, 0.36, 1)" : "none",
+                transition: "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)",
+                willChange: "transform",
               }}
             >
               {slides.map((project, index) => {
-                const isCenter = Math.abs(index - posForCenter) <= sharpRadius;
+                const isCenter = Math.abs(index - pos) <= sharpRadius;
                 return (
                   <article
                     key={index}
