@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useLayoutEffect, useCallback } from "react";
+import { useRef, useEffect, useState, useLayoutEffect, useCallback, useMemo } from "react";
 import { useLang } from "@/i18n/LanguageContext";
 import ProjectModal from "@/components/ProjectModal";
 
@@ -99,9 +99,13 @@ export default function Projects() {
   }));
 
   const n = projects.length;
-  // Virtual infinite scroll: pos is unbounded, slides repeat via mod
-  const RENDER_COUNT = 11; // how many slides to render around current pos
-  const START = Math.floor(RENDER_COUNT / 2) * n + 1;
+  const COPIES = 201; // effectively infinite — no reposition ever needed
+  const START = Math.floor(COPIES / 2) * n + 1;
+  const slides = useMemo(
+    () => Array.from({ length: COPIES }, () => projects).flat(),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [n]
+  );
 
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
@@ -143,15 +147,7 @@ export default function Projects() {
     };
   }, [measure]);
 
-  // Render a window of slides centered around pos, mapped via mod
-  const half = Math.floor(RENDER_COUNT / 2);
-  const slideWindow = Array.from({ length: RENDER_COUNT }, (_, i) => {
-    const absIdx = pos - half + i;
-    const project = projects[((absIdx % n) + n) % n];
-    return { ...project, absIdx };
-  });
-
-  const offset = metrics.vw / 2 - (half * metrics.step + metrics.cardW / 2);
+  const offset = metrics.vw / 2 - (pos * metrics.step + metrics.cardW / 2);
 
   const goRef = useRef<(dir: number) => void>(() => {});
 
@@ -209,11 +205,11 @@ export default function Projects() {
                 willChange: "transform",
               }}
             >
-              {slideWindow.map((project, index) => {
-                const isCenter = Math.abs(index - half) <= sharpRadius;
+              {slides.map((project, index) => {
+                const isCenter = Math.abs(index - pos) <= sharpRadius;
                 return (
                   <article
-                    key={project.absIdx}
+                    key={index}
                     aria-hidden={!isCenter}
                     onClick={isCenter ? () => setActiveKey(project.key) : undefined}
                     className={`group relative flex shrink-0 basis-[78%] flex-col overflow-hidden rounded-[1.25rem] border border-[rgba(156,163,175,0.16)] bg-[linear-gradient(160deg,#2e2e2e_0%,#252525_100%)] shadow-[0_18px_45px_rgba(0,0,0,0.4)] transition-[transform,opacity,filter,border-color,box-shadow] duration-[550ms] min-[641px]:basis-[60%] min-[1024px]:basis-[29%] ${
