@@ -106,6 +106,17 @@ export const translations = {
             "Fully responsive design with dynamic product detail pages",
           ],
         },
+        nexfy: {
+          title: "Nexfy",
+          description:
+            "Global network connecting freelance sales agents on commission with business opportunities. Companies post verified opportunities, agents apply and close deals, and the platform handles contracts, payments and performance tracking.",
+          features: [
+            "Opportunity matching between commission-based sales agents and companies",
+            "Stripe-powered commission management and secure payments",
+            "Digital contracts with legally binding e-signatures",
+            "Agent performance dashboard: sales, commissions and closing time",
+          ],
+        },
       },
     },
     contact: {
@@ -231,6 +242,17 @@ export const translations = {
             "Modo demo: funciona con productos de muestra si Shopify no está configurado",
             "Formulario de contacto con Nodemailer + envío de email via Gmail",
             "Diseño completamente responsivo con páginas de detalle de producto dinámicas",
+          ],
+        },
+        nexfy: {
+          title: "Nexfy",
+          description:
+            "Red global que conecta agentes de venta freelance que trabajan a comisión con oportunidades de negocio. Las empresas publican oportunidades verificadas, los agentes postulan y cierran ventas, y la plataforma gestiona contratos, pagos y seguimiento de rendimiento.",
+          features: [
+            "Matching de oportunidades entre agentes de venta a comisión y empresas",
+            "Gestión de comisiones y pagos seguros con Stripe",
+            "Contratos digitales con firma electrónica con validez legal",
+            "Dashboard de rendimiento del agente: ventas, comisiones y tiempo de cierre",
           ],
         },
       },
