@@ -16,6 +16,7 @@ export const translations = {
       viewWork: "View Work",
       contactMe: "Contact Me",
       goToAbout: "Go to About",
+      learnMore: "Learn more about me",
     },
     about: {
       title: "About Me",
@@ -38,6 +39,8 @@ export const translations = {
       subtitle: "Here are a few projects I've worked on recently.",
       viewProject: "View Project",
       code: "Code",
+      viewMore: "View More",
+      viewLess: "View Less",
       seeMore: "See More on GitHub",
       items: {
         ecommerce: {
@@ -154,6 +157,7 @@ export const translations = {
       viewWork: "Ver Proyectos",
       contactMe: "Contactame",
       goToAbout: "Ir a Sobre mí",
+      learnMore: "Conocé más sobre mí",
     },
     about: {
       title: "Sobre mí",
@@ -176,6 +180,8 @@ export const translations = {
       subtitle: "Estos son algunos proyectos en los que trabajé recientemente.",
       viewProject: "Ver Proyecto",
       code: "Código",
+      viewMore: "Ver Más",
+      viewLess: "Ver Menos",
       seeMore: "Ver más en GitHub",
       items: {
         ecommerce: {

@@ -39,56 +39,60 @@ const tools = [
 ];
 
 const skillItemClass =
-  "flex min-h-[80px] flex-col items-center justify-center rounded-[15px] border border-[rgba(139,146,160,0.3)] bg-[linear-gradient(135deg,rgba(107,114,128,0.08),rgba(139,146,160,0.08))] px-[0.8rem] py-[1.2rem] text-center text-sm font-semibold text-[#f0f1f3] transition-all duration-300 hover:-translate-y-[6px] hover:scale-[1.04] hover:border-[rgba(139,146,160,0.6)] hover:bg-[linear-gradient(135deg,rgba(107,114,128,0.2),rgba(139,146,160,0.2))] hover:shadow-[0_10px_30px_rgba(107,114,128,0.35)]";
-
-const showMoreBtnClass =
-  "mx-auto mt-[1.6rem] hidden cursor-pointer items-center gap-2 rounded-[0.6rem] border-2 border-[#8b92a0] bg-transparent px-[1.8rem] py-[0.7rem] text-[0.95rem] font-semibold text-white shadow-[0_0_12px_rgba(139,146,160,0.3)] transition-all duration-300 hover:-translate-y-[3px] hover:border-[#b8bcc4] hover:bg-[rgba(139,146,160,0.15)] hover:shadow-[0_0_20px_rgba(139,146,160,0.5)] max-[980px]:flex";
+  "flex min-h-[80px] flex-col items-center justify-center rounded-[15px] border border-[rgba(156,163,175,0.22)] bg-[linear-gradient(135deg,rgba(156,163,175,0.045),rgba(156,163,175,0.09))] px-[0.8rem] py-[1.2rem] text-center text-sm font-semibold text-[#f0f1f3] transition-all duration-300 hover:-translate-y-[6px] hover:scale-[1.04] hover:border-[rgba(156,163,175,0.5)] hover:bg-[linear-gradient(135deg,rgba(156,163,175,0.14),rgba(156,163,175,0.2))] hover:shadow-[0_10px_30px_rgba(156,163,175,0.28)]";
 
 function SkillsSection({
   title,
   items,
-  expanded,
-  onToggle,
-  viewMore,
-  viewLess,
 }: {
   title: string;
   items: { name: string; icon: string }[];
-  expanded: boolean;
-  onToggle: () => void;
-  viewMore: string;
-  viewLess: string;
 }) {
+  // Duplicado para que el loop del marquee sea invisible.
+  const marqueeItems = [...items, ...items];
+
   return (
-    <div className="rounded-[20px] border border-[rgba(139,146,160,0.35)] bg-[rgba(35,35,35,0.85)] p-10 backdrop-blur-[8px] transition-all duration-300 hover:-translate-y-2 hover:border-[rgba(139,146,160,0.6)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)]">
-      <h3 className="text-gradient-light relative mb-8 text-center text-[clamp(22px,3vw,28px)] font-extrabold after:absolute after:-bottom-3 after:left-1/2 after:h-1 after:w-20 after:-translate-x-1/2 after:rounded-sm after:bg-[linear-gradient(90deg,#8b92a0,#b8bcc4)]">
+    <div className="rounded-[20px] border border-[rgba(139,146,160,0.35)] bg-[rgba(35,35,35,0.85)] p-5 backdrop-blur-[8px] transition-all duration-300 hover:-translate-y-2 hover:border-[rgba(139,146,160,0.6)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] sm:p-8 lg:p-10">
+      <h3 className="text-gradient-gray relative mb-8 text-center text-2xl font-bold after:absolute after:-bottom-3 after:left-1/2 after:h-1 after:w-20 after:-translate-x-1/2 after:rounded-sm after:bg-[linear-gradient(90deg,#6b7280,#9ca3af)]">
         {title}
       </h3>
-      <div className="grid justify-center gap-4 [grid-template-columns:repeat(auto-fit,minmax(140px,1fr))]">
+
+      {/* Desktop/tablet: grid fijo con todo el contenido */}
+      <div className="hidden gap-4 sm:grid sm:[grid-template-columns:repeat(auto-fit,minmax(140px,1fr))]">
         {items.map((item, i) => (
-          <div
-            key={i}
-            className={`${skillItemClass} ${i >= 3 && !expanded ? "max-[980px]:hidden" : ""}`}
-          >
-            <span className="mb-2 text-[1.8rem]">{item.icon}</span>
-            <span className="text-[0.92rem]">{item.name}</span>
+          <div key={i} className={skillItemClass}>
+            <span className="mb-2 text-2xl">{item.icon}</span>
+            <span className="text-sm">{item.name}</span>
           </div>
         ))}
       </div>
-      <button type="button" className={showMoreBtnClass} onClick={onToggle}>
-        <span>{expanded ? viewLess : viewMore}</span>
-        <span className={`transition-transform ${expanded ? "rotate-180" : ""}`} aria-hidden="true">
-          ▾
-        </span>
-      </button>
+
+      {/* Mobile: marquee infinito, sin botón, sin cortar contenido */}
+      <div
+        className="relative -mx-5 overflow-hidden sm:hidden"
+        style={{
+          maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+          WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
+        }}
+      >
+        <div
+          className="animate-marquee flex w-max gap-3"
+          style={{ animationDuration: `${items.length * 2.5}s` }}
+        >
+          {marqueeItems.map((item, i) => (
+            <div key={i} className={`${skillItemClass} w-28 flex-shrink-0`}>
+              <span className="mb-2 text-2xl">{item.icon}</span>
+              <span className="text-sm">{item.name}</span>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
 
 export default function About() {
   const { t, lang } = useLang();
-  const [showAllTech, setShowAllTech] = useState(false);
-  const [showAllTools, setShowAllTools] = useState(false);
   const [photoRevealed, setPhotoRevealed] = useState(false);
   const isTouchRef = useRef(false);
 
@@ -125,19 +129,19 @@ export default function About() {
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,rgba(160,160,160,0.08)_0%,transparent_50%),radial-gradient(circle_at_80%_80%,rgba(140,140,140,0.08)_0%,transparent_50%)]" />
 
       <div className="relative z-[1] mx-auto w-full max-w-[1200px] px-8">
-        <h2 className="text-gradient-light m-0 mb-8 text-center text-[clamp(42px,5.5vw,72px)] font-extrabold leading-[1.05]">
+        <h2 className="text-gradient-gray m-0 mb-8 text-center text-3xl font-bold leading-tight md:text-4xl">
           {t.about.title}
         </h2>
 
         <div className="mb-16 mt-8 grid items-center gap-16 [grid-template-columns:1.2fr_0.8fr] max-[980px]:grid-cols-1 max-[980px]:gap-10 max-[980px]:text-center">
           <div className="text-left max-[980px]:text-center">
-            <p className="mb-[1.6rem] text-[clamp(16px,1.9vw,20px)] font-medium leading-[1.75] text-white/75">
+            <p className="mb-[1.6rem] text-lg leading-[1.75] text-[#b8bec7]">
               {t.about.p1}
             </p>
-            <p className="mb-[1.6rem] text-[clamp(16px,1.9vw,20px)] leading-[1.75] text-white/75">
+            <p className="mb-[1.6rem] text-lg leading-[1.75] text-[#b8bec7]">
               {t.about.p2}
             </p>
-            <p className="mb-[1.6rem] text-[clamp(16px,1.9vw,20px)] leading-[1.75] text-white/75">
+            <p className="mb-[1.6rem] text-lg leading-[1.75] text-[#b8bec7]">
               {t.about.p3}
             </p>
 
@@ -147,7 +151,7 @@ export default function About() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t.about.viewCV}
-                className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-[0.6rem] border-2 border-[#8b92a0] bg-transparent px-[1.8rem] py-[0.7rem] text-[0.95rem] font-semibold text-white shadow-[0_0_12px_rgba(139,146,160,0.3)] transition-all duration-300 hover:-translate-y-[3px] hover:border-[#b8bcc4] hover:bg-[rgba(139,146,160,0.15)] hover:shadow-[0_0_20px_rgba(139,146,160,0.5)]"
+                className="inline-flex cursor-pointer items-center justify-center gap-2 rounded-full border-2 border-[#4b5563] bg-transparent px-6 py-3 font-semibold text-white transition-all hover:border-white hover:bg-[rgba(255,255,255,0.1)]"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                   <path d="M6 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6H6z" />
@@ -181,31 +185,30 @@ export default function About() {
         <section className="mx-[-2rem] mt-8 py-14">
           <div className="mx-auto max-w-[1200px] px-8">
             <div className="mx-auto mb-12 max-w-[900px] text-center">
-              <span className="mb-4 block text-[0.9rem] font-semibold uppercase tracking-[0.1em] text-white/70">
+              <span className="mb-2 block text-sm font-semibold text-[#9ca3af]">
                 {t.about.introduction}
               </span>
-              <h2 className="text-gradient-light m-0 mb-4 text-center text-[clamp(32px,4.5vw,56px)] font-black">
+              <h2 className="text-gradient-gray m-0 mb-4 text-center text-3xl font-bold leading-tight md:text-4xl">
                 {t.about.overviewTitle}
               </h2>
-              <p className="mx-auto max-w-[800px] text-center text-[clamp(16px,1.8vw,20px)] leading-[1.7] text-white/75">
+              <p className="mx-auto max-w-[800px] text-center text-lg leading-[1.7] text-[#d1d5db]">
                 {t.about.overviewDescription}
               </p>
             </div>
 
-            <div className="mt-9 grid gap-8 [grid-template-columns:repeat(auto-fit,minmax(250px,1fr))]">
+            <div className="mt-9 grid grid-cols-2 gap-4 sm:gap-8 sm:[grid-template-columns:repeat(auto-fit,minmax(250px,1fr))]">
               {services.map((service, index) => (
                 <div
                   key={index}
-                  className="group relative overflow-hidden rounded-[20px] border border-[rgba(139,146,160,0.3)] bg-[rgba(35,35,35,0.85)] px-8 py-9 text-center backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[10px] hover:border-[rgba(139,146,160,0.6)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)]"
+                  className="group relative overflow-hidden rounded-[20px] border border-[rgba(156,163,175,0.3)] bg-[rgba(35,35,35,0.85)] px-4 py-6 text-center backdrop-blur-[10px] transition-all duration-300 hover:-translate-y-[10px] hover:border-[rgba(156,163,175,0.6)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.2)] sm:px-8 sm:py-9"
                 >
-                  <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(14,14,14,0.1),rgba(206,206,206,0.12))] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="relative mx-auto mb-[1.3rem] flex h-20 w-20 items-center justify-center [&_svg]:h-10 [&_svg]:w-10 [&_svg]:text-[#e2e8f0] [&_svg]:transition-all [&_svg]:duration-300 group-hover:[&_svg]:scale-110 group-hover:[&_svg]:text-white">
+                  <div className="relative mx-auto mb-[0.9rem] flex h-14 w-14 items-center justify-center [&_svg]:h-7 [&_svg]:w-7 [&_svg]:text-[#9ca3af] [&_svg]:transition-all [&_svg]:duration-300 group-hover:[&_svg]:scale-110 group-hover:[&_svg]:text-white sm:mb-[1.3rem] sm:h-20 sm:w-20 sm:[&_svg]:h-10 sm:[&_svg]:w-10">
                     {service.icon}
                   </div>
-                  <h3 className="relative mb-[0.35rem] text-[1.25rem] font-bold text-[#f0f1f3]">
+                  <h3 className="relative mb-[0.35rem] text-base font-bold text-white sm:text-xl">
                     {service.title}
                   </h3>
-                  <p className="relative m-0 text-base text-[#cfd3da]">{service.subtitle}</p>
+                  <p className="relative m-0 text-sm text-[#9ca3af] sm:text-base">{service.subtitle}</p>
                 </div>
               ))}
             </div>
@@ -214,22 +217,8 @@ export default function About() {
 
         {/* Skills */}
         <div className="mt-12 grid grid-cols-2 gap-12 max-[980px]:grid-cols-1 max-[980px]:gap-8">
-          <SkillsSection
-            title={t.about.technologies}
-            items={technologies}
-            expanded={showAllTech}
-            onToggle={() => setShowAllTech((v) => !v)}
-            viewMore={t.about.viewMore}
-            viewLess={t.about.viewLess}
-          />
-          <SkillsSection
-            title={t.about.tools}
-            items={tools}
-            expanded={showAllTools}
-            onToggle={() => setShowAllTools((v) => !v)}
-            viewMore={t.about.viewMore}
-            viewLess={t.about.viewLess}
-          />
+          <SkillsSection title={t.about.technologies} items={technologies} />
+          <SkillsSection title={t.about.tools} items={tools} />
         </div>
       </div>
     </section>

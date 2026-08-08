@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useLayoutEffect, useCallback } from "react";
+import { useState, useRef } from "react";
 import { useLang } from "@/i18n/LanguageContext";
 import ProjectModal from "@/components/ProjectModal";
 
@@ -12,10 +12,18 @@ import elpactoImg from "@/assets/elpacto_real.png";
 import petparadiseImg from "@/assets/petparadise_card.png";
 import nexfyImg from "@/assets/nexfy_real.jpg";
 
-type ProjectKey = "ecommerce" | "lpticket" | "elpacto" | "stealthbid" | "social" | "petparadise" | "nexfy";
+type ProjectKey =
+  | "ecommerce"
+  | "lpticket"
+  | "elpacto"
+  | "stealthbid"
+  | "social"
+  | "petparadise"
+  | "nexfy";
 
 const projectsBase: {
   key: ProjectKey;
+  category: string;
   image: string;
   screenshots: string[];
   tags: string[];
@@ -23,20 +31,8 @@ const projectsBase: {
   codeUrl?: string;
 }[] = [
   {
-    key: "ecommerce",
-    image: ecommerceImg.src,
-    screenshots: [
-      "/screenshots/ecommerce-1.png",
-      "/screenshots/ecommerce-2.png",
-      "/screenshots/ecommerce-3.png",
-      "/screenshots/ecommerce-4.png",
-    ],
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
-    projectUrl: "https://ecommerceclient-production.up.railway.app/",
-    codeUrl: "https://github.com/fidelgenre/ECommerce",
-  },
-  {
     key: "lpticket",
+    category: "TICKETING",
     image: lpticketImg.src,
     screenshots: [
       "/screenshots/lpticket-1.png",
@@ -55,6 +51,7 @@ const projectsBase: {
   },
   {
     key: "elpacto",
+    category: "SPORTS COMMUNITY",
     image: elpactoImg.src,
     screenshots: [],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "NestJS", "Socket.IO", "PWA"],
@@ -62,15 +59,39 @@ const projectsBase: {
     codeUrl: "https://github.com/FidelGenre/ElPactoClub",
   },
   {
+    key: "nexfy",
+    category: "SALES NETWORK",
+    image: nexfyImg.src,
+    screenshots: [],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
+    projectUrl: "https://www.nexfyapp.com/",
+  },
+  {
+    key: "ecommerce",
+    category: "E-COMMERCE",
+    image: ecommerceImg.src,
+    screenshots: [
+      "/screenshots/ecommerce-1.png",
+      "/screenshots/ecommerce-2.png",
+      "/screenshots/ecommerce-3.png",
+      "/screenshots/ecommerce-4.png",
+    ],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
+    projectUrl: "https://ecommerceclient-production.up.railway.app/",
+    codeUrl: "https://github.com/fidelgenre/ECommerce",
+  },
+  {
     key: "stealthbid",
+    category: "WEB3 MARKETPLACE",
     image: dappweb3Img.src,
     screenshots: [],
-    tags: ["Next.js", "SKALE BITE v2", "Coinbase x402", "Google (AP2 + Gemini)", "TypeScript", "Tailwind CSS", "Solidity", "Foundry"],
+    tags: ["Next.js", "SKALE v2", "Coinbase x402", "Gemini AI", "TypeScript", "Solidity"],
     projectUrl: "https://stealthbidagents.vercel.app/",
     codeUrl: "https://github.com/FidelGenre/Crowdfunding",
   },
   {
     key: "social",
+    category: "SOCIAL NETWORK",
     image: socialImg.src,
     screenshots: [],
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Java", "SpringBoot", "PostgreSQL"],
@@ -79,26 +100,226 @@ const projectsBase: {
   },
   {
     key: "petparadise",
+    category: "PET E-COMMERCE",
     image: petparadiseImg.src,
     screenshots: [],
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Shopify", "Storefront API", "Nodemailer", "Vercel"],
+    tags: ["Next.js", "TypeScript", "Shopify", "Storefront API", "Nodemailer", "Vercel"],
     projectUrl: "https://www.petparadiseshop.com.ar/",
     codeUrl: "https://github.com/FidelGenre/petparadiseshop",
   },
-  {
-    key: "nexfy",
-    image: nexfyImg.src,
-    screenshots: [],
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Stripe"],
-    projectUrl: "https://www.nexfyapp.com/",
-  },
 ];
 
-const actionBtnClass =
-  "inline-flex items-center gap-2 rounded-[10px] border-[1.5px] border-white/25 bg-white/[0.12] px-[0.95rem] py-[0.55rem] text-[0.88rem] font-bold text-white backdrop-blur-[6px] transition-all duration-[250ms] hover:-translate-y-0.5 hover:border-white/55 hover:bg-white/[0.22]";
+const VISIBLE_COUNT = 3;
+
+/* ─────────────────────────── helpers ─────────────────────────────── */
+
+function TagPill({ tag }: { tag: string }) {
+  return (
+    <span
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        padding: "0.22rem 0.65rem",
+        borderRadius: "999px",
+        border: "1px solid rgba(156,163,175,0.35)",
+        background: "rgba(156,163,175,0.1)",
+        color: "#b0b7c3",
+        fontSize: "0.73rem",
+        fontWeight: 600,
+        whiteSpace: "nowrap",
+      }}
+    >
+      {tag}
+    </span>
+  );
+}
+
+function BtnLink({ href, children }: { href: string; children: React.ReactNode }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      style={{
+        display: "inline-flex",
+        alignItems: "center",
+        gap: "0.4rem",
+        padding: "0.5rem 1.05rem",
+        borderRadius: "999px",
+        border: "1.5px solid rgba(255,255,255,0.2)",
+        background: "rgba(255,255,255,0.05)",
+        color: "#e5e7eb",
+        fontSize: "0.82rem",
+        fontWeight: 700,
+        textDecoration: "none",
+        transition: "border-color 0.2s, background 0.2s, transform 0.2s",
+        flexShrink: 0,
+      }}
+      onMouseEnter={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = "rgba(255,255,255,0.5)";
+        el.style.background = "rgba(255,255,255,0.12)";
+        el.style.transform = "translateY(-2px)";
+      }}
+      onMouseLeave={(e) => {
+        const el = e.currentTarget as HTMLElement;
+        el.style.borderColor = "rgba(255,255,255,0.2)";
+        el.style.background = "rgba(255,255,255,0.05)";
+        el.style.transform = "";
+      }}
+    >
+      {children}
+    </a>
+  );
+}
+
+const IconExternal = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+    <path d="M14 3h7v7M10 14L21 3M21 14v7h-7" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+  </svg>
+);
+
+const IconGithub = () => (
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.26c-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.34-1.77-1.34-1.77-1.09-.75.08-.74.08-.74 1.21.09 1.85 1.25 1.85 1.25 1.07 1.83 2.8 1.3 3.48.99.11-.78.42-1.3.76-1.6-2.67-.3-5.48-1.33-5.48-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.51.12-3.16 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.86.12 3.16.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.82.58A12 12 0 0 0 12 .5Z" />
+  </svg>
+);
+
+const IconChevron = ({ open }: { open: boolean }) => (
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    style={{ transform: open ? "rotate(180deg)" : "none", transition: "transform 0.25s ease" }}
+  >
+    <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+/* ─────────────────────────── project block ─────────────────────────────── */
+/* Imagen a un lado (alternando), tarjeta oscura SUPERPUESTA sobre la imagen
+   con margin-top negativo — patrón "tarjeta flotante" (juanpestana.netlify.app)
+   pero en la paleta gris/oscura del sitio. */
+
+function ProjectOverlap({
+  project,
+  index,
+  viewLabel,
+  codeLabel,
+  onClick,
+}: {
+  project: (typeof projectsBase)[0] & { title: string; description: string };
+  index: number;
+  viewLabel: string;
+  codeLabel: string;
+  onClick: () => void;
+}) {
+  const [hov, setHov] = useState(false);
+  const isEven = index % 2 === 0;
+
+  return (
+    <div className={`proj-overlap ${isEven ? "proj-overlap--left" : "proj-overlap--right"}`}>
+      <button
+        type="button"
+        className="proj-overlap-img"
+        onClick={onClick}
+        onMouseEnter={() => setHov(true)}
+        onMouseLeave={() => setHov(false)}
+        aria-label={`Ver proyecto: ${project.title}`}
+        style={{
+          boxSizing: "border-box",
+          cursor: "pointer",
+          display: "block",
+          background: "none",
+          border: "none",
+          outline: "none",
+          padding: 0,
+          margin: 0,
+          font: "inherit",
+          color: "inherit",
+          transform: hov ? "scale(1.015)" : "scale(1)",
+          transition: "transform 0.5s cubic-bezier(0.22,1,0.36,1)",
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={project.image}
+          alt={project.title}
+          loading="lazy"
+          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block" }}
+        />
+      </button>
+
+      <div className="proj-overlap-card">
+        <p
+          style={{
+            margin: 0,
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+            fontSize: "0.7rem",
+            fontWeight: 700,
+            letterSpacing: "0.15em",
+            textTransform: "uppercase",
+            color: "#75818f",
+          }}
+        >
+          <span style={{ color: "#d1d5db", fontSize: "0.95rem" }}>
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          {project.category}
+        </p>
+
+        <h3
+          style={{
+            margin: "0.9rem 0 0",
+            fontSize: "1.5rem",
+            fontWeight: 800,
+            lineHeight: 1.2,
+            color: "#f3f4f6",
+            letterSpacing: "-0.01em",
+          }}
+        >
+          {project.title}
+        </h3>
+
+        <p
+          style={{
+            margin: "0.9rem 0 0",
+            fontSize: "0.88rem",
+            lineHeight: 1.7,
+            color: "#9ca3af",
+            textAlign: "justify",
+          }}
+        >
+          {project.description}
+        </p>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.38rem", marginTop: "1.1rem" }}>
+          {project.tags.map((tag) => <TagPill key={tag} tag={tag} />)}
+        </div>
+
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginTop: "1.25rem" }}>
+          <BtnLink href={project.projectUrl}>
+            <IconExternal /> {viewLabel}
+          </BtnLink>
+          {project.codeUrl && (
+            <BtnLink href={project.codeUrl}>
+              <IconGithub /> {codeLabel}
+            </BtnLink>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Projects() {
   const { t } = useLang();
+  const [activeKey, setActiveKey] = useState<ProjectKey | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const collapseRef = useRef<HTMLDivElement>(null);
 
   const projects = projectsBase.map((p) => ({
     ...p,
@@ -106,273 +327,295 @@ export default function Projects() {
     description: t.projects.items[p.key].description,
   }));
 
-  const n = projects.length;
-  const COPIES = 3;
-  const START = n + 1; // middle copy, index 1 = LPTicket
-  const slides = [...projects, ...projects, ...projects];
-
-  const viewportRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  const [pos, setPos] = useState(START);
-  const [sharpRadius, setSharpRadius] = useState(1);
-  const [activeKey, setActiveKey] = useState<ProjectKey | null>(null);
-  const isPausedRef = useRef(false);
-  const posRef = useRef(START);
-  const stepRef = useRef(0); // cardW + gap, kept in sync imperatively
-  const vwRef = useRef(0);
-  const cardWRef = useRef(0);
-
-  const calcOffset = useCallback((p: number) => {
-    return vwRef.current / 2 - (p * stepRef.current + cardWRef.current / 2);
-  }, []);
-
-  const applyTransform = useCallback((p: number, animated: boolean) => {
-    const track = trackRef.current;
-    if (!track) return;
-    track.style.transition = animated ? "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)" : "none";
-    track.style.transform = `translate3d(${calcOffset(p)}px, 0, 0)`;
-  }, [calcOffset]);
-
-  const measure = useCallback(() => {
-    const track = trackRef.current;
-    const viewport = viewportRef.current;
-    if (!track || !viewport) return;
-    const card = track.children[0] as HTMLElement | undefined;
-    if (!card) return;
-    cardWRef.current = card.offsetWidth;
-    const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
-    stepRef.current = cardWRef.current + gap;
-    vwRef.current = viewport.offsetWidth;
-    applyTransform(posRef.current, false);
-  }, [applyTransform]);
-
-  useLayoutEffect(() => {
-    measure();
-  }, [measure]);
-
-  useEffect(() => {
-    const onResize = () => {
-      setSharpRadius(window.matchMedia("(min-width: 1024px)").matches ? 1 : 0);
-      measure();
-    };
-    onResize();
-    window.addEventListener("resize", onResize);
-    const ro = new ResizeObserver(measure);
-    if (viewportRef.current) ro.observe(viewportRef.current);
-    return () => {
-      window.removeEventListener("resize", onResize);
-      ro.disconnect();
-    };
-  }, [measure]);
-
-  const goRef = useRef<(dir: number) => void>(() => {});
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      if (!isPausedRef.current) goRef.current(1);
-    }, 3000);
-    return () => clearInterval(id);
-  }, []);
-
-  const go = useCallback((dir: number) => {
-    const prev = posRef.current;
-    let next = prev + dir;
-
-    // If next is within the middle copy, just animate
-    if (next >= n && next < 2 * n) {
-      posRef.current = next;
-      applyTransform(next, true);
-      setPos(next);
-      return;
-    }
-
-    // Need to loop: animate to the edge copy first, then instantly reposition
-    // to the equivalent position in the middle copy (no React re-render during reposition)
-    const edgePos = next;
-    const middlePos = next - dir * n;
-
-    posRef.current = edgePos;
-    applyTransform(edgePos, true);
-    setPos(edgePos);
-
-    setTimeout(() => {
-      posRef.current = middlePos;
-      applyTransform(middlePos, false); // instant, no transition
-      requestAnimationFrame(() => {
-        // restore transition after one frame (browser won't animate the jump)
-        const track = trackRef.current;
-        if (track) track.style.transition = "transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)";
-      });
-      setPos(middlePos);
-    }, 460);
-  }, [n, applyTransform]);
-
-  goRef.current = go;
-
   return (
-    <section id="projects" className="relative bg-[#1f1f1f] px-8 py-24">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(156,163,175,0.05)_0%,transparent_55%)]" />
+    <>
+      <style>{`
+        #projects-inner {
+          max-width: 1160px;
+          margin: 0 auto;
+        }
+        .proj-overlap {
+          display: grid;
+          grid-template-columns: repeat(12, 1fr);
+          align-items: center;
+          margin-bottom: 6rem;
+        }
+        .proj-overlap-img,
+        .proj-overlap-card {
+          grid-row: 1 / 1;
+        }
+        .proj-overlap-img {
+          grid-column: 1 / 9;
+          height: 26rem;
+          border-radius: 1rem;
+          overflow: hidden;
+          background: #111214;
+          box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+          z-index: 0;
+        }
+        .proj-overlap-card {
+          grid-column: 5 / 12;
+          z-index: 1;
+          background: #202020;
+          border: 1px solid rgba(156,163,175,0.2);
+          border-radius: 1rem;
+          box-shadow: 0 30px 70px rgba(0,0,0,0.55);
+          padding: 3.5rem 2.25rem;
+        }
+        /* proyectos pares (2°, 4°...): imagen a la derecha, card a la izquierda */
+        .proj-overlap--right .proj-overlap-img { grid-column: 5 / 13; }
+        .proj-overlap--right .proj-overlap-card { grid-column: 2 / 9; }
+        @media (max-width: 991px) {
+          .proj-overlap {
+            display: block;
+          }
+          .proj-overlap-img {
+            width: 100%;
+            height: 20rem;
+          }
+          .proj-overlap-card {
+            width: 100%;
+            margin-top: -2.5rem;
+            padding: 1.5rem;
+          }
+          .proj-overlap {
+            margin-bottom: 4rem;
+          }
+        }
+        .proj-collapse {
+          display: grid;
+          grid-template-rows: 0fr;
+          transition: grid-template-rows 0.6s cubic-bezier(0.22,1,0.36,1);
+        }
+        .proj-collapse--open {
+          grid-template-rows: 1fr;
+        }
+        .proj-collapse-inner {
+          overflow: hidden;
+          min-height: 0;
+          opacity: 0;
+          transform: translateY(-12px);
+          transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .proj-collapse--open .proj-collapse-inner {
+          opacity: 1;
+          transform: translateY(0);
+          transition: opacity 0.4s ease 0.15s, transform 0.4s ease 0.15s;
+        }
+      `}</style>
 
-      <div className="relative z-[1] mx-auto max-w-[1560px]">
-        <h2 className="text-gradient-gray mb-2 text-center text-[clamp(2rem,5vw,3rem)] font-bold">
-          {t.projects.title}
-        </h2>
-        <p className="mb-16 text-center text-[1.125rem] text-[#9ca3af]">{t.projects.subtitle}</p>
+      <section
+        id="projects"
+        style={{
+          position: "relative",
+          background: "#1a1a1a",
+          padding: "6rem 1.5rem 8rem",
+          overflow: "hidden",
+        }}
+      >
+        {/* soft radial glow */}
+        <div
+          style={{
+            pointerEvents: "none",
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(ellipse 75% 40% at 50% 0%, rgba(156,163,175,0.05) 0%, transparent 65%)",
+          }}
+        />
 
-        <div className="relative px-0 min-[1024px]:px-[3.25rem]">
-          <button
-            type="button"
-            onClick={() => go(-1)}
-            aria-label="Previous project"
-            className="absolute left-[0.15rem] top-1/2 z-[5] flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[rgba(156,163,175,0.4)] bg-[linear-gradient(135deg,#6b7280_0%,#4b5563_100%)] text-white shadow-[0_8px_24px_rgba(0,0,0,0.45)] transition-all duration-300 hover:bg-[linear-gradient(135deg,#9ca3af_0%,#6b7280_100%)] hover:shadow-[0_10px_30px_rgba(107,114,128,0.6)] active:scale-90 max-[1023px]:left-2 max-[1023px]:h-11 max-[1023px]:w-11 max-[1023px]:bg-[rgba(75,85,99,0.7)] max-[1023px]:backdrop-blur-[4px] max-[640px]:left-0 max-[640px]:h-10 max-[640px]:w-10"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M15 18l-6-6 6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
-
-          <div
-            ref={viewportRef}
-            className="overflow-hidden py-8"
-            onMouseEnter={() => { isPausedRef.current = true; }}
-            onMouseLeave={() => { isPausedRef.current = false; }}
-            onTouchStart={() => { isPausedRef.current = true; }}
-            onTouchEnd={() => { isPausedRef.current = false; }}
-          >
-            <div
-              ref={trackRef}
-              className="flex gap-5"
-              style={{ willChange: "transform" }}
+        <div id="projects-inner" style={{ position: "relative", zIndex: 1 }}>
+          {/* ── header ── */}
+          <div style={{ marginBottom: "5rem" }}>
+            <p
+              style={{
+                margin: "0 0 0.5rem",
+                fontSize: "0.7rem",
+                fontWeight: 700,
+                letterSpacing: "0.2em",
+                color: "#6b7280",
+                textTransform: "uppercase",
+              }}
             >
-              {slides.map((project, index) => {
-                const isCenter = Math.abs(index - pos) <= sharpRadius;
-                return (
-                  <article
-                    key={index}
-                    aria-hidden={!isCenter}
-                    onClick={isCenter ? () => setActiveKey(project.key) : undefined}
-                    className={`group relative flex shrink-0 basis-[78%] flex-col overflow-hidden rounded-[1.25rem] border border-[rgba(156,163,175,0.16)] bg-[linear-gradient(160deg,#2e2e2e_0%,#252525_100%)] shadow-[0_18px_45px_rgba(0,0,0,0.4)] transition-[transform,opacity,filter,border-color,box-shadow] duration-[550ms] min-[641px]:basis-[60%] min-[1024px]:basis-[29%] ${
-                      isCenter
-                        ? "cursor-pointer scale-100 opacity-100 hover:-translate-y-2 hover:border-[rgba(156,163,175,0.45)] hover:shadow-[0_26px_60px_rgba(107,114,128,0.3)]"
-                        : "pointer-events-none scale-[0.84] opacity-50 blur-[4px] brightness-[0.65]"
-                    }`}
-                  >
-                    {/* línea de acento superior */}
-                    <div
-                      className={`absolute inset-x-0 top-0 z-[2] h-[3px] bg-[linear-gradient(90deg,#9ca3af,#6b7280,transparent)] transition-opacity duration-[400ms] ${
-                        isCenter ? "opacity-100" : "opacity-0"
-                      }`}
-                    />
+              {t.projects.subtitle}
+            </p>
+            <h2
+              className="text-gradient-gray"
+              style={{
+                margin: 0,
+                fontSize: "clamp(2.2rem, 5vw, 3.5rem)",
+                fontWeight: 900,
+                lineHeight: 1,
+                letterSpacing: "-0.025em",
+              }}
+            >
+              {t.projects.title}
+            </h2>
+          </div>
 
-                    <div className="relative aspect-[16/9] w-full overflow-hidden bg-[linear-gradient(135deg,#3a3a3a,#2b2b2b)] min-[641px]:aspect-[4/3]">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={project.image}
-                        alt={project.title}
-                        loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.06]"
-                      />
+          {/* ── projects ── */}
+          {projects.slice(0, VISIBLE_COUNT).map((project, i) => (
+            <ProjectOverlap
+              key={project.key}
+              project={project}
+              index={i}
+              viewLabel={t.projects.viewProject}
+              codeLabel={t.projects.code}
+              onClick={() => setActiveKey(project.key)}
+            />
+          ))}
 
-                      <div className="absolute inset-0 flex items-end justify-center gap-[0.6rem] bg-[linear-gradient(180deg,rgba(0,0,0,0)_45%,rgba(0,0,0,0.55)_100%)] p-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                        <a
-                          href={project.projectUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          tabIndex={isCenter ? 0 : -1}
-                          aria-label={`${t.projects.viewProject}: ${project.title}`}
-                          className={actionBtnClass}
-                        >
-                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                            <path d="M14 3h7v7M10 14L21 3M21 14v7h-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                          </svg>
-                          {t.projects.viewProject}
-                        </a>
-
-                        {project.codeUrl && (
-                          <a
-                            href={project.codeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            tabIndex={isCenter ? 0 : -1}
-                            aria-label={`${t.projects.code}: ${project.title}`}
-                            className={actionBtnClass}
-                          >
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                              <path d="M12 .5a12 12 0 0 0-3.79 23.4c.6.11.82-.26.82-.58v-2.26c-3.34.73-4.04-1.61-4.04-1.61-.55-1.4-1.34-1.77-1.34-1.77-1.09-.75.08-.74.08-.74 1.21.09 1.85 1.25 1.85 1.25 1.07 1.83 2.8 1.3 3.48.99.11-.78.42-1.3.76-1.6-2.67-.3-5.48-1.33-5.48-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.51.12-3.16 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.28-1.55 3.29-1.23 3.29-1.23.66 1.65.24 2.86.12 3.16.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.62-5.49 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.22.69.82.58A12 12 0 0 0 12 .5Z" />
-                            </svg>
-                            {t.projects.code}
-                          </a>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="flex flex-1 flex-col px-[1.4rem] py-7">
-                      <h3 className="mb-[0.6rem] text-[1.25rem] font-bold leading-[1.25] text-white">
-                        {project.title}
-                      </h3>
-                      <p className="mb-5 line-clamp-2 text-[0.9rem] leading-[1.6] text-[#c4c9d1] min-[641px]:line-clamp-4">
-                        {project.description}
-                      </p>
-                      <div className="mt-auto flex flex-wrap gap-2">
-                        {project.tags.map((tag, ti) => (
-                          <span
-                            key={ti}
-                            className="rounded-full border border-[rgba(156,163,175,0.3)] bg-[rgba(156,163,175,0.18)] px-3 py-[0.35rem] text-[0.78rem] font-semibold text-[#d7dbe2] transition-all duration-300 hover:border-[rgba(156,163,175,0.55)] hover:bg-[rgba(156,163,175,0.28)]"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </article>
-                );
-              })}
+          {/* ── extra projects, colapsables ── */}
+          <div ref={collapseRef} className={`proj-collapse ${showAll ? "proj-collapse--open" : ""}`}>
+            <div className="proj-collapse-inner">
+              {projects.slice(VISIBLE_COUNT).map((project, i) => (
+                <ProjectOverlap
+                  key={project.key}
+                  project={project}
+                  index={VISIBLE_COUNT + i}
+                  viewLabel={t.projects.viewProject}
+                  codeLabel={t.projects.code}
+                  onClick={() => setActiveKey(project.key)}
+                />
+              ))}
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => go(1)}
-            aria-label="Next project"
-            className="absolute right-[0.15rem] top-1/2 z-[5] flex h-12 w-12 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-[rgba(156,163,175,0.4)] bg-[linear-gradient(135deg,#6b7280_0%,#4b5563_100%)] text-white shadow-[0_8px_24px_rgba(0,0,0,0.45)] transition-all duration-300 hover:bg-[linear-gradient(135deg,#9ca3af_0%,#6b7280_100%)] hover:shadow-[0_10px_30px_rgba(107,114,128,0.6)] active:scale-90 max-[1023px]:right-2 max-[1023px]:h-11 max-[1023px]:w-11 max-[1023px]:bg-[rgba(75,85,99,0.7)] max-[1023px]:backdrop-blur-[4px] max-[640px]:right-0 max-[640px]:h-10 max-[640px]:w-10"
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 18l6-6-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+          {/* ── view more/less ── */}
+          {projects.length > VISIBLE_COUNT && (
+            <div
+              style={{ display: "flex", justifyContent: "center", marginTop: "1rem", marginBottom: "3rem" }}
+            >
+              <button
+                type="button"
+                onClick={() => {
+                  if (showAll) {
+                    // Atamos el scroll cuadro a cuadro a la altura REAL que
+                    // va midiendo el contenedor mientras la transición CSS lo
+                    // colapsa (no un scroll "smooth" aparte, que corre con su
+                    // propia curva y queda desincronizado — y con
+                    // `scroll-behavior: smooth` global, hasta se anima solo).
+                    const el = collapseRef.current;
+                    const startHeight = el?.getBoundingClientRect().height ?? 0;
+                    const startY = window.scrollY;
+                    const startTime = performance.now();
+                    const DURATION = 650;
+
+                    setShowAll(false);
+
+                    const tick = (now: number) => {
+                      const currentHeight = el?.getBoundingClientRect().height ?? 0;
+                      const shrunk = startHeight - currentHeight;
+                      window.scrollTo({ top: startY - shrunk, behavior: "instant" });
+                      if (now - startTime < DURATION) {
+                        requestAnimationFrame(tick);
+                      }
+                    };
+                    requestAnimationFrame(tick);
+                  } else {
+                    setShowAll(true);
+                  }
+                }}
+                style={{
+                  all: "unset",
+                  cursor: "pointer",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                  padding: "0.75rem 1.75rem",
+                  borderRadius: "999px",
+                  border: "1.5px solid rgba(156,163,175,0.3)",
+                  background: "rgba(156,163,175,0.06)",
+                  color: "#d1d5db",
+                  fontSize: "0.88rem",
+                  fontWeight: 700,
+                  transition: "all 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = "rgba(209,213,219,0.6)";
+                  el.style.background = "rgba(156,163,175,0.13)";
+                  el.style.color = "#fff";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLElement;
+                  el.style.borderColor = "rgba(156,163,175,0.3)";
+                  el.style.background = "rgba(156,163,175,0.06)";
+                  el.style.color = "#d1d5db";
+                }}
+              >
+                {showAll ? t.projects.viewLess : t.projects.viewMore}
+                <IconChevron open={showAll} />
+              </button>
+            </div>
+          )}
+
+          {/* ── see more ── */}
+          <div style={{ marginTop: "3rem", display: "flex", justifyContent: "center" }}>
+            <a
+              href="https://github.com/FidelGenre?tab=repositories"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.55rem",
+                padding: "0.8rem 2rem",
+                borderRadius: "10px",
+                border: "2px solid rgba(156,163,175,0.3)",
+                background: "rgba(156,163,175,0.07)",
+                color: "#d1d5db",
+                fontSize: "0.9rem",
+                fontWeight: 700,
+                textDecoration: "none",
+                transition: "all 0.25s",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transform = "translateY(-3px)";
+                el.style.borderColor = "rgba(209,213,219,0.6)";
+                el.style.background = "rgba(156,163,175,0.14)";
+                el.style.color = "#fff";
+              }}
+              onMouseLeave={(e) => {
+                const el = e.currentTarget as HTMLElement;
+                el.style.transform = "";
+                el.style.borderColor = "rgba(156,163,175,0.3)";
+                el.style.background = "rgba(156,163,175,0.07)";
+                el.style.color = "#d1d5db";
+              }}
+            >
+              <IconGithub />
+              {t.projects.seeMore}
+            </a>
+          </div>
         </div>
 
-        <div className="mt-14 flex justify-center">
-          <a
-            href="https://github.com/FidelGenre?tab=repositories"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="cursor-pointer rounded-xl border-none bg-[linear-gradient(135deg,#6b7280_0%,#4b5563_100%)] px-10 py-4 text-base font-semibold text-white no-underline shadow-[0_4px_15px_rgba(107,114,128,0.4)] transition-all duration-300 hover:-translate-y-[3px] hover:bg-[linear-gradient(135deg,#9ca3af_0%,#6b7280_100%)] hover:shadow-[0_6px_25px_rgba(107,114,128,0.6)]"
-          >
-            {t.projects.seeMore}
-          </a>
-        </div>
-      </div>
-
-      {activeKey && (() => {
-        const base = projectsBase.find((p) => p.key === activeKey)!;
-        return (
-          <ProjectModal
-            project={{
-              title: t.projects.items[activeKey].title,
-              description: t.projects.items[activeKey].description,
-              features: t.projects.items[activeKey].features,
-              tags: base.tags,
-              screenshots: base.screenshots.length > 0 ? base.screenshots : [base.image],
-              projectUrl: base.projectUrl,
-              codeUrl: base.codeUrl,
-            }}
-            onClose={() => setActiveKey(null)}
-            labels={{ viewProject: t.projects.viewProject, code: t.projects.code }}
-          />
-        );
-      })()}
-    </section>
+        {/* ── modal ── */}
+        {activeKey &&
+          (() => {
+            const base = projectsBase.find((p) => p.key === activeKey)!;
+            return (
+              <ProjectModal
+                project={{
+                  title: t.projects.items[activeKey].title,
+                  description: t.projects.items[activeKey].description,
+                  features: t.projects.items[activeKey].features,
+                  tags: base.tags,
+                  screenshots:
+                    base.screenshots.length > 0 ? base.screenshots : [base.image],
+                  projectUrl: base.projectUrl,
+                  codeUrl: base.codeUrl,
+                }}
+                onClose={() => setActiveKey(null)}
+                labels={{
+                  viewProject: t.projects.viewProject,
+                  code: t.projects.code,
+                }}
+              />
+            );
+          })()}
+      </section>
+    </>
   );
 }

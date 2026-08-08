@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
@@ -12,7 +11,6 @@ export default function Home() {
     <main>
       <MouseTrail />
       <ScrollToTopButton />
-      <Navbar />
       <Hero />
       <About />
       <Projects />

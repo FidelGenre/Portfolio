@@ -52,29 +52,30 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="relative z-[999] border-b border-[rgba(156,163,175,0.2)] bg-[rgba(49,49,49,0.92)] shadow-[0_4px_20px_rgba(0,0,0,0.3)] backdrop-blur-[20px]">
-        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-8 py-[1.2rem]">
+      <nav className="relative z-[999] bg-[linear-gradient(135deg,#1a1a1a_0%,#2d2d2d_50%,#404040_100%)]">
+        <div className="mx-auto flex max-w-[1400px] items-center justify-between px-8 py-5">
           <a
             href="#home"
             onClick={(e) => {
               e.preventDefault();
               scrollToSection("home");
             }}
+            className="flex items-center gap-2 cursor-pointer transition-opacity hover:opacity-80"
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={boxIcon.src}
-              alt="Logo icon"
-              className="h-auto w-[42px] transition-transform duration-200 hover:-translate-y-[3px] md:w-[70px]"
+              alt="Logo"
+              className="h-auto w-8 md:w-10"
             />
+            <span className="hidden text-sm font-bold text-white md:inline">Fidel Genre</span>
           </a>
 
-          <ul className="hidden list-none gap-12 md:flex">
+          <ul className="hidden list-none gap-8 lg:flex">
             {navItems.map((item) => (
-              <li key={item.id} className="w-[90px] text-center">
+              <li key={item.id}>
                 <button
                   onClick={() => scrollToSection(item.id)}
-                  className="w-full cursor-pointer border-none bg-transparent py-2 text-[1.125rem] font-medium text-[#e5e7eb] transition-[color,transform] duration-300 hover:-translate-y-[3px] hover:text-[#d1d5db]"
+                  className="cursor-pointer border-none bg-transparent text-sm font-medium text-[#b8bcc4] transition-colors duration-300 hover:text-white"
                 >
                   {item.label}
                 </button>
@@ -82,18 +83,17 @@ export default function Navbar() {
             ))}
           </ul>
 
-          <div className="flex items-center gap-4">
-            {/* en desktop visible en el navbar; en mobile va dentro del menú */}
+          <div className="flex items-center gap-3">
             <div className="hidden md:block">{langButton()}</div>
 
             <button
-              className="flex cursor-pointer flex-col gap-[5px] border-none bg-transparent p-2 transition-transform duration-300 hover:scale-110 md:hidden"
+              className="flex cursor-pointer flex-col gap-1.5 border-none bg-transparent p-2 transition-transform duration-300 hover:scale-110 lg:hidden"
               onClick={toggleMenu}
               aria-label="Toggle menu"
             >
-              <span className="h-0.5 w-[25px] rounded-sm bg-[linear-gradient(90deg,#9ca3af,#6b7280)]" />
-              <span className="h-0.5 w-[25px] rounded-sm bg-[linear-gradient(90deg,#9ca3af,#6b7280)]" />
-              <span className="h-0.5 w-[25px] rounded-sm bg-[linear-gradient(90deg,#9ca3af,#6b7280)]" />
+              <span className="h-0.5 w-6 rounded-sm bg-[#b8bcc4]" />
+              <span className="h-0.5 w-6 rounded-sm bg-[#b8bcc4]" />
+              <span className="h-0.5 w-6 rounded-sm bg-[#b8bcc4]" />
             </button>
           </div>
         </div>

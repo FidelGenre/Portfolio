@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useLang } from "@/i18n/LanguageContext";
+import boxIcon from "@/assets/boxicon.png";
 
 export default function Contact() {
   const { t } = useLang();
@@ -44,8 +45,8 @@ export default function Contact() {
     }
   };
 
-  const inputClass =
-    "w-full min-w-0 rounded-xl border border-[rgba(156,163,175,0.2)] bg-[rgba(55,65,81,0.5)] px-4 py-3 text-base text-white transition-all duration-300 [overflow-wrap:anywhere] focus:border-[rgba(156,163,175,0.6)] focus:bg-[rgba(55,65,81,0.8)] focus:shadow-[0_0_0_3px_rgba(156,163,175,0.1)] focus:outline-none";
+  const fieldClass =
+    "w-full border-0 border-b border-[rgba(156,163,175,0.3)] bg-transparent px-0 py-3 text-lg text-white outline-none transition-colors placeholder:text-[#565d68] focus:border-white";
 
   const infoItems = [
     {
@@ -91,39 +92,79 @@ export default function Contact() {
     },
   ];
 
-  return (
-    <section id="contact" className="relative bg-[#1a1a1a] px-8 py-24 [overflow-x:clip]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,rgba(156,163,175,0.05)_0%,transparent_50%)]" />
+  const stairCard = (
+    key: string,
+    side: "left" | "right",
+    style: { top: string; offset: string; size: string; rotate: string; opacity: string }
+  ) => (
+    <div
+      key={key}
+      aria-hidden="true"
+      className={`absolute rounded-2xl border border-[rgba(156,163,175,0.25)] bg-[linear-gradient(135deg,rgba(156,163,175,0.06),rgba(156,163,175,0.12))] ${style.size}`}
+      style={{
+        top: style.top,
+        [side]: style.offset,
+        transform: `rotate(${style.rotate})`,
+        opacity: style.opacity,
+      }}
+    />
+  );
 
-      <div className="relative z-[1] mx-auto max-w-[1400px]">
-        <h2 className="text-gradient-gray mb-4 text-center text-[clamp(2rem,5vw,3rem)] font-bold">
+  return (
+    <section id="contact" className="relative overflow-hidden bg-[#1a1a1a] px-6 py-24">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(156,163,175,0.05)_0%,transparent_55%)]" />
+
+      <div className="relative z-[1] mx-auto max-w-[1500px]">
+        {/* escalera decorativa — costado izquierdo */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-72 xl:block">
+          {stairCard("l1", "left", { top: "8%", offset: "60px", size: "h-24 w-24", rotate: "-8deg", opacity: "0.9" })}
+          {stairCard("l2", "left", { top: "38%", offset: "10px", size: "h-20 w-20", rotate: "6deg", opacity: "0.6" })}
+          {stairCard("l3", "left", { top: "68%", offset: "40px", size: "h-16 w-16", rotate: "-4deg", opacity: "0.35" })}
+        </div>
+
+        {/* escalera decorativa — costado derecho (espejada) */}
+        <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-72 xl:block">
+          {stairCard("r1", "right", { top: "12%", offset: "60px", size: "h-24 w-24", rotate: "8deg", opacity: "0.9" })}
+          {stairCard("r2", "right", { top: "42%", offset: "10px", size: "h-20 w-20", rotate: "-6deg", opacity: "0.6" })}
+          {stairCard("r3", "right", { top: "70%", offset: "40px", size: "h-16 w-16", rotate: "4deg", opacity: "0.35" })}
+        </div>
+
+        <div className="relative mx-auto max-w-5xl">
+        <p className="mb-2 text-center text-sm font-semibold text-[#9ca3af]">{t.contact.subtitle}</p>
+        <h2 className="text-gradient-gray mb-12 text-center text-3xl font-bold leading-tight md:text-4xl">
           {t.contact.title}
         </h2>
-        <p className="mx-auto mb-12 max-w-[700px] text-center text-[1.125rem] leading-[1.6] text-[#9ca3af]">
-          {t.contact.subtitle}
-        </p>
 
-        <div className="grid gap-12 [grid-template-columns:minmax(0,1fr)] md:[grid-template-columns:minmax(0,1fr)_minmax(0,1.5fr)] mx-auto max-w-4xl md:max-w-none">
-          {/* Info */}
-          <div className="w-full max-w-full overflow-hidden rounded-3xl border border-[rgba(156,163,175,0.2)] bg-[rgba(38,38,38,0.8)] p-10 backdrop-blur-[10px] transition-all duration-300 hover:border-[rgba(156,163,175,0.4)] hover:shadow-[0_10px_40px_rgba(107,114,128,0.15)]">
-            <h3 className="mb-8 text-[1.75rem] font-bold text-white">{t.contact.infoTitle}</h3>
+        {/* panel único: info + form, misma card, con el ícono del sitio de marca de agua */}
+        <div className="relative grid overflow-hidden rounded-3xl border border-[rgba(156,163,175,0.2)] bg-[#202020] shadow-[0_30px_70px_rgba(0,0,0,0.4)] lg:grid-cols-[0.85fr_1.15fr]">
+          {/* left: info */}
+          <div className="relative overflow-hidden border-b border-[rgba(156,163,175,0.15)] p-8 lg:border-r lg:border-b-0 lg:p-10">
+            {/* marca de agua: mismo ícono del navbar/hero */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={boxIcon.src}
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-8 -bottom-8 h-40 w-40 opacity-[0.06]"
+            />
 
-            {/* Desktop: fila con texto — Mobile: solo iconos en fila */}
-            <div className="hidden md:flex md:flex-col">
+            <h3 className="relative mb-6 text-xl font-bold text-white">{t.contact.infoTitle}</h3>
+
+            <div className="relative flex flex-col">
               {infoItems.map((item, i) => {
                 const inner = (
                   <>
-                    <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#6b7280,#4b5563)] text-white shadow-[0_4px_15px_rgba(107,114,128,0.3)]">
-                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <span className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full border border-[rgba(156,163,175,0.3)] text-[#9ca3af] transition-all group-hover:border-white group-hover:text-white">
+                      <svg width="17" height="17" viewBox="0 0 24 24" fill="none">
                         {item.svg}
                       </svg>
-                    </div>
-                    <span className="min-w-0 break-words text-base text-[#e5e7eb] [overflow-wrap:anywhere]">
+                    </span>
+                    <span className="min-w-0 break-words text-sm text-[#d1d5db] transition-colors [overflow-wrap:anywhere] group-hover:text-white">
                       {item.text}
                     </span>
                   </>
                 );
-                const rowClass = "mb-4 flex items-center gap-4 rounded-2xl border border-[rgba(156,163,175,0.2)] bg-[linear-gradient(135deg,rgba(107,114,128,0.05),rgba(75,85,99,0.05))] p-6 transition-all duration-300 last:mb-0 hover:translate-x-[5px] hover:border-[rgba(156,163,175,0.4)] hover:bg-[linear-gradient(135deg,rgba(107,114,128,0.1),rgba(75,85,99,0.1))]";
+                const rowClass = "group flex items-center gap-3 py-3";
                 return item.href ? (
                   <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" className={rowClass}>
                     {inner}
@@ -135,38 +176,15 @@ export default function Contact() {
                 );
               })}
             </div>
-
-            {/* Mobile: solo iconos en fila */}
-            <div className="flex justify-center gap-2 md:hidden">
-              {infoItems.map((item, i) => {
-                const icon = (
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[linear-gradient(135deg,#6b7280,#4b5563)] text-white shadow-[0_4px_15px_rgba(107,114,128,0.3)] transition-all duration-300 hover:scale-110 hover:shadow-[0_6px_20px_rgba(107,114,128,0.5)]">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                      {item.svg}
-                    </svg>
-                  </div>
-                );
-                return item.href ? (
-                  <a key={i} href={item.href} target="_blank" rel="noopener noreferrer" aria-label={item.text}>
-                    {icon}
-                  </a>
-                ) : (
-                  <div key={i}>{icon}</div>
-                );
-              })}
-            </div>
           </div>
 
-          {/* Form */}
-          <form
-            onSubmit={handleSubmit}
-            className="flex h-full w-full max-w-full flex-col overflow-hidden rounded-3xl border border-[rgba(156,163,175,0.2)] bg-[rgba(38,38,38,0.8)] p-8 backdrop-blur-[10px]"
-          >
+          {/* right: form */}
+          <form onSubmit={handleSubmit} className="flex flex-col p-8 lg:p-10">
             <input type="hidden" name="from_name" value="Portfolio Contact" />
             <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />
 
-            <div className="mb-5">
-              <label htmlFor="name" className="mb-2 block text-base font-semibold text-[#e5e7eb]">
+            <div className="mb-6">
+              <label htmlFor="name" className="mb-1 block text-sm font-semibold text-[#9ca3af]">
                 {t.contact.name}
               </label>
               <input
@@ -175,13 +193,13 @@ export default function Contact() {
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
-                className={inputClass}
+                className={fieldClass}
                 required
               />
             </div>
 
-            <div className="mb-5">
-              <label htmlFor="email" className="mb-2 block text-base font-semibold text-[#e5e7eb]">
+            <div className="mb-6">
+              <label htmlFor="email" className="mb-1 block text-sm font-semibold text-[#9ca3af]">
                 {t.contact.email}
               </label>
               <input
@@ -190,13 +208,13 @@ export default function Contact() {
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
-                className={inputClass}
+                className={fieldClass}
                 required
               />
             </div>
 
-            <div className="mb-5 flex flex-1 flex-col">
-              <label htmlFor="message" className="mb-2 block text-base font-semibold text-[#e5e7eb]">
+            <div className="mb-8 flex flex-1 flex-col">
+              <label htmlFor="message" className="mb-1 block text-sm font-semibold text-[#9ca3af]">
                 {t.contact.message}
               </label>
               <textarea
@@ -204,8 +222,8 @@ export default function Contact() {
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                rows={6}
-                className={`${inputClass} flex-1 resize-none`}
+                rows={4}
+                className={`${fieldClass} flex-1 resize-none`}
                 required
               />
             </div>
@@ -213,13 +231,14 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status.sending}
-              className="w-full cursor-pointer rounded-xl border-none bg-[linear-gradient(135deg,#6b7280_0%,#4b5563_100%)] p-[1.125rem] text-base font-semibold text-white shadow-[0_4px_15px_rgba(107,114,128,0.4)] transition-all duration-300 hover:-translate-y-[3px] hover:bg-[linear-gradient(135deg,#9ca3af_0%,#6b7280_100%)] hover:shadow-[0_6px_25px_rgba(107,114,128,0.6)] disabled:cursor-not-allowed disabled:opacity-70"
+              className="w-full cursor-pointer rounded-full border-2 border-[#4b5563] bg-transparent px-8 py-3 font-semibold text-white transition-all hover:border-white hover:bg-[rgba(255,255,255,0.1)] disabled:cursor-not-allowed disabled:opacity-60"
             >
               {status.sending ? t.contact.sending : t.contact.send}
             </button>
 
-            {status.text && <p className="mt-4 text-center text-[#e5e7eb]">{status.text}</p>}
+            {status.text && <p className="mt-4 text-center text-[#d1d5db]">{status.text}</p>}
           </form>
+        </div>
         </div>
       </div>
     </section>

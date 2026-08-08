@@ -18,8 +18,8 @@ export function ScrollToTopButton() {
       src={arrowUp.src}
       alt="Volver arriba"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`fixed bottom-[10px] z-[9999] h-[200px] w-[200px] cursor-pointer transition-[right] duration-300 ease-in-out max-[830px]:h-[130px] max-[830px]:w-[130px] ${
-        visible ? "right-[1px]" : "right-[-210px]"
+      className={`fixed bottom-[10px] z-[9999] h-[130px] w-[130px] cursor-pointer transition-[right] duration-300 ease-in-out max-[830px]:h-[100px] max-[830px]:w-[100px] ${
+        visible ? "right-[1px]" : "right-[-140px]"
       }`}
     />
   );
