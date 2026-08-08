@@ -57,24 +57,38 @@ function SkillsSection({
     const el = scrollerRef.current;
     if (!el) return;
 
+    // Bypasea cualquier scroll-behavior:smooth heredado/ambiental — los
+    // saltos de "wrap" y el incremento cuadro a cuadro tienen que ser
+    // instantáneos, no animados por el navegador.
+    el.style.scrollBehavior = "auto";
+
     let raf = 0;
     let interacting = false;
     let resumeTimeout: ReturnType<typeof setTimeout> | null = null;
-    const AUTO_SPEED = 0.6; // px por frame cuando nadie la toca
+    const AUTO_SPEED = 1; // px por frame cuando nadie la toca
 
-    const setWidth = () => el.scrollWidth / 3;
+    const oneSetWidth = () => el.scrollWidth / 3;
 
-    // arranca en la copia del medio, con margen para arrastrar a ambos lados
-    el.scrollLeft = setWidth();
+    // Centrar en la copia del medio. Se reintenta porque en el primer
+    // frame los emojis/iconos pueden no haber terminado de ocupar layout
+    // todavía y scrollWidth leería 0.
+    const center = () => {
+      const one = oneSetWidth();
+      if (one > 0) el.scrollLeft = one;
+    };
+    center();
+    const centerRetry = setTimeout(center, 200);
 
     const wrap = () => {
-      const one = setWidth();
+      const one = oneSetWidth();
       if (one <= 0) return;
       if (el.scrollLeft < one * 0.5) el.scrollLeft += one;
       else if (el.scrollLeft > one * 1.5) el.scrollLeft -= one;
     };
 
     const tick = () => {
+      // el incremento NO depende de que el centrado ya haya corrido —
+      // así nunca queda bloqueado esperando algo que no pasó.
       if (!interacting) el.scrollLeft += AUTO_SPEED;
       wrap();
       raf = requestAnimationFrame(tick);
@@ -87,23 +101,23 @@ function SkillsSection({
     };
     const onEnd = () => {
       // espera a que se apague el momentum del scroll nativo antes de retomar
+      if (resumeTimeout) clearTimeout(resumeTimeout);
       resumeTimeout = setTimeout(() => {
         interacting = false;
-      }, 700);
+      }, 800);
     };
 
     el.addEventListener("touchstart", onStart, { passive: true });
     el.addEventListener("touchend", onEnd, { passive: true });
-    el.addEventListener("mousedown", onStart);
-    window.addEventListener("mouseup", onEnd);
+    el.addEventListener("touchcancel", onEnd, { passive: true });
 
     return () => {
       cancelAnimationFrame(raf);
+      clearTimeout(centerRetry);
       if (resumeTimeout) clearTimeout(resumeTimeout);
       el.removeEventListener("touchstart", onStart);
       el.removeEventListener("touchend", onEnd);
-      el.removeEventListener("mousedown", onStart);
-      window.removeEventListener("mouseup", onEnd);
+      el.removeEventListener("touchcancel", onEnd);
     };
   }, []);
 
