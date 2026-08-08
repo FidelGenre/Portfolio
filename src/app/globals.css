@@ -89,15 +89,6 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Marquee infinito (skills en mobile) */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-.animate-marquee {
-  animation: marquee linear infinite;
-}
-
 /* Ocultar scrollbar */
 .no-scrollbar::-webkit-scrollbar {
   display: none;

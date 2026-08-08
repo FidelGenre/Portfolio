@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, type ReactNode } from "react";
+import { useState, useRef, useEffect, type ReactNode } from "react";
 import aboutImage from "@/assets/aboutImage.jpg";
 import yocopiaImage from "@/assets/yocopia.jpg";
 import { useLang } from "@/i18n/LanguageContext";
@@ -48,8 +48,64 @@ function SkillsSection({
   title: string;
   items: { name: string; icon: string }[];
 }) {
-  // Duplicado para que el loop del marquee sea invisible.
-  const marqueeItems = [...items, ...items];
+  // Triplicado: da margen para arrastrar libremente hacia cualquier lado
+  // sin llegar nunca al borde real del contenido.
+  const marqueeItems = [...items, ...items, ...items];
+  const scrollerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+
+    let raf = 0;
+    let interacting = false;
+    let resumeTimeout: ReturnType<typeof setTimeout> | null = null;
+    const AUTO_SPEED = 0.6; // px por frame cuando nadie la toca
+
+    const setWidth = () => el.scrollWidth / 3;
+
+    // arranca en la copia del medio, con margen para arrastrar a ambos lados
+    el.scrollLeft = setWidth();
+
+    const wrap = () => {
+      const one = setWidth();
+      if (one <= 0) return;
+      if (el.scrollLeft < one * 0.5) el.scrollLeft += one;
+      else if (el.scrollLeft > one * 1.5) el.scrollLeft -= one;
+    };
+
+    const tick = () => {
+      if (!interacting) el.scrollLeft += AUTO_SPEED;
+      wrap();
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+
+    const onStart = () => {
+      interacting = true;
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+    };
+    const onEnd = () => {
+      // espera a que se apague el momentum del scroll nativo antes de retomar
+      resumeTimeout = setTimeout(() => {
+        interacting = false;
+      }, 700);
+    };
+
+    el.addEventListener("touchstart", onStart, { passive: true });
+    el.addEventListener("touchend", onEnd, { passive: true });
+    el.addEventListener("mousedown", onStart);
+    window.addEventListener("mouseup", onEnd);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      if (resumeTimeout) clearTimeout(resumeTimeout);
+      el.removeEventListener("touchstart", onStart);
+      el.removeEventListener("touchend", onEnd);
+      el.removeEventListener("mousedown", onStart);
+      window.removeEventListener("mouseup", onEnd);
+    };
+  }, []);
 
   return (
     <div className="rounded-[20px] border border-[rgba(139,146,160,0.35)] bg-[rgba(35,35,35,0.85)] p-5 backdrop-blur-[8px] transition-all duration-300 hover:-translate-y-2 hover:border-[rgba(139,146,160,0.6)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.12)] sm:p-8 lg:p-10">
@@ -67,17 +123,20 @@ function SkillsSection({
         ))}
       </div>
 
-      {/* Mobile: marquee infinito, sin botón, sin cortar contenido */}
+      {/* Mobile: scroll horizontal real — se arrastra con el dedo en
+          cualquier dirección y a la velocidad que quieras; suelta y sigue
+          moviéndose sola. */}
       <div
-        className="relative -mx-5 overflow-hidden sm:hidden"
+        className="relative -mx-5 sm:hidden"
         style={{
           maskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
           WebkitMaskImage: "linear-gradient(to right, transparent, black 8%, black 92%, transparent)",
         }}
       >
         <div
-          className="animate-marquee flex w-max gap-3"
-          style={{ animationDuration: `${items.length * 2.5}s` }}
+          ref={scrollerRef}
+          className="no-scrollbar flex gap-3 overflow-x-auto px-5"
+          style={{ touchAction: "pan-x" }}
         >
           {marqueeItems.map((item, i) => (
             <div key={i} className={`${skillItemClass} w-28 flex-shrink-0`}>
