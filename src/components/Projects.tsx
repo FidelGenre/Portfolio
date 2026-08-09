@@ -255,9 +255,6 @@ function ProjectOverlap({
         <p
           style={{
             margin: 0,
-            display: "flex",
-            alignItems: "center",
-            gap: "0.6rem",
             fontSize: "0.7rem",
             fontWeight: 700,
             letterSpacing: "0.15em",
@@ -265,9 +262,6 @@ function ProjectOverlap({
             color: "#75818f",
           }}
         >
-          <span style={{ color: "#d1d5db", fontSize: "0.95rem" }}>
-            {String(index + 1).padStart(2, "0")}
-          </span>
           {project.category}
         </p>
 

@@ -92,41 +92,58 @@ export default function Contact() {
     },
   ];
 
-  const stairCard = (
+  const floatingBox = (
     key: string,
     side: "left" | "right",
-    style: { top: string; offset: string; size: string; rotate: string; opacity: string }
+    style: { top: string; offset: string; size: string; rotate: number; opacity: string; duration: string; delay: string }
   ) => (
-    <div
+    // eslint-disable-next-line @next/next/no-img-element
+    <img
       key={key}
+      src={boxIcon.src}
+      alt=""
       aria-hidden="true"
-      className={`absolute rounded-2xl border border-[rgba(156,163,175,0.25)] bg-[linear-gradient(135deg,rgba(156,163,175,0.06),rgba(156,163,175,0.12))] ${style.size}`}
+      className={`contact-floating-box absolute ${style.size}`}
       style={{
         top: style.top,
         [side]: style.offset,
-        transform: `rotate(${style.rotate})`,
         opacity: style.opacity,
+        ["--float-rot" as string]: `${style.rotate}deg`,
+        transform: `rotate(${style.rotate}deg)`,
+        animationDuration: style.duration,
+        animationDelay: style.delay,
       }}
     />
   );
 
   return (
     <section id="contact" className="relative overflow-hidden bg-[#1a1a1a] px-6 py-24">
+      <style>{`
+        @keyframes contactBoxFloat {
+          0%, 100% { transform: translateY(0) rotate(var(--float-rot, 0deg)); }
+          50% { transform: translateY(-18px) rotate(var(--float-rot, 0deg)); }
+        }
+        .contact-floating-box {
+          animation-name: contactBoxFloat;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+        }
+      `}</style>
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(156,163,175,0.05)_0%,transparent_55%)]" />
 
       <div className="relative z-[1] mx-auto max-w-[1500px]">
-        {/* escalera decorativa — costado izquierdo */}
+        {/* cajitas flotando — costado izquierdo */}
         <div className="pointer-events-none absolute inset-y-0 left-0 hidden w-72 xl:block">
-          {stairCard("l1", "left", { top: "8%", offset: "60px", size: "h-24 w-24", rotate: "-8deg", opacity: "0.9" })}
-          {stairCard("l2", "left", { top: "38%", offset: "10px", size: "h-20 w-20", rotate: "6deg", opacity: "0.6" })}
-          {stairCard("l3", "left", { top: "68%", offset: "40px", size: "h-16 w-16", rotate: "-4deg", opacity: "0.35" })}
+          {floatingBox("l1", "left", { top: "8%", offset: "60px", size: "w-16", rotate: -12, opacity: "0.9", duration: "5.5s", delay: "0s" })}
+          {floatingBox("l2", "left", { top: "38%", offset: "10px", size: "w-12", rotate: 8, opacity: "0.6", duration: "4.8s", delay: "0.6s" })}
+          {floatingBox("l3", "left", { top: "68%", offset: "40px", size: "w-10", rotate: -6, opacity: "0.35", duration: "6s", delay: "1.1s" })}
         </div>
 
-        {/* escalera decorativa — costado derecho (espejada) */}
+        {/* cajitas flotando — costado derecho (espejadas) */}
         <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-72 xl:block">
-          {stairCard("r1", "right", { top: "12%", offset: "60px", size: "h-24 w-24", rotate: "8deg", opacity: "0.9" })}
-          {stairCard("r2", "right", { top: "42%", offset: "10px", size: "h-20 w-20", rotate: "-6deg", opacity: "0.6" })}
-          {stairCard("r3", "right", { top: "70%", offset: "40px", size: "h-16 w-16", rotate: "4deg", opacity: "0.35" })}
+          {floatingBox("r1", "right", { top: "12%", offset: "60px", size: "w-16", rotate: 12, opacity: "0.9", duration: "5.2s", delay: "0.3s" })}
+          {floatingBox("r2", "right", { top: "42%", offset: "10px", size: "w-12", rotate: -8, opacity: "0.6", duration: "4.6s", delay: "0.9s" })}
+          {floatingBox("r3", "right", { top: "70%", offset: "40px", size: "w-10", rotate: 6, opacity: "0.35", duration: "5.8s", delay: "1.4s" })}
         </div>
 
         <div className="relative mx-auto max-w-5xl">
