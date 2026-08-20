@@ -31,14 +31,22 @@ export default function Contact() {
         body: fd,
       });
 
-      const data = await res.json();
+      // Parseamos el body aparte: si esto falla (extensión del navegador,
+      // respuesta rara, etc.) no debe tratarse como que el envío falló —
+      // el POST ya llegó al servidor en ese punto.
+      let data: { success?: boolean; message?: string } | null = null;
+      try {
+        data = await res.json();
+      } catch {
+        data = null;
+      }
 
-      if (data.success) {
+      if (res.ok && (data?.success ?? true)) {
         setStatus({ sending: false, text: t.contact.success });
         setFormData({ name: "", email: "", message: "" });
         e.currentTarget.reset();
       } else {
-        setStatus({ sending: false, text: data.message ? `❌ ${data.message}` : t.contact.error });
+        setStatus({ sending: false, text: data?.message ? `❌ ${data.message}` : t.contact.error });
       }
     } catch {
       setStatus({ sending: false, text: t.contact.network });
