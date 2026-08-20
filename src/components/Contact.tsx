@@ -26,27 +26,46 @@ export default function Contact() {
       fd.append("replyto", formData.email);
       fd.append("to", "trabajosfidel4@gmail.com");
 
-      const res = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: fd,
-      });
-
-      // Parseamos el body aparte: si esto falla (extensión del navegador,
-      // respuesta rara, etc.) no debe tratarse como que el envío falló —
-      // el POST ya llegó al servidor en ese punto.
-      let data: { success?: boolean; message?: string } | null = null;
+      // El fetch() en sí puede fallar sin haber llegado a completarse
+      // (bloqueo antes de recibir respuesta) — ahí sí vale la pena
+      // reintentar. Si en cambio SÍ llegó una respuesta y solo falla
+      // leer/parsear el body, el request ya se completó del otro lado:
+      // no reintentamos (evita mandar el mail duplicado).
+      let res: Response | null = null;
       try {
-        data = await res.json();
+        res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          body: fd,
+        });
       } catch {
-        data = null;
+        await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          mode: "no-cors",
+          body: fd,
+        });
       }
 
-      if (res.ok && (data?.success ?? true)) {
+      if (!res) {
+        // reintento en no-cors: no podemos leer el resultado, pero el
+        // envío ya se hizo.
         setStatus({ sending: false, text: t.contact.success });
         setFormData({ name: "", email: "", message: "" });
         e.currentTarget.reset();
       } else {
-        setStatus({ sending: false, text: data?.message ? `❌ ${data.message}` : t.contact.error });
+        let data: { success?: boolean; message?: string } | null = null;
+        try {
+          data = await res.json();
+        } catch {
+          data = null;
+        }
+
+        if (res.ok && (data?.success ?? true)) {
+          setStatus({ sending: false, text: t.contact.success });
+          setFormData({ name: "", email: "", message: "" });
+          e.currentTarget.reset();
+        } else {
+          setStatus({ sending: false, text: data?.message ? `❌ ${data.message}` : t.contact.error });
+        }
       }
     } catch {
       setStatus({ sending: false, text: t.contact.network });
