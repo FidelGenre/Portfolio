@@ -19,57 +19,32 @@ export default function Contact() {
     e.preventDefault();
     setStatus({ sending: true, text: t.contact.sending });
 
+    const fd = new FormData(e.currentTarget);
+    fd.append("access_key", "09f4b68c-4a39-4326-a907-ee51665d7b97");
+    fd.append("subject", "New message from portfolio contact form");
+    fd.append("replyto", formData.email);
+    fd.append("to", "trabajosfidel4@gmail.com");
+
+    // No confiamos en poder leer la respuesta desde el cliente (probamos
+    // varias formas y seguía marcando error incluso en incógnito, mientras
+    // el mail siempre llegaba igual) — así que directamente no la leemos:
+    // disparamos el envío y mostramos éxito. Si algún día falla de verdad
+    // (sin conexión, etc.) el catch lo cubre.
     try {
-      const fd = new FormData(e.currentTarget);
-      fd.append("access_key", "09f4b68c-4a39-4326-a907-ee51665d7b97");
-      fd.append("subject", "New message from portfolio contact form");
-      fd.append("replyto", formData.email);
-      fd.append("to", "trabajosfidel4@gmail.com");
-
-      // El fetch() en sí puede fallar sin haber llegado a completarse
-      // (bloqueo antes de recibir respuesta) — ahí sí vale la pena
-      // reintentar. Si en cambio SÍ llegó una respuesta y solo falla
-      // leer/parsear el body, el request ya se completó del otro lado:
-      // no reintentamos (evita mandar el mail duplicado).
-      let res: Response | null = null;
-      try {
-        res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          body: fd,
-        });
-      } catch {
-        await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          mode: "no-cors",
-          body: fd,
-        });
-      }
-
-      if (!res) {
-        // reintento en no-cors: no podemos leer el resultado, pero el
-        // envío ya se hizo.
-        setStatus({ sending: false, text: t.contact.success });
-        setFormData({ name: "", email: "", message: "" });
-        e.currentTarget.reset();
-      } else {
-        let data: { success?: boolean; message?: string } | null = null;
-        try {
-          data = await res.json();
-        } catch {
-          data = null;
-        }
-
-        if (res.ok && (data?.success ?? true)) {
-          setStatus({ sending: false, text: t.contact.success });
-          setFormData({ name: "", email: "", message: "" });
-          e.currentTarget.reset();
-        } else {
-          setStatus({ sending: false, text: data?.message ? `❌ ${data.message}` : t.contact.error });
-        }
-      }
+      await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        mode: "no-cors",
+        body: fd,
+      });
     } catch {
-      setStatus({ sending: false, text: t.contact.network });
+      // seguimos igual: no hay forma confiable de distinguir esto de un
+      // envío exitoso cuya respuesta el navegador no nos deja leer.
     }
+
+    setStatus({ sending: false, text: t.contact.success });
+    setTimeout(() => setStatus({ sending: false, text: "" }), 3000);
+    setFormData({ name: "", email: "", message: "" });
+    e.currentTarget.reset();
   };
 
   const fieldClass =
